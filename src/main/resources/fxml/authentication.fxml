@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AuthenticationController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AuthenticationController">
    <children>
       <VBox alignment="CENTER" prefHeight="800.0" prefWidth="600.0" styleClass="linear-grad">
          <children>
@@ -15,12 +16,20 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </FontAwesomeIconView>
-            <Label text="Lecture Manager" textFill="WHITE">
+            <Label text="Fusion Project" textFill="WHITE">
                <font>
-                  <Font size="55.0" />
+                  <Font size="47.0" />
                </font>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Sign Up Manager" textFill="WHITE">
+               <font>
+                  <Font size="53.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="25.0" />
                </VBox.margin>
             </Label>
             <Label text="1.0" textFill="WHITE">
