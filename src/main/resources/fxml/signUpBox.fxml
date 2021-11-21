@@ -14,7 +14,7 @@
       </Label>
       <AnchorPane prefHeight="335.0" prefWidth="600.0">
          <children>
-            <TextField fx:id="id" layoutX="145.0" layoutY="45.0" prefHeight="42.0" prefWidth="310.0" promptText="ID" />
+            <TextField fx:id="id" layoutX="145.0" layoutY="45.0" prefHeight="42.0" prefWidth="310.0" promptText="ID" styleClass="custom-font" />
             <PasswordField fx:id="pw" layoutX="145.0" layoutY="117.0" prefHeight="42.0" prefWidth="310.0" promptText="Password" />
             <Button layoutX="145.0" layoutY="191.0" mnemonicParsing="false" onAction="#signUp" prefHeight="42.0" prefWidth="310.0" styleClass="button" text="Sign up" textFill="WHITE">
                <font>

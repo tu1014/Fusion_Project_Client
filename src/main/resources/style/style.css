@@ -33,3 +33,7 @@
 .message-background {
     -fx-background-color: #7156DD;
 }
+
+.custom-font {
+    -fx-font-family : "BM JUA";
+}
