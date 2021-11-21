@@ -28,7 +28,7 @@ public class SplashController implements Initializable {
 
         fadeIn.play();
 
-        // fadeIn.setOnFinished( (e) -> { moveToAuthentication(); });
+        fadeIn.setOnFinished( (e) -> { moveToAuthentication(); });
 
     }
 

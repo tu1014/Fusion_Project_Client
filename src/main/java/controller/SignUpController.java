@@ -15,6 +15,9 @@ public class SignUpController {
     @FXML TextField id;
     @FXML PasswordField pw;
 
+    private AuthenticationController parentController;
+    void setParentController(AuthenticationController controller) { parentController = controller; }
+
     @FXML
     private void moveToLogin(ActionEvent event) {
 
@@ -22,6 +25,8 @@ public class SignUpController {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/signInBox.fxml"));
             VBox vbox = fxmlLoader.load();
+            SignInController controller = fxmlLoader.getController();
+            controller.setParentController(parentController);
             vBox.getChildren().setAll(vbox);
 
         }
@@ -36,9 +41,12 @@ public class SignUpController {
         String id = this.id.getText();
         String pw = this.pw.getText();
 
-        if (id.length()==0 || pw.length()==0) { System.out.println("공백 오류"); return; }
+        if (id.length()==0 || pw.length()==0) {
+            parentController.showMessage("ID, PW를 다시 확인해주세요");
+            System.out.println("공백 오류");
+        }
 
-        moveToLogin(event);
+        else moveToLogin(event);
 
     }
 

@@ -31,17 +31,27 @@
                   <Insets bottom="135.0" />
                </VBox.margin>
             </Label>
-            <Label text="Don't you have admin account?" textFill="WHITE" underline="true">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
          </children>
          <padding>
             <Insets left="50.0" right="50.0" />
          </padding>
       </VBox>
-      <VBox fx:id="inputBox" alignment="CENTER" prefHeight="800.0" prefWidth="600.0">
+      <VBox fx:id="inputBox1" alignment="TOP_CENTER" prefHeight="800.0" prefWidth="600.0" styleClass="whiteBackground">
+         <children>
+            <HBox fx:id="messageBox" alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="600.0" styleClass="message-background" visible="false">
+               <children>
+                  <Label fx:id="message" text="message" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </HBox>
+            <VBox fx:id="inputBox" alignment="TOP_CENTER" prefHeight="760.0" prefWidth="600.0" styleClass="whiteBackground" />
+         </children>
       </VBox>
    </children>
 </HBox>

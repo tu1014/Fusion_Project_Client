@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" styleClass="whiteBox" stylesheets="@../style/authenticationBox.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignInController">
+<VBox fx:id="vBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="600.0" styleClass="whiteBackground" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignInController">
    <children>
       <Label text="Sign In">
          <font>
@@ -19,9 +19,9 @@
       </Label>
       <AnchorPane prefHeight="335.0" prefWidth="510.0">
          <children>
-            <TextField fx:id="id" layoutX="145.0" layoutY="45.0" prefHeight="42.0" prefWidth="310.0" />
-            <PasswordField fx:id="pw" layoutX="145.0" layoutY="116.0" prefHeight="42.0" prefWidth="310.0" />
-            <Button onAction="#login" layoutX="145.0" layoutY="239.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="310.0" styleClass="loginBtn" text="Log in" textFill="WHITE">
+            <TextField fx:id="id" layoutX="145.0" layoutY="45.0" prefHeight="42.0" prefWidth="310.0" promptText="ID" />
+            <PasswordField fx:id="pw" layoutX="145.0" layoutY="116.0" prefHeight="42.0" prefWidth="310.0" promptText="Password" />
+            <Button layoutX="145.0" layoutY="239.0" mnemonicParsing="false" onAction="#login" prefHeight="42.0" prefWidth="310.0" styleClass="button" text="Log in" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
@@ -34,7 +34,7 @@
             <RadioButton fx:id="professor" layoutX="368.0" layoutY="190.0" mnemonicParsing="false" text="Professor" toggleGroup="$user" />
          </children>
       </AnchorPane>
-      <Button onAction="#moveToSignup" mnemonicParsing="false" style="-fx-background-color: #c3a3ff;" text="Don't you have admin account?" textFill="#ffffffe3">
+      <Button mnemonicParsing="false" onAction="#moveToSignup" styleClass="button" text="Don't you have admin account?" textFill="#ffffffe3">
          <font>
             <Font size="25.0" />
          </font>

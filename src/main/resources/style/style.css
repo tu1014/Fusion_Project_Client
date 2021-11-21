@@ -5,11 +5,11 @@
 }
 
 .button:hover {
-    -fx-background-color: #2A1C42;
+    -fx-background-color: #7156DD;
 }
 
 .button:pressed {
-    -fx-background-color: #7156DD;
+    -fx-background-color: #2A1C42;
 }
 
 .sidePanel {
@@ -29,4 +29,7 @@
 }
 .linear-grad {
     -fx-background-color: linear-gradient(to bottom left, #6F4CBB, #431FA0);
+}
+.message-background {
+    -fx-background-color: #7156DD;
 }

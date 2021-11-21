@@ -25,17 +25,22 @@ public class SignInController {
 
     private AuthenticationController parentController;
 
+    void setParentController(AuthenticationController controller) { parentController = controller; }
+
     @FXML
     private void login(ActionEvent event) {
 
         String id = this.id.getText();
         String pw = this.pw.getText();
-        FXMLLoader fxmlLoader;
+        // FXMLLoader fxmlLoader;
 
         if (admin.isSelected()) { System.out.println("관리자 로그인"); }
         else if (student.isSelected()) { System.out.println("학생 로그인"); }
         else if(professor.isSelected()) { System.out.println("교수 로그인"); }
-        else { System.out.println("사용자 유형을 선택해주세요."); }
+        else {
+            parentController.showMessage("사용자 유형을 선택해주세요");
+            System.out.println("사용자 유형을 선택해주세요.");
+        }
 
     }
 
@@ -46,6 +51,8 @@ public class SignInController {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/signUpBox.fxml"));
             VBox vbox = fxmlLoader.load();
+            SignUpController controller = fxmlLoader.getController();
+            controller.setParentController(parentController);
             this.vBox.getChildren().setAll(vbox);
 
 
