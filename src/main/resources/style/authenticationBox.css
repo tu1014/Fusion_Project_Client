@@ -1,0 +1,20 @@
+.whiteBox {
+    -fx-background-color: #FFFFFF;
+}
+
+.roundRectangle {
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.loginBtn {
+    -fx-background-color: #3F2B63;
+}
+
+.loginBtn:hover {
+    -fx-background-color: #2A1C42;
+}
+
+.loginBtn:pressed {
+    -fx-background-color: #7156DD;
+}

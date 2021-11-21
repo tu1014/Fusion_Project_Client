@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AuthenticationController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="800.0" prefWidth="600.0" styleClass="linear-grad">
+         <children>
+            <FontAwesomeIconView fill="WHITE" glyphName="UNIVERSITY" size="60">
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </FontAwesomeIconView>
+            <Label text="Lecture Manager" textFill="WHITE">
+               <font>
+                  <Font size="55.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <Label text="1.0" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="135.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Don't you have admin account?" textFill="WHITE" underline="true">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="50.0" right="50.0" />
+         </padding>
+      </VBox>
+      <VBox fx:id="inputBox" alignment="CENTER" prefHeight="800.0" prefWidth="600.0">
+      </VBox>
+   </children>
+</HBox>

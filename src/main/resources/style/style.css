@@ -1,0 +1,32 @@
+.button {
+    /*-fx-background-color: #3F2B63;*/
+    -fx-background-color: #6F4CBB;
+
+}
+
+.button:hover {
+    -fx-background-color: #2A1C42;
+}
+
+.button:pressed {
+    -fx-background-color: #7156DD;
+}
+
+.sidePanel {
+    -fx-background-color: #3F2B63;
+}
+
+.whiteBackground {
+    -fx-background-color: #FFFFFF;
+}
+
+.purpleBackground {
+    -fx-background-color: #3F2B63;
+}
+
+.borderBlack {
+    -fx-border-color: black;
+}
+.linear-grad {
+    -fx-background-color: linear-gradient(to bottom left, #6F4CBB, #431FA0);
+}

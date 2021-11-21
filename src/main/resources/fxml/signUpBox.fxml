@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="vBox" fx:controller="controller.SignUpController" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" styleClass="whiteBox" stylesheets="@../style/authenticationBox.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="Sign Up">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <AnchorPane prefHeight="335.0" prefWidth="600.0">
+         <children>
+            <TextField fx:id="id" layoutX="145.0" layoutY="45.0" prefHeight="42.0" prefWidth="310.0" />
+            <PasswordField fx:id="pw" layoutX="152.0" layoutY="117.0" prefHeight="42.0" prefWidth="310.0" />
+            <Button onAction="#signUp" layoutX="145.0" layoutY="191.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="310.0" styleClass="loginBtn" text="Sign up" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="57.0" prefWidth="600.0">
+         <children>
+            <Button onAction="#moveToLogin" graphicTextGap="15.0" layoutX="141.0" layoutY="8.0" mnemonicParsing="false" styleClass="loginBtn" text="Back to log in page" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="BACKWARD" size="25" />
+               </graphic>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
