@@ -33,9 +33,6 @@ public class AdminMainController {
     @FXML Button lectureList;
 
 
-    Button lastSelected;
-
-
     /*@FXML
     private void exit() throws IOException {
 

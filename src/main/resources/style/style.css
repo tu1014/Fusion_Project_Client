@@ -1,7 +1,27 @@
-.button {
+.navButton {
     /*-fx-background-color: #3F2B63;*/
     -fx-background-color: #6F4CBB;
+    -fx-background-radius: 0em;
 
+}
+
+.navButton:hover {
+    -fx-background-color: #7156DD;
+}
+
+.navButton:pressed {
+    -fx-background-color: #2A1C42;
+}
+
+.navButton:focused {
+    -fx-background-color: #2A1C42;
+}
+
+
+
+
+.button {
+    -fx-background-color: #6F4CBB;
 }
 
 .button:hover {
@@ -11,6 +31,11 @@
 .button:pressed {
     -fx-background-color: #2A1C42;
 }
+
+
+
+
+
 
 .sidePanel {
     -fx-background-color: #6F4CBB;
