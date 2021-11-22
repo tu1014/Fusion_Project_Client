@@ -16,7 +16,7 @@ public class LogoutDialogController {
     @FXML AnchorPane anchor;
 
     @FXML
-    private void exit(ActionEvent event) throws IOException {
+    private void exit(ActionEvent event) {
 
         System.out.println("로그아웃 합니다.");
 
@@ -25,11 +25,17 @@ public class LogoutDialogController {
         dialog.close();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/authentication.fxml"));
-        Parent root = fxmlLoader.load();
-        rootWindow.setScene(new Scene(root));
+        Parent root = null;
 
-        AuthenticationController authenticationController = fxmlLoader.getController();
-        authenticationController.loadSignInBox();
+        try {
+
+            root = fxmlLoader.load();
+            rootWindow.setScene(new Scene(root));
+            AuthenticationController authenticationController = fxmlLoader.getController();
+            authenticationController.loadSignInBox();
+        }
+
+        catch (IOException e) { e.printStackTrace(); }
 
     }
 

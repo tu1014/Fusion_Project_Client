@@ -32,25 +32,6 @@ public class AdminMainController {
     @FXML Button professorList;
     @FXML Button lectureList;
 
-
-    /*@FXML
-    private void exit() throws IOException {
-
-        System.out.println("종료 확인 다이아로그박스 실행");
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/exitDialog.fxml"));
-        AnchorPane dialogBox = fxmlLoader.load();
-
-        Stage dialogStage = new Stage(StageStyle.UNDECORATED);
-        Scene scene = new Scene(dialogBox);
-        dialogStage.setScene(scene);
-        dialogStage.initOwner(closeBtn.getScene().getWindow());
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-
-        dialogStage.show();
-
-    }*/
-
     @FXML
     private void logout() throws IOException {
 
@@ -89,39 +70,38 @@ public class AdminMainController {
     }
 
     @FXML
-    private void studentList() throws IOException {
+    private void studentList() {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/studentList.fxml"));
-        AnchorPane stdList = fxmlLoader.load();
+        AnchorPane stdList = null;
 
-        StudentListController studentListController = fxmlLoader.getController();
-        studentListController.setParentController(this);
+        try {
 
-        /*for(Student std : stdDB.getList()) {
+            stdList = fxmlLoader.load();
+            StudentListController studentListController = fxmlLoader.getController();
+            studentListController.setParentController(this);
 
-            fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/studentItem.fxml"));
-            HBox item = fxmlLoader.load();
-            StudentItemController studentItemController = fxmlLoader.getController();
-            studentItemController.id.setText(std.getStdNumber());
-            studentItemController.name.setText(std.getName());
-            studentListController.vBox.getChildren().add(item);
+            mainPanel.getChildren().setAll(stdList);
 
-        }*/
-
-//        for(int i=0; i<20; i++) {
-//
-//            fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/studentItem.fxml"));
-//            HBox item = fxmlLoader.load();
-//            studentListController.vBox.getChildren().add(item);
-//
-//        }
-
-        mainPanel.getChildren().setAll(stdList);
+        } catch (IOException e) { e.printStackTrace(); }
 
     }
 
     @FXML
     private void professorList() {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professorList.fxml"));
+        AnchorPane stdList = null;
+
+        try {
+
+            stdList = fxmlLoader.load();
+            ProfessorListController professorListController = fxmlLoader.getController();
+            professorListController.setParentController(this);
+
+            mainPanel.getChildren().setAll(stdList);
+
+        } catch (IOException e) { e.printStackTrace(); }
 
     }
 
