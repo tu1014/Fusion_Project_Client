@@ -1,9 +1,11 @@
 package controller;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -12,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
@@ -24,6 +27,13 @@ public class AdminMainController {
     @FXML AnchorPane mainPanel;
     @FXML HBox messageBox;
     @FXML Label message;
+    @FXML Button timeLimit;
+    @FXML Button studentList;
+    @FXML Button professorList;
+    @FXML Button lectureList;
+
+
+    Button lastSelected;
 
 
     /*@FXML
@@ -63,24 +73,34 @@ public class AdminMainController {
 
     }
 
-    /*@FXML
+    void showMessage(String message) {
+
+        this.message.setText(message);
+        messageBox.setVisible(true);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(3), messageBox);
+        fadeOut.setFromValue(1);
+        fadeOut.setToValue(0);
+        fadeOut.setCycleCount(1);
+        fadeOut.play();
+        fadeOut.setOnFinished( (e) -> { messageBox.setVisible(false); });
+
+    }
+
+    @FXML
     private void setTimeLimit() {
-        currentMenu.setText("Set time limit");
 
     }
 
     @FXML
     private void studentList() throws IOException {
 
-        currentMenu.setText("Student list");
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/studentList.fxml"));
-        VBox stdList = fxmlLoader.load();
+        AnchorPane stdList = fxmlLoader.load();
 
         StudentListController studentListController = fxmlLoader.getController();
-        studentListController.setDB(adminDB, stdDB, pfDB);
+        studentListController.setParentController(this);
 
-        for(Student std : stdDB.getList()) {
+        /*for(Student std : stdDB.getList()) {
 
             fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/studentItem.fxml"));
             HBox item = fxmlLoader.load();
@@ -89,10 +109,7 @@ public class AdminMainController {
             studentItemController.name.setText(std.getName());
             studentListController.vBox.getChildren().add(item);
 
-        }
-
-
-
+        }*/
 
 //        for(int i=0; i<20; i++) {
 //
@@ -102,19 +119,19 @@ public class AdminMainController {
 //
 //        }
 
-        mainBox.getChildren().setAll(stdList);
+        mainPanel.getChildren().setAll(stdList);
 
-    }*/
+    }
 
-    /*@FXML
+    @FXML
     private void professorList() {
-        currentMenu.setText("Professor list");
+
     }
 
     @FXML
     private void lectureList() {
-        currentMenu.setText("Lecture list");
-    }*/
+
+    }
 
 
 }

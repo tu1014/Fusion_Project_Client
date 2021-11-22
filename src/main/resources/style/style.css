@@ -37,3 +37,7 @@
 .custom-font {
     -fx-font-family : "BM JUA";
 }
+
+.text-color-white {
+    -fx-text-fill: #ffffff;
+}
