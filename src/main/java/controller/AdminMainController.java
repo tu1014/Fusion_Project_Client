@@ -19,6 +19,13 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class AdminMainController {
 
+    @FXML Label userId;
+    @FXML Label name;
+    @FXML AnchorPane mainPanel;
+    @FXML HBox messageBox;
+    @FXML Label message;
+
+
     /*@FXML
     private void exit() throws IOException {
 

@@ -32,15 +32,31 @@ public class SignInController {
 
         String id = this.id.getText();
         String pw = this.pw.getText();
-        // FXMLLoader fxmlLoader;
+        FXMLLoader fxmlLoader;
 
-        if (admin.isSelected()) { System.out.println("관리자 로그인"); }
-        else if (student.isSelected()) { System.out.println("학생 로그인"); }
-        else if(professor.isSelected()) { System.out.println("교수 로그인"); }
-        else {
-            parentController.showMessage("사용자 유형을 선택해주세요");
-            System.out.println("사용자 유형을 선택해주세요.");
+        try {
+
+            if (admin.isSelected()) {
+
+                System.out.println("관리자 로그인");
+
+                fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/adminMain.fxml"));
+                Parent mainPage = fxmlLoader.load();
+
+                Stage stage = (Stage) vBox.getParent().getScene().getWindow();
+                stage.setScene(new Scene(mainPage));
+
+            }
+            else if (student.isSelected()) { System.out.println("학생 로그인"); }
+            else if(professor.isSelected()) { System.out.println("교수 로그인"); }
+            else {
+                parentController.showMessage("사용자 유형을 선택해주세요");
+                System.out.println("사용자 유형을 선택해주세요.");
+            }
+
         }
+
+        catch(IOException e) { e.printStackTrace(); }
 
     }
 
