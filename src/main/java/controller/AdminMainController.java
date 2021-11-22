@@ -63,6 +63,19 @@ public class AdminMainController {
     @FXML
     private void setTimeLimit() {
 
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/timeLimit.fxml"));
+        AnchorPane timeLimit = null;
+
+        try {
+
+            timeLimit = fxmlLoader.load();
+            TimeLimitController timeLimitController = fxmlLoader.getController();
+            timeLimitController.setParentController(this);
+
+            mainPanel.getChildren().setAll(timeLimit);
+
+        } catch (IOException e) { e.printStackTrace(); }
+
     }
 
     @FXML
