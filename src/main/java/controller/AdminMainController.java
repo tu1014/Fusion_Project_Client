@@ -44,46 +44,24 @@ public class AdminMainController {
 
     }*/
 
-    /*@FXML
+    @FXML
     private void logout() throws IOException {
-
-        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
-        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
 
         System.out.println("로그아웃 확인 다이아로그박스 실행");
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/logoutDialog.fxml"));
         AnchorPane dialogBox = fxmlLoader.load();
 
-        Stage dialogStage = new Stage(StageStyle.UNDECORATED);
+        Stage dialogStage = new Stage();
         Scene scene = new Scene(dialogBox);
         dialogStage.setScene(scene);
-        dialogStage.initOwner(closeBtn.getScene().getWindow());
+        dialogStage.initOwner(name.getScene().getWindow());
         dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.setResizable(false);
 
         dialogStage.show();
 
-        LogoutDialogController logoutDialogController = fxmlLoader.getController();
-        logoutDialogController.setDB(adminDB,stdDB,pfDB);
-
-        dialogBox.setOnMousePressed( (MouseEvent event) -> {
-
-            xOffset.set(event.getSceneX());
-            yOffset.set(event.getSceneY());
-
-        });
-
-
-        Stage box = (Stage) logoutDialogController.anchor.getScene().getWindow();
-
-        dialogBox.setOnMouseDragged( (MouseEvent event) -> {
-
-            box.setX(event.getScreenX() - xOffset.get());
-            box.setY(event.getScreenY() - yOffset.get());
-
-        });
-
-    }*/
+    }
 
     /*@FXML
     private void setTimeLimit() {
