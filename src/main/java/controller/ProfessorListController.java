@@ -12,35 +12,30 @@ import java.util.ResourceBundle;
 
 public class ProfessorListController implements Initializable {
 
-    @FXML ComboBox<String> gradeBox;
+    @FXML ComboBox<String> filter;
     @FXML TextField keyWord;
     @FXML AnchorPane panel;
 
     AdminMainController parentController;
 
     void setParentController(AdminMainController con) { parentController = con; }
-
-    String searchDepartment = "";
+    
     String searchKeyWord = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        gradeBox.getItems().add("All department");
-        gradeBox.getItems().add("컴퓨터소프트웨어공학과");
-        gradeBox.getItems().add("기계공학과");
-        gradeBox.getItems().add("전자공학부");
-        gradeBox.getItems().add("기계시스템공학과");
-        gradeBox.setOnAction(this::setSearchGrade);
+        filter.getItems().add("department");
+        filter.getItems().add("name");
+        filter.setOnAction(this::setSearchGrade);
     }
 
     public void setSearchGrade(ActionEvent event) {
 
-        String choice = gradeBox.getValue();
+        String choice = filter.getValue();
 
-        if (choice.equals("All department")) searchDepartment = "";
-        else searchDepartment = choice;
+        searchKeyWord = choice;
 
-        parentController.showMessage("검색 학과 : " + choice);
+        parentController.showMessage("검색 필터 : " + choice);
 
     }
 

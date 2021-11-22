@@ -27,10 +27,6 @@ public class AdminMainController {
     @FXML AnchorPane mainPanel;
     @FXML HBox messageBox;
     @FXML Label message;
-    @FXML Button timeLimit;
-    @FXML Button studentList;
-    @FXML Button professorList;
-    @FXML Button lectureList;
 
     @FXML
     private void logout() throws IOException {
@@ -107,6 +103,19 @@ public class AdminMainController {
 
     @FXML
     private void lectureList() {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/lectureList.fxml"));
+        AnchorPane lectureList = null;
+
+        try {
+
+            lectureList = fxmlLoader.load();
+            LectureListController lectureListController = fxmlLoader.getController();
+            lectureListController.setParentController(this);
+
+            mainPanel.getChildren().setAll(lectureList);
+
+        } catch (IOException e) { e.printStackTrace(); }
 
     }
 
