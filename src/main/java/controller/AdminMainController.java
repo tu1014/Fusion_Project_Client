@@ -91,15 +91,15 @@ public class AdminMainController {
     private void professorList() {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professorList.fxml"));
-        AnchorPane stdList = null;
+        AnchorPane professorList = null;
 
         try {
 
-            stdList = fxmlLoader.load();
+            professorList = fxmlLoader.load();
             ProfessorListController professorListController = fxmlLoader.getController();
             professorListController.setParentController(this);
 
-            mainPanel.getChildren().setAll(stdList);
+            mainPanel.getChildren().setAll(professorList);
 
         } catch (IOException e) { e.printStackTrace(); }
 
@@ -107,6 +107,24 @@ public class AdminMainController {
 
     @FXML
     private void lectureList() {
+
+    }
+
+    @FXML
+    private void subjectList() {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/subjectList.fxml"));
+        AnchorPane subjectList = null;
+
+        try {
+
+            subjectList = fxmlLoader.load();
+            SubjectListController subjectListController = fxmlLoader.getController();
+            subjectListController.setParentController(this);
+
+            mainPanel.getChildren().setAll(subjectList);
+
+        } catch (IOException e) { e.printStackTrace(); }
 
     }
 
