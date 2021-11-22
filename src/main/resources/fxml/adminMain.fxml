@@ -43,20 +43,6 @@
                   <Insets bottom="20.0" top="60.0" />
                </VBox.margin>
             </AnchorPane>
-            <Button fx:id="timeLimit" alignment="BASELINE_LEFT" graphicTextGap="14.0" mnemonicParsing="false" onAction="#setTimeLimit" prefHeight="70.0" prefWidth="300.0" styleClass="navButton" text="Set time limit" textFill="WHITE">
-               <graphic>
-                  <FontAwesomeIconView fill="#fcfcfc" glyphName="CALENDAR" size="20" />
-               </graphic>
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Button>
             <Button fx:id="studentList" alignment="BASELINE_LEFT" graphicTextGap="14.0" mnemonicParsing="false" onAction="#studentList" prefHeight="70.0" prefWidth="300.0" styleClass="navButton" text="Student list" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="#fcfcfc" glyphName="HISTORY" size="20" />
@@ -110,6 +96,20 @@
                   <Insets />
                </VBox.margin>
             </Button>
+            <Button fx:id="timeLimit" alignment="BASELINE_LEFT" graphicTextGap="14.0" mnemonicParsing="false" onAction="#setTimeLimit" prefHeight="70.0" prefWidth="300.0" styleClass="navButton" text="Set time limit" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="#fcfcfc" glyphName="CALENDAR" size="20" />
+               </graphic>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
             <Button alignment="BASELINE_LEFT" graphicTextGap="14.0" mnemonicParsing="false" onAction="#logout" prefHeight="70.0" prefWidth="300.0" styleClass="navButton" text="Log out" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="#fcfcfc" glyphName="BACKWARD" size="20" />
@@ -129,7 +129,7 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="whiteBackground" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="messageBox" alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="900.0" styleClass="message-background" stylesheets="@../style/style.css">
+            <HBox fx:id="messageBox" alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="900.0" styleClass="message-background" stylesheets="@../style/style.css" visible="false">
                <children>
                   <Label fx:id="message" styleClass="custom-font" text="This is message" textFill="WHITE">
                      <font>
