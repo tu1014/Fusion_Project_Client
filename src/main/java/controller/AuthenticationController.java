@@ -10,10 +10,14 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AuthenticationController implements Initializable {
+
+    private Socket socket = null;
+    public void setSocket(Socket socket) { this.socket = socket; }
 
     @FXML VBox inputBox;
     @FXML Label message;
