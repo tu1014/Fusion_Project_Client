@@ -3,13 +3,35 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import network.Connect;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.Socket;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class SignUpController {
+public class SignUpController implements Initializable {
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Socket socket = Connect.getSocket();
+
+        try {
+
+            /*bi = new BufferedInputStream(socket.getInputStream());
+            bo = new BufferedOutputStream(socket.getOutputStream());*/
+            is = socket.getInputStream();
+            os = socket.getOutputStream();
+
+        } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    InputStream is;
+    OutputStream os;
 
     @FXML VBox vBox;
     @FXML TextField id;

@@ -16,9 +16,6 @@ import java.util.ResourceBundle;
 
 public class AuthenticationController implements Initializable {
 
-    private Socket socket = null;
-    public void setSocket(Socket socket) { this.socket = socket; }
-
     @FXML VBox inputBox;
     @FXML Label message;
     @FXML HBox messageBox;

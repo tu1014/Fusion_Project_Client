@@ -23,9 +23,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class AdminMainController {
 
-    private Socket socket = null;
-    public void setSocket(Socket socket) { this.socket = socket; }
-
     @FXML Label userId;
     @FXML Label name;
     @FXML AnchorPane mainPanel;

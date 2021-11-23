@@ -71,24 +71,24 @@ public class Protocol {
     }
 
     public void setHeader(
-            byte messageType,
-            byte action,
-            byte code,
-            byte frag,
-            byte last,
+            int messageType,
+            int action,
+            int code,
+            int frag,
+            int last,
             int seqNumber
     ) {
 
-        packet.header[0] = messageType;
-        packet.header[1] = action;
-        packet.header[2] = code;
+        packet.header[0] = (byte)messageType;
+        packet.header[1] = (byte)action;
+        packet.header[2] = (byte)code;
 
         // set body length >> set Body 끝난 이후 설정하는 것이 좋겠다
         /*packet.header[3] = (byte)(bodyLength >> 8);
         packet.header[4] = (byte)(bodyLength);*/
 
-        packet.header[5] = frag;
-        packet.header[6] = last;
+        packet.header[5] = (byte)frag;
+        packet.header[6] = (byte)last;
 
         // set SeqNumber
         packet.header[7] = (byte)(seqNumber >> 8);

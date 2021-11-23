@@ -11,12 +11,18 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import network.Connect;
+import network.Protocol;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SignInController {
+public class SignInController implements Initializable {
+
+    InputStream is;
+    OutputStream os;
 
     @FXML RadioButton admin, student, professor;
     @FXML TextField id;
@@ -26,6 +32,37 @@ public class SignInController {
     private AuthenticationController parentController;
 
     void setParentController(AuthenticationController controller) { parentController = controller; }
+
+    private void adminLogin(String id, String pw) throws IOException {
+
+        FXMLLoader fxmlLoader;
+        System.out.println("관리자 로그인");
+        Protocol protocol = new Protocol();
+        protocol.setHeader(
+                Protocol.REQUEST,
+                Protocol.LOGIN,
+                Protocol.ADMIN,
+                0, 0, 0
+                );
+
+        protocol.addBody(id.getBytes());
+        protocol.addBody(pw.getBytes());
+        protocol.setBodyLength();
+
+        byte[] packet = protocol.getPacket();
+
+        for(int i=0; i<packet.length; i++) System.out.print(packet[i]);
+
+        os.write(packet);
+
+        fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/adminMain.fxml"));
+        Parent mainPage = fxmlLoader.load();
+
+        Stage stage = (Stage) vBox.getParent().getScene().getWindow();
+        stage.setScene(new Scene(mainPage));
+
+    }
+
 
     @FXML
     private void login(ActionEvent event) {
@@ -37,14 +74,7 @@ public class SignInController {
         try {
 
             if (admin.isSelected()) {
-
-                System.out.println("관리자 로그인");
-
-                fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/adminMain.fxml"));
-                Parent mainPage = fxmlLoader.load();
-
-                Stage stage = (Stage) vBox.getParent().getScene().getWindow();
-                stage.setScene(new Scene(mainPage));
+                adminLogin(id, pw);
 
             }
             else if (student.isSelected()) { System.out.println("학생 로그인"); }
@@ -78,4 +108,17 @@ public class SignInController {
 
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Socket socket = Connect.getSocket();
+
+        try {
+
+            /*bi = new BufferedInputStream(socket.getInputStream());
+            bo = new BufferedOutputStream(socket.getOutputStream());*/
+            is = socket.getInputStream();
+            os = socket.getOutputStream();
+
+        } catch (IOException e) { e.printStackTrace(); }
+    }
 }
