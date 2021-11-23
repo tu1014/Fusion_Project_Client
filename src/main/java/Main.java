@@ -16,11 +16,26 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.util.Optional;
 
+import java.io.*;
+import java.net.*;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        
+        Socket socket = null;
+        
+        try {
+            
+            socket = new Socket("127.0.0.1", 3000);
+            System.out.println("접속 성공");
+        }
+        
+        catch(IOException ioe) {ioe.printStackTrace();}
+        
+        
+        
         Font.loadFont(getClass().getResource("font/bmjua_ttf.ttf").toString(), 20).getFamily();
 
         Parent root = FXMLLoader.load(getClass().getResource("fxml/splash.fxml"));
@@ -62,6 +77,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        
+        
+        
         launch(args);
     }
 
