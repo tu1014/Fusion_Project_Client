@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import network.Connector;
 import network.Protocol;
+import persistence.DTO.AdminDTO;
 
 import java.io.*;
 import java.net.Socket;
@@ -38,7 +39,7 @@ public class SignInController implements Initializable {
     private void adminLogin(String id, String pw) throws IOException {
 
         FXMLLoader fxmlLoader;
-        System.out.println("관리자 로그인");
+        System.out.println("관리자 로그인 시도");
         protocol.init();
         protocol.setHeader(
                 Protocol.REQUEST,
@@ -59,23 +60,34 @@ public class SignInController implements Initializable {
 
         Connector.read();
 
-        int userId = Connector.readInt();
-        String adminId = Connector.readUTF();
-        String password = Connector.readUTF();
-        String name = Connector.readUTF();
-        String phoneNumber = Connector.readUTF();
+        byte[] header = Connector.getHeader();
 
-        System.out.println(userId);
-        System.out.println(adminId);
-        System.out.println(password);
-        System.out.println(name);
-        System.out.println(phoneNumber);
+        if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
 
-        fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/adminMain.fxml"));
-        Parent mainPage = fxmlLoader.load();
+            parentController.showMessage("ID가 존재하지 않거나 PW가 틀렸습니다.");
+            return;
 
-        Stage stage = (Stage) vBox.getParent().getScene().getWindow();
-        stage.setScene(new Scene(mainPage));
+        }
+
+        else {
+
+            int userId = Connector.readInt();
+            String adminId = Connector.readUTF();
+            String password = Connector.readUTF();
+            String name = Connector.readUTF();
+            String phoneNumber = Connector.readUTF();
+
+            AdminDTO adminDTO = new AdminDTO(userId, name, password, phoneNumber, adminId);
+
+            fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/adminMain.fxml"));
+            Parent mainPage = fxmlLoader.load();
+            AdminMainController con = fxmlLoader.getController();
+            con.setCurrentUser(adminDTO);
+
+            Stage stage = (Stage) vBox.getParent().getScene().getWindow();
+            stage.setScene(new Scene(mainPage));
+
+        }
 
     }
 

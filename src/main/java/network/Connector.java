@@ -91,6 +91,8 @@ public class Connector {
         return rs;
     }
 
+    public static byte[] getHeader() { return header; }
+
 
 
 

@@ -15,6 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import persistence.DTO.AdminDTO;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -28,6 +29,20 @@ public class AdminMainController {
     @FXML AnchorPane mainPanel;
     @FXML HBox messageBox;
     @FXML Label message;
+
+    AdminDTO currentUser;
+
+    public void setCurrentUser(AdminDTO adminDTO) {
+        this.currentUser = adminDTO;
+        setUserInfo();
+    }
+
+    public void setUserInfo() {
+        userId.setText(currentUser.getAdminId());
+        name.setText(currentUser.getName());
+    }
+
+
 
     @FXML
     private void logout() throws IOException {
