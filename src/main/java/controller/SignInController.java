@@ -29,6 +29,8 @@ public class SignInController implements Initializable {
     @FXML PasswordField pw;
     @FXML VBox vBox;
 
+    Protocol protocol = new Protocol();
+
     private AuthenticationController parentController;
 
     void setParentController(AuthenticationController controller) { parentController = controller; }
@@ -37,21 +39,21 @@ public class SignInController implements Initializable {
 
         FXMLLoader fxmlLoader;
         System.out.println("관리자 로그인");
-        Protocol protocol = new Protocol();
+        protocol.init();
         protocol.setHeader(
                 Protocol.REQUEST,
                 Protocol.LOGIN,
                 Protocol.ADMIN,
-                0, 0, 0
+                Protocol.UNUSED,
+                Protocol.UNUSED,
+                Protocol.UNUSED
                 );
 
-        protocol.addBody(id.getBytes());
-        protocol.addBody(pw.getBytes());
+        protocol.addBodyStringData(id);
+        protocol.addBodyStringData(pw);
         protocol.setBodyLength();
 
         byte[] packet = protocol.getPacket();
-
-        for(int i=0; i<packet.length; i++) System.out.print(packet[i]);
 
         os.write(packet);
 
