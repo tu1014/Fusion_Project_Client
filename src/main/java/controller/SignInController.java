@@ -11,7 +11,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import network.Connect;
+import network.Connector;
 import network.Protocol;
 
 import java.io.*;
@@ -56,6 +56,20 @@ public class SignInController implements Initializable {
         byte[] packet = protocol.getPacket();
 
         os.write(packet);
+
+        Connector.read();
+
+        int userId = Connector.readInt();
+        String adminId = Connector.readUTF();
+        String password = Connector.readUTF();
+        String name = Connector.readUTF();
+        String phoneNumber = Connector.readUTF();
+
+        System.out.println(userId);
+        System.out.println(adminId);
+        System.out.println(password);
+        System.out.println(name);
+        System.out.println(phoneNumber);
 
         fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/adminMain.fxml"));
         Parent mainPage = fxmlLoader.load();
@@ -112,7 +126,7 @@ public class SignInController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Socket socket = Connect.getSocket();
+        Socket socket = Connector.getSocket();
 
         try {
 

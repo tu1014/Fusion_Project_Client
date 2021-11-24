@@ -9,10 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import network.Connect;
+import network.Connector;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,7 +25,7 @@ public class SplashController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        isConnected = Connect.connect();
+        isConnected = Connector.connect();
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(4), vBox);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);

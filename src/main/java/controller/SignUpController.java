@@ -7,7 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import network.Connect;
+import network.Connector;
 
 import java.io.*;
 import java.net.Socket;
@@ -18,7 +18,7 @@ public class SignUpController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Socket socket = Connect.getSocket();
+        Socket socket = Connector.getSocket();
 
         try {
 
