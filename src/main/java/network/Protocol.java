@@ -3,13 +3,16 @@ package network;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Protocol {
 
     public static final byte LEN_HEADER_SIZE = 9;
+    public static final byte LEN_INT_DATA = 2;
     public static final int LEN_MAX_LENGTH = 1000;
 
     public static final int UNUSED = 0;
+    public static final int USED = 1;
 
     public static final byte INDEX_MESSAGE_TYPE = 0;
     public static final byte INDEX_ACTION = 1;
@@ -56,46 +59,61 @@ public class Protocol {
 
         private Packet() { header = new byte[LEN_HEADER_SIZE]; }
 
+        public void printPacket() {
+            System.out.print("Packet Header : ");
+            for(int i=0; i<9; i++) System.out.print(header[i] + " ");
+            System.out.println();
+
+        }
+
     }
 
     private Packet packet;
     ByteArrayOutputStream baos;
-    DataOutputStream dos;
+    ArrayList<byte[]> packetList;
+    boolean isFragmented;
+    int packetSeqNum;
 
     public Protocol() {init();}
 
     public void init() {
         packet = new Packet();
         baos = new ByteArrayOutputStream();
-        dos = new DataOutputStream(baos);
+        packetList = new ArrayList<>();
+        isFragmented = false;
+        packetSeqNum = 0;
     }
 
     public void setHeader(
             int messageType,
             int action,
-            int code,
-            int frag,
-            int last,
-            int seqNumber
+            int code
     ) {
 
         packet.header[INDEX_MESSAGE_TYPE] = (byte)messageType;
         packet.header[INDEX_ACTION] = (byte)action;
         packet.header[INDEX_CODE] = (byte)code;
 
-        packet.header[INDEX_FRAG] = (byte)frag;
+        /*packet.header[INDEX_FRAG] = (byte)frag;
         packet.header[INDEX_LAST] = (byte)last;
 
         // set SeqNumber
         packet.header[INDEX_SEQ_NUMBER] = (byte)(seqNumber >> 8);
-        packet.header[INDEX_SEQ_NUMBER+1] = (byte)(seqNumber);
+        packet.header[INDEX_SEQ_NUMBER+1] = (byte)(seqNumber);*/
 
     }
 
     public void setBodyLength() {
 
+        baos.size();
+
+        System.out.println("baos.size() : " + baos.size());
+
         packet.body = baos.toByteArray();
         int bodyLength = packet.body.length;
+
+        System.out.println("bodyLength : " + bodyLength);
+
         packet.header[INDEX_BODY_LENGTH] = (byte)(bodyLength >> 8);
         packet.header[INDEX_BODY_LENGTH+1] = (byte)(bodyLength);
 
@@ -103,10 +121,24 @@ public class Protocol {
 
 
     // data의 0번째 index부터 count 만큼
-    public void addBodyStringData(String data) {
+    public void addBodyStringData(byte[] data) {
 
         try {
-            dos.writeUTF(data);
+
+            if(baos.size() + LEN_INT_DATA + data.length >= LEN_MAX_LENGTH) {
+
+                isFragmented = true;
+                packet.header[INDEX_FRAG] = USED;
+                packet.header[INDEX_SEQ_NUMBER] = (byte)(packetSeqNum >> 8);
+                packet.header[INDEX_SEQ_NUMBER+1] = (byte)(packetSeqNum);
+                packetSeqNum++;
+                packetList.add(getPacket());
+                baos.reset();
+
+            }
+            addBodyIntData(data.length);
+            baos.write(data);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -115,11 +147,8 @@ public class Protocol {
 
     public void addBodyIntData(int data) {
 
-        try {
-            dos.writeInt(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        baos.write((byte)(data >> 8));
+        baos.write((byte)(data));
 
     }
 
@@ -129,9 +158,18 @@ public class Protocol {
         byte[] rs = new byte[LEN_HEADER_SIZE + packet.body.length];
         System.arraycopy(packet.header, 0, rs, 0, LEN_HEADER_SIZE);
         System.arraycopy(packet.body, 0, rs, LEN_HEADER_SIZE, packet.body.length);
-
+        packet.printPacket();
         return rs;
 
+    }
+
+    public ArrayList<byte[]> getAllPacket() {
+
+        setBodyLength();
+        if (isFragmented) packet.header[INDEX_LAST] = USED;
+        packetList.add(getPacket());
+
+        return packetList;
     }
 
     public byte[] getHeader() {return packet.header;}

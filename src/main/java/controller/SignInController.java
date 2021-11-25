@@ -18,6 +18,7 @@ import persistence.DTO.AdminDTO;
 import java.io.*;
 import java.net.Socket;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SignInController implements Initializable {
@@ -41,22 +42,23 @@ public class SignInController implements Initializable {
         FXMLLoader fxmlLoader;
         System.out.println("관리자 로그인 시도");
         protocol.init();
-        protocol.setHeader(
-                Protocol.REQUEST,
-                Protocol.LOGIN,
-                Protocol.ADMIN,
-                Protocol.UNUSED,
-                Protocol.UNUSED,
-                Protocol.UNUSED
-                );
+        protocol.setHeader(Protocol.REQUEST, Protocol.LOGIN, Protocol.ADMIN);
 
-        protocol.addBodyStringData(id);
-        protocol.addBodyStringData(pw);
+        protocol.addBodyStringData(id.getBytes());
+        protocol.addBodyStringData(pw.getBytes());
         protocol.setBodyLength();
 
-        byte[] packet = protocol.getPacket();
+        ArrayList<byte[]> packetList = protocol.getAllPacket();
 
-        os.write(packet);
+        packetList.stream().forEach(v -> {
+            try {
+                os.write(v);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        // os.write(packet);
 
         Connector.read();
 
@@ -72,10 +74,10 @@ public class SignInController implements Initializable {
         else {
 
             int userId = Connector.readInt();
-            String adminId = Connector.readUTF();
-            String password = Connector.readUTF();
-            String name = Connector.readUTF();
-            String phoneNumber = Connector.readUTF();
+            String adminId = Connector.readString();
+            String password = Connector.readString();
+            String name = Connector.readString();
+            String phoneNumber = Connector.readString();
 
             AdminDTO adminDTO = new AdminDTO(userId, name, password, phoneNumber, adminId);
 

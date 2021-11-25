@@ -10,8 +10,7 @@ public class Connector {
     private static byte[] body;
     private static InputStream is;
     private static OutputStream os;
-    private static ByteArrayInputStream bais;
-    private static DataInputStream dis;
+    private static DataReader reader;
 
     public static boolean connect() {
 
@@ -49,8 +48,7 @@ public class Connector {
             body = new byte[bodyLength];
             if (bodyLength != 0) is.read(body);
 
-            bais = new ByteArrayInputStream(body);
-            dis = new DataInputStream(bais);
+            reader = new DataReader(body);
 
 
         } catch (IOException e) {
@@ -68,25 +66,18 @@ public class Connector {
 
     }
 
-    public static String readUTF() {
-        String rs = "";
+    public static String readString() {
 
-        try {
-            rs =  dis.readUTF();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String rs = "";
+        rs = reader.readString();
 
         return rs;
     }
 
     public static int readInt() {
+
         int rs = 0;
-        try {
-            rs = dis.readInt();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        rs = reader.readInt();
 
         return rs;
     }
