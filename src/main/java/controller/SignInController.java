@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import network.Connector;
 import network.Protocol;
 import persistence.DTO.AdminDTO;
+import persistence.DTO.ProfessorDTO;
 import persistence.DTO.StudentDTO;
 
 import java.io.*;
@@ -154,6 +155,64 @@ public class SignInController implements Initializable {
 
     }
 
+    private void professorLogin(String id, String pw) throws IOException {
+
+        FXMLLoader fxmlLoader;
+        System.out.println("교수 로그인 시도");
+        protocol.init();
+        protocol.setHeader(Protocol.REQUEST, Protocol.LOGIN, Protocol.PROFESSOR);
+
+        protocol.addBodyStringData(id.getBytes());
+        protocol.addBodyStringData(pw.getBytes());
+        protocol.setBodyLength();
+
+        ArrayList<byte[]> packetList = protocol.getAllPacket();
+
+        packetList.stream().forEach(v -> {
+            try {
+                os.write(v);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        // os.write(packet);
+
+        Connector.read();
+
+        byte[] header = Connector.getHeader();
+
+        if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
+
+            parentController.showMessage("ID가 존재하지 않거나 PW가 틀렸습니다.");
+            return;
+
+        }
+
+        else {
+
+            int userId = Connector.readInt();
+            String name = Connector.readString();
+            String password = Connector.readString();
+            String phoneNumber = Connector.readString();
+            int departmentId = Connector.readInt();
+            String professorId = Connector.readString();
+
+            ProfessorDTO professorDTO = new ProfessorDTO(userId, name, password, phoneNumber, departmentId, professorId);
+            System.out.println(professorDTO);
+
+            fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professor/professorMain.fxml"));
+            Parent mainPage = fxmlLoader.load();
+            ProfessorMainController con = fxmlLoader.getController();
+            con.setCurrentUser(professorDTO);
+
+            Stage stage = (Stage) vBox.getParent().getScene().getWindow();
+            stage.setScene(new Scene(mainPage));
+
+        }
+
+    }
+
 
     @FXML
     private void login(ActionEvent event) {
@@ -166,7 +225,7 @@ public class SignInController implements Initializable {
 
             if (admin.isSelected()) { adminLogin(id, pw); }
             else if (student.isSelected()) { studentLogin(id, pw); }
-            else if(professor.isSelected()) { System.out.println("교수 로그인"); }
+            else if(professor.isSelected()) { professorLogin(id, pw); }
             else {
                 parentController.showMessage("사용자 유형을 선택해주세요");
                 System.out.println("사용자 유형을 선택해주세요.");

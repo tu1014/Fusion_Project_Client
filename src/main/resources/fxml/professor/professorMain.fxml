@@ -23,7 +23,7 @@
                         <Image url="@../../image/user.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="userType" layoutX="167.0" layoutY="37.0" prefHeight="17.0" prefWidth="125.0" styleClass="custom-font" text="학생" textFill="WHITE">
+                  <Label fx:id="userType" layoutX="167.0" layoutY="37.0" prefHeight="17.0" prefWidth="125.0" styleClass="custom-font" text="교수" textFill="WHITE">
                      <font>
                         <Font size="22.0" />
                      </font>
