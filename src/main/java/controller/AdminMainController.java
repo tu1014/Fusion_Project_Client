@@ -49,7 +49,7 @@ public class AdminMainController {
 
         System.out.println("로그아웃 확인 다이아로그박스 실행");
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/logoutDialog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/authentication/logoutDialog.fxml"));
         AnchorPane dialogBox = fxmlLoader.load();
 
         Stage dialogStage = new Stage();
@@ -79,7 +79,7 @@ public class AdminMainController {
     @FXML
     private void setTimeLimit() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/timeLimit.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/timeLimit.fxml"));
         AnchorPane timeLimit = null;
 
         try {
@@ -97,7 +97,7 @@ public class AdminMainController {
     @FXML
     private void studentList() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/studentList.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/studentList.fxml"));
         AnchorPane stdList = null;
 
         try {
@@ -115,7 +115,7 @@ public class AdminMainController {
     @FXML
     private void professorList() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professorList.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/professorList.fxml"));
         AnchorPane professorList = null;
 
         try {
@@ -133,7 +133,7 @@ public class AdminMainController {
     @FXML
     private void lectureList() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/lectureList.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/lectureList.fxml"));
         AnchorPane lectureList = null;
 
         try {
@@ -151,7 +151,7 @@ public class AdminMainController {
     @FXML
     private void subjectList() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/subjectList.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/subjectList.fxml"));
         AnchorPane subjectList = null;
 
         try {

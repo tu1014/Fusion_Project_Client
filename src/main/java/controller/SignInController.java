@@ -83,7 +83,7 @@ public class SignInController implements Initializable {
 
             AdminDTO adminDTO = new AdminDTO(userId, name, password, phoneNumber, adminId);
 
-            fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/adminMain.fxml"));
+            fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/adminMain.fxml"));
             Parent mainPage = fxmlLoader.load();
             AdminMainController con = fxmlLoader.getController();
             con.setCurrentUser(adminDTO);
@@ -142,7 +142,7 @@ public class SignInController implements Initializable {
             StudentDTO studentDTO = new StudentDTO(userId, name, password, phoneNumber, studentId, departmentId, grade);
             System.out.println(studentDTO);
 
-            fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/studentMain.fxml"));
+            fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/student/studentMain.fxml"));
             Parent mainPage = fxmlLoader.load();
             StudentMainController con = fxmlLoader.getController();
             con.setCurrentUser(studentDTO);
@@ -183,7 +183,7 @@ public class SignInController implements Initializable {
 
         try {
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/signUpBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/authentication/signUpBox.fxml"));
             VBox vbox = fxmlLoader.load();
             SignUpController controller = fxmlLoader.getController();
             controller.setParentController(parentController);

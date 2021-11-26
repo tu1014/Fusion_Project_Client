@@ -12,15 +12,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="root" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentMainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="root" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StudentMainController">
    <left>
-      <VBox prefHeight="800.0" prefWidth="300.0" styleClass="sidePanel" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
+      <VBox prefHeight="800.0" prefWidth="300.0" styleClass="sidePanel" stylesheets="@../../style/style.css" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane prefHeight="192.0" prefWidth="300.0" styleClass="purpleBackground">
                <children>
                   <ImageView fitHeight="114.0" fitWidth="133.0" layoutX="23.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" styleClass="text-color-white">
                      <image>
-                        <Image url="@../image/user.png" />
+                        <Image url="@../../image/user.png" />
                      </image>
                   </ImageView>
                   <Label fx:id="userType" layoutX="167.0" layoutY="37.0" prefHeight="17.0" prefWidth="125.0" styleClass="custom-font" text="학생" textFill="WHITE">
@@ -129,7 +129,7 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="whiteBackground" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="messageBox" alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="900.0" styleClass="message-background" stylesheets="@../style/style.css" visible="false">
+            <HBox fx:id="messageBox" alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="900.0" styleClass="message-background" stylesheets="@../../style/style.css" visible="false">
                <children>
                   <Label fx:id="message" styleClass="custom-font" text="This is message" textFill="WHITE">
                      <font>

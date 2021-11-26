@@ -29,7 +29,7 @@ public class AuthenticationController implements Initializable {
 
         try {
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/signInBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/authentication/signInBox.fxml"));
             VBox inputBox = fxmlLoader.load();
             SignInController controller = fxmlLoader.getController();
             controller.setParentController(this);

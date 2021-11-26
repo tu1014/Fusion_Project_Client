@@ -26,7 +26,7 @@ public class Main extends Application {
         
         Font.loadFont(getClass().getResource("font/bmjua_ttf.ttf").toString(), 20).getFamily();
 
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/splash.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/util/splash.fxml"));
         primaryStage.setScene(new Scene(root));
 
         // primaryStage.initStyle(StageStyle.UNDECORATED);
@@ -40,7 +40,7 @@ public class Main extends Application {
             @Override
             public void handle(WindowEvent evt) {
 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/exitDialog.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/util/exitDialog.fxml"));
                 AnchorPane dialogBox = null;
 
                 try {

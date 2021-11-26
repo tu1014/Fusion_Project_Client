@@ -24,7 +24,7 @@ public class LogoutDialogController {
         Stage rootWindow = (Stage) dialog.getOwner();
         dialog.close();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/authentication.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/authentication/authentication.fxml"));
         Parent root = null;
 
         try {
