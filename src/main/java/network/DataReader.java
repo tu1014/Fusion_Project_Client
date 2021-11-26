@@ -13,7 +13,7 @@ public class DataReader {
     public int readInt() {
 
         int result = ((int) (buffer[index++] & 0xff) << 8) |
-                ((int) buffer[index++] & 0xff);
+                     ((int) buffer[index++] & 0xff);
 
 
         return result;

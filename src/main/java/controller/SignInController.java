@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import network.Connector;
 import network.Protocol;
 import persistence.DTO.AdminDTO;
+import persistence.DTO.StudentDTO;
 
 import java.io.*;
 import java.net.Socket;
@@ -73,11 +74,12 @@ public class SignInController implements Initializable {
 
         else {
 
+            // 로직 메서드로 뺄까?
             int userId = Connector.readInt();
-            String adminId = Connector.readString();
-            String password = Connector.readString();
             String name = Connector.readString();
+            String password = Connector.readString();
             String phoneNumber = Connector.readString();
+            String adminId = Connector.readString();
 
             AdminDTO adminDTO = new AdminDTO(userId, name, password, phoneNumber, adminId);
 
@@ -85,6 +87,65 @@ public class SignInController implements Initializable {
             Parent mainPage = fxmlLoader.load();
             AdminMainController con = fxmlLoader.getController();
             con.setCurrentUser(adminDTO);
+
+            Stage stage = (Stage) vBox.getParent().getScene().getWindow();
+            stage.setScene(new Scene(mainPage));
+
+        }
+
+    }
+
+    private void studentLogin(String id, String pw) throws IOException {
+
+        FXMLLoader fxmlLoader;
+        System.out.println("학생 로그인 시도");
+        protocol.init();
+        protocol.setHeader(Protocol.REQUEST, Protocol.LOGIN, Protocol.STUDENT);
+
+        protocol.addBodyStringData(id.getBytes());
+        protocol.addBodyStringData(pw.getBytes());
+        protocol.setBodyLength();
+
+        ArrayList<byte[]> packetList = protocol.getAllPacket();
+
+        packetList.stream().forEach(v -> {
+            try {
+                os.write(v);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        // os.write(packet);
+
+        Connector.read();
+
+        byte[] header = Connector.getHeader();
+
+        if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
+
+            parentController.showMessage("ID가 존재하지 않거나 PW가 틀렸습니다.");
+            return;
+
+        }
+
+        else {
+
+            int userId = Connector.readInt();
+            String name = Connector.readString();
+            String password = Connector.readString();
+            String phoneNumber = Connector.readString();
+            String studentId = Connector.readString();
+            int departmentId = Connector.readInt();
+            int grade = Connector.readInt();
+
+            StudentDTO studentDTO = new StudentDTO(userId, name, password, phoneNumber, studentId, departmentId, grade);
+            System.out.println(studentDTO);
+
+            fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/studentMain.fxml"));
+            Parent mainPage = fxmlLoader.load();
+            StudentMainController con = fxmlLoader.getController();
+            con.setCurrentUser(studentDTO);
 
             Stage stage = (Stage) vBox.getParent().getScene().getWindow();
             stage.setScene(new Scene(mainPage));
@@ -103,11 +164,8 @@ public class SignInController implements Initializable {
 
         try {
 
-            if (admin.isSelected()) {
-                adminLogin(id, pw);
-
-            }
-            else if (student.isSelected()) { System.out.println("학생 로그인"); }
+            if (admin.isSelected()) { adminLogin(id, pw); }
+            else if (student.isSelected()) { studentLogin(id, pw); }
             else if(professor.isSelected()) { System.out.println("교수 로그인"); }
             else {
                 parentController.showMessage("사용자 유형을 선택해주세요");

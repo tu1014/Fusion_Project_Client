@@ -60,12 +60,41 @@ public class Protocol {
         private Packet() { header = new byte[LEN_HEADER_SIZE]; }
 
         public void printPacket() {
-            System.out.print("Packet Header : ");
-            for(int i=0; i<9; i++) System.out.print(header[i] + " ");
+            System.out.println("<Packet Header>");
+            if (header[INDEX_MESSAGE_TYPE] == REQUEST) System.out.print("REQUEST ");
+            if (header[INDEX_MESSAGE_TYPE] == RESPONSE) System.out.print("RESPONSE ");
+            switch (header[INDEX_ACTION]) {
+                case Protocol.LOGIN: System.out.print("LOGIN "); break;
+                case Protocol.LOGOUT: System.out.print("LOGOUT "); break;
+                case Protocol.CREATE: System.out.print("CRATE "); break;
+                case Protocol.READ: System.out.print("READ "); break;
+                case Protocol.UPDATE: System.out.print("UPDATE "); break;
+                case Protocol.DELETE: System.out.print("DELETE "); break;
+            }
+            switch (header[INDEX_CODE]) {
+                case Protocol.ADMIN: System.out.print("ADMIN "); break;
+                case Protocol.STUDENT: System.out.print("STUDENT "); break;
+                case Protocol.PROFESSOR: System.out.print("PROFESSOR "); break;
+                case Protocol.SUBJECT: System.out.print("SUBJECT "); break;
+                case Protocol.LECTURE_TIME_TABLE: System.out.print("LECTURE_TIME_TABLE "); break;
+                case Protocol.OPENING_SUBJECT: System.out.print("OPENING_SUBJECT "); break;
+                case Protocol.REGISTRATION: System.out.print("REGISTRATION "); break;
+                case Protocol.STUDENT_TIME_TABLE: System.out.print("STUDENT_TIME_TABLE "); break;
+                case Protocol.SYLLABUS: System.out.print("SYLLABUS "); break;
+            }
+            System.out.println();
+            int bodyLength = ((int) (header[INDEX_BODY_LENGTH] & 0xff) << 8) |
+                    ((int) header[INDEX_BODY_LENGTH+1] & 0xff);
+
+            System.out.print(bodyLength + " ");
+            System.out.print(header[INDEX_FRAG] + " ");
+            System.out.print(header[INDEX_LAST] + " ");
+            int seqNum = ((int) (header[INDEX_SEQ_NUMBER] & 0xff) << 8) |
+                    ((int) header[INDEX_SEQ_NUMBER+1] & 0xff);
+            System.out.print(seqNum + " ");
             System.out.println();
 
-        }
-
+        } // printPacket
     }
 
     private Packet packet;
@@ -94,25 +123,14 @@ public class Protocol {
         packet.header[INDEX_ACTION] = (byte)action;
         packet.header[INDEX_CODE] = (byte)code;
 
-        /*packet.header[INDEX_FRAG] = (byte)frag;
-        packet.header[INDEX_LAST] = (byte)last;
-
-        // set SeqNumber
-        packet.header[INDEX_SEQ_NUMBER] = (byte)(seqNumber >> 8);
-        packet.header[INDEX_SEQ_NUMBER+1] = (byte)(seqNumber);*/
-
     }
 
     public void setBodyLength() {
 
         baos.size();
 
-        System.out.println("baos.size() : " + baos.size());
-
         packet.body = baos.toByteArray();
         int bodyLength = packet.body.length;
-
-        System.out.println("bodyLength : " + bodyLength);
 
         packet.header[INDEX_BODY_LENGTH] = (byte)(bodyLength >> 8);
         packet.header[INDEX_BODY_LENGTH+1] = (byte)(bodyLength);
