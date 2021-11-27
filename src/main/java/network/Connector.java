@@ -11,6 +11,7 @@ public class Connector {
     private static InputStream is;
     private static OutputStream os;
     private static DataReader reader;
+    private static Protocol protocol;
 
     public static boolean connect() {
 
@@ -21,6 +22,7 @@ public class Connector {
             header = new byte[Protocol.LEN_HEADER_SIZE];
             is = socket.getInputStream();
             os = socket.getOutputStream();
+            protocol = new Protocol();
 
             return true;
         }
@@ -30,6 +32,8 @@ public class Connector {
         return false;
 
     }
+
+    public static Protocol getProtocol() { return protocol; }
 
     public static Socket getSocket() {
         return socket;

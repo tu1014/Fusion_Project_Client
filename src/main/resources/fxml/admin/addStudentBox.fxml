@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="370.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminController.AddStudentBoxController">
+   <children>
+      <Label layoutX="84.0" layoutY="56.0" text="Add Student">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <TextField fx:id="studentId" layoutX="77.0" layoutY="108.0" prefHeight="28.0" prefWidth="217.0" promptText="StdNumber" styleClass="custom-font" />
+      <PasswordField fx:id="pw" layoutX="77.0" layoutY="155.0" prefHeight="28.0" prefWidth="217.0" promptText="Password" styleClass="custom-font" />
+      <TextField fx:id="name" layoutX="77.0" layoutY="204.0" prefHeight="28.0" prefWidth="217.0" promptText="Name" styleClass="custom-font" />
+      <Button fx:id="addBtn" layoutX="124.0" layoutY="393.0" mnemonicParsing="false" onAction="#addStd" text="Add Student" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="departmentBox" layoutX="77.0" layoutY="303.0" prefHeight="22.0" prefWidth="217.0" promptText="컴퓨터소프트웨어공학과">
+         <styleClass>
+            <String fx:value="whiteBackground" />
+            <String fx:value="custom-font" />
+         </styleClass>
+      </ComboBox>
+      <ComboBox fx:id="gradeBox" layoutX="77.0" layoutY="343.0" prefHeight="22.0" prefWidth="217.0" promptText="1학년">
+         <styleClass>
+            <String fx:value="whiteBackground" />
+            <String fx:value="custom-font" />
+         </styleClass>
+      </ComboBox>
+      <TextField fx:id="phoneNumber" layoutX="77.0" layoutY="254.0" prefHeight="28.0" prefWidth="217.0" promptText="Phone Number" styleClass="custom-font" />
+      <HBox fx:id="messageBox" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="370.0" styleClass="message-background">
+         <children>
+            <Label fx:id="message" styleClass="custom-font" text="message" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="18.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -36,7 +36,7 @@ public class SignInController implements Initializable {
     @FXML PasswordField pw;
     @FXML VBox vBox;
 
-    Protocol protocol = new Protocol();
+    Protocol protocol = Connector.getProtocol();
 
     private AuthenticationController parentController;
 
@@ -264,8 +264,6 @@ public class SignInController implements Initializable {
 
         try {
 
-            /*bi = new BufferedInputStream(socket.getInputStream());
-            bo = new BufferedOutputStream(socket.getOutputStream());*/
             is = socket.getInputStream();
             os = socket.getOutputStream();
 
