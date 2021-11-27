@@ -1,4 +1,4 @@
-package persistence.DTO;
+package persistence.Entity;
 
 public class ProfessorDTO extends UserDTO {
 

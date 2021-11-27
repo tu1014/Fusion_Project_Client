@@ -4,17 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import network.Connector;
 import network.Protocol;
-import persistence.DTO.AdminDTO;
-import persistence.DTO.StudentDTO;
-import studentController.StudentMainController;
+import persistence.Entity.AdminDTO;
 
 import java.io.*;
 import java.net.Socket;

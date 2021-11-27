@@ -1,26 +1,26 @@
-package persistence.DTO;
+package persistence.Entity;
 
-public class StudentDTO extends UserDTO {
+public class Student extends UserDTO {
 
-    public StudentDTO() {}
+    public Student() {}
 
-    public StudentDTO(long userId, String name, String password, String phoneNumber, String studentId, int departmentId, int grade) {
+    public Student(long userId, String name, String password, String phoneNumber, String studentId, String departmentName, int grade) {
         super(userId, name, password, phoneNumber);
         this.studentId = studentId;
-        this.departmentId = departmentId;
+        this.departmentName = departmentName;
         this.grade = grade;
     }
 
     // main test에서 사용
-    public StudentDTO(String name, String password, String phoneNumber, String studentId, int departmentId, int grade) {
+    public Student(String name, String password, String phoneNumber, String studentId, String departmentName, int grade) {
         super(name, password, phoneNumber);
         this.studentId = studentId;
-        this.departmentId = departmentId;
+        this.departmentName = departmentName;
         this.grade = grade;
     }
 
     private String studentId;
-    private int departmentId;
+    private String departmentName;
     private int grade;
 
     public String getStudentId() {
@@ -31,12 +31,12 @@ public class StudentDTO extends UserDTO {
         this.studentId = studentId;
     }
 
-    public int getDepartmentId() {
-        return departmentId;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public int getGrade() {
@@ -51,7 +51,7 @@ public class StudentDTO extends UserDTO {
     public String toString() {
         return "StudentDTO{" +
                 "studentId='" + studentId + '\'' +
-                ", departmentId=" + departmentId +
+                ", departmentId=" + departmentName +
                 ", grade=" + grade +
                 ", userId=" + userId +
                 ", name='" + name + '\'' +

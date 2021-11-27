@@ -1,4 +1,4 @@
-package persistence.DTO;
+package persistence.Entity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import persistence.DTO.AdminDTO;
+import persistence.Entity.AdminDTO;
 
 import java.io.IOException;
 

@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import persistence.DTO.StudentDTO;
+import persistence.Entity.Student;
 
 import java.io.IOException;
 
@@ -24,9 +24,9 @@ public class StudentMainController {
     @FXML HBox messageBox;
     @FXML Label message;
 
-    StudentDTO currentUser;
+    Student currentUser;
 
-    public void setCurrentUser(StudentDTO stdDTO) {
+    public void setCurrentUser(Student stdDTO) {
         this.currentUser = stdDTO;
         setUserInfo();
     }

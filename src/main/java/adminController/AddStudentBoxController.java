@@ -4,7 +4,6 @@ import Validator.Validator;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -12,8 +11,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import network.Connector;
 import network.Protocol;
-import persistence.DTO.AdminDTO;
-import persistence.DTO.StudentDTO;
+import persistence.Entity.Student;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -157,20 +155,21 @@ public class AddStudentBoxController implements Initializable {
             pw = Connector.readString();
             phoneNumber = Connector.readString();
             studentID = Connector.readString();
-            int departmentId = Connector.readInt();
+            String departmentName = Connector.readString();
             int grade = Connector.readInt();
 
-            StudentDTO studentDTO = new StudentDTO(
+            Student student = new Student(
                     userID,
                     name,
                     pw,
                     phoneNumber,
                     studentID,
-                    departmentId,
+                    departmentName,
                     grade
             );
 
-            System.out.println(studentDTO);
+            System.out.println(student);
+
             /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/studentItem.fxml"));
             HBox item = fxmlLoader.load();
             StudentItemController studentItemController = fxmlLoader.getController();
