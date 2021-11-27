@@ -8,13 +8,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="370.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminController.AddStudentBoxController">
    <children>
-      <Label layoutX="84.0" layoutY="56.0" text="Add Student">
+      <Label layoutX="84.0" layoutY="48.0" text="Add Student">
          <font>
             <Font size="37.0" />
          </font>
       </Label>
       <TextField fx:id="studentId" layoutX="77.0" layoutY="108.0" prefHeight="28.0" prefWidth="217.0" promptText="StdNumber" styleClass="custom-font" />
-      <PasswordField fx:id="pw" layoutX="77.0" layoutY="155.0" prefHeight="28.0" prefWidth="217.0" promptText="Password" styleClass="custom-font" />
+      <PasswordField fx:id="pw" layoutX="77.0" layoutY="155.0" prefHeight="28.0" prefWidth="217.0" promptText="Password" />
       <TextField fx:id="name" layoutX="77.0" layoutY="204.0" prefHeight="28.0" prefWidth="217.0" promptText="Name" styleClass="custom-font" />
       <Button fx:id="addBtn" layoutX="124.0" layoutY="393.0" mnemonicParsing="false" onAction="#addStd" text="Add Student" textFill="WHITE">
          <font>
@@ -34,7 +34,7 @@
          </styleClass>
       </ComboBox>
       <TextField fx:id="phoneNumber" layoutX="77.0" layoutY="254.0" prefHeight="28.0" prefWidth="217.0" promptText="Phone Number" styleClass="custom-font" />
-      <HBox fx:id="messageBox" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="370.0" styleClass="message-background">
+      <HBox fx:id="messageBox" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="370.0" styleClass="message-background" visible="false">
          <children>
             <Label fx:id="message" styleClass="custom-font" text="message" textFill="WHITE">
                <HBox.margin>

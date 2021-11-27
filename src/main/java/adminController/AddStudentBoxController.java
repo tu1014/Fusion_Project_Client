@@ -1,5 +1,6 @@
 package adminController;
 
+import Validator.Validator;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,14 +35,14 @@ public class AddStudentBoxController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         departmentBox.getItems().add("컴퓨터소프트웨어공학과");
         departmentBox.getItems().add("기계공학과");
-        departmentBox.getItems().add("인공지능학과");
+        departmentBox.getItems().add("전자공학과");
         departmentBox.setOnAction(this::setDepartment);
 
         gradeBox.getItems().add("1학년");
         gradeBox.getItems().add("2학년");
         gradeBox.getItems().add("3학년");
         gradeBox.getItems().add("4학년");
-        departmentBox.setOnAction(this::setGrade);
+        gradeBox.setOnAction(this::setGrade);
 
         Socket socket = Connector.getSocket();
 
@@ -102,6 +103,23 @@ public class AddStudentBoxController implements Initializable {
         String pw = this.pw.getText();
         String name = this.name.getText();
         String phoneNumber = this.phoneNumber.getText();
+
+        if(Validator.isValidStudentId(studentID) == false) {
+            showMessage("올바르지 않은 학번 입력");
+            return;
+        }
+        if(Validator.isValidBirthDay(pw) == false) {
+            showMessage("올바르지 않은 생년월일(password) 입력");
+            return;
+        }
+        if(Validator.isEmpty(name)) {
+            showMessage("올바르지 않은 이름 입력");
+            return;
+        }
+        if(Validator.isValidPhoneNumber(phoneNumber) == false) {
+            showMessage("올바르지 않은 전화번호 입력");
+            return;
+        }
 
         protocol.init();
         protocol.setHeader(Protocol.REQUEST, Protocol.CREATE, Protocol.STUDENT);
