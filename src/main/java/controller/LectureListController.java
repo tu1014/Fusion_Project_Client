@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 public class LectureListController implements Initializable {
 
     @FXML ComboBox<String> gradeBox;
+    @FXML ComboBox<String> filter;
     @FXML TextField keyWord;
     @FXML AnchorPane panel;
 
@@ -21,10 +22,18 @@ public class LectureListController implements Initializable {
     void setParentController(AdminMainController con) { parentController = con; }
 
     int searchGrade = 0;
-    String searchKeyWord = "";
+    String searchKeyWord = " ";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
+        filter.getItems().add("No Filter");
+        filter.getItems().add("교과목 코드");
+        filter.getItems().add("교과목 이름");
+        filter.getItems().add("교수 이름");
+        filter.setOnAction(this::setSearchFilter);
+
         gradeBox.getItems().add("All Grades");
         gradeBox.getItems().add("1학년");
         gradeBox.getItems().add("2학년");
@@ -44,6 +53,25 @@ public class LectureListController implements Initializable {
         else searchGrade = 0;
 
         parentController.showMessage("검색 키워드 : " + choice);
+
+    }
+
+    public void setSearchFilter(ActionEvent event) {
+
+        String choice = filter.getValue();
+
+        if (choice.equals("No Filter")) searchKeyWord = " ";
+        else if (choice.equals("교과목 코드")) searchKeyWord = "subjectCode";
+        else if (choice.equals("교과목 이름")) searchKeyWord = "subjectName";
+        else if (choice.equals("교수 이름")) searchKeyWord = "professorName";
+
+        if (choice.equals("교수 이름")) gradeBox.setVisible(true);
+        else {
+            gradeBox.setVisible(false);
+            // searchGrade = 0;
+        }
+
+        parentController.showMessage("검색 필터 : " + choice);
 
     }
 
