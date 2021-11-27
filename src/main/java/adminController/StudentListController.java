@@ -1,4 +1,4 @@
-package controller;
+package adminController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProfessorListController implements Initializable {
+public class StudentListController implements Initializable {
 
     @FXML ComboBox<String> filter;
     @FXML TextField keyWord;
@@ -24,17 +24,17 @@ public class ProfessorListController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        filter.getItems().add("department");
+        filter.getItems().add("grade");
         filter.getItems().add("name");
+        filter.getItems().add("student number");
+
         filter.setOnAction(this::setSearchGrade);
     }
 
     public void setSearchGrade(ActionEvent event) {
 
         String choice = filter.getValue();
-
         searchKeyWord = choice;
-
         parentController.showMessage("검색 필터 : " + choice);
 
     }

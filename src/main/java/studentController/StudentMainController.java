@@ -1,5 +1,6 @@
-package controller;
+package studentController;
 
+import adminController.*;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,33 +11,31 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import persistence.DTO.ProfessorDTO;
 import persistence.DTO.StudentDTO;
 
 import java.io.IOException;
 
-public class ProfessorMainController {
 
-    @FXML
-    Label userId;
+public class StudentMainController {
+
+    @FXML Label userId;
     @FXML Label name;
-    @FXML
-    AnchorPane mainPanel;
-    @FXML
-    HBox messageBox;
+    @FXML AnchorPane mainPanel;
+    @FXML HBox messageBox;
     @FXML Label message;
 
-    ProfessorDTO currentUser;
+    StudentDTO currentUser;
 
-    public void setCurrentUser(ProfessorDTO pfDTO) {
-        this.currentUser = pfDTO;
+    public void setCurrentUser(StudentDTO stdDTO) {
+        this.currentUser = stdDTO;
         setUserInfo();
     }
 
     public void setUserInfo() {
-        userId.setText(currentUser.getProfessorId());
+        userId.setText(currentUser.getStudentId());
         name.setText(currentUser.getName());
     }
+
 
     @FXML
     private void logout() throws IOException {

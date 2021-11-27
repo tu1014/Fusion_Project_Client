@@ -1,5 +1,8 @@
-package controller;
+package authenticationController;
 
+import adminController.AdminMainController;
+import professorController.ProfessorMainController;
+import studentController.StudentMainController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

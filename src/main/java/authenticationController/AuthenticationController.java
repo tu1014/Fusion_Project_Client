@@ -1,4 +1,4 @@
-package controller;
+package authenticationController;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 

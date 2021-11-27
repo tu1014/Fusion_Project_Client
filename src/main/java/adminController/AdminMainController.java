@@ -1,4 +1,4 @@
-package controller;
+package adminController;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
@@ -11,12 +11,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import persistence.DTO.AdminDTO;
-import persistence.DTO.StudentDTO;
 
 import java.io.IOException;
 
 
-public class StudentMainController {
+public class AdminMainController {
 
     @FXML Label userId;
     @FXML Label name;
@@ -24,17 +23,18 @@ public class StudentMainController {
     @FXML HBox messageBox;
     @FXML Label message;
 
-    StudentDTO currentUser;
+    AdminDTO currentUser;
 
-    public void setCurrentUser(StudentDTO stdDTO) {
-        this.currentUser = stdDTO;
+    public void setCurrentUser(AdminDTO adminDTO) {
+        this.currentUser = adminDTO;
         setUserInfo();
     }
 
     public void setUserInfo() {
-        userId.setText(currentUser.getStudentId());
+        userId.setText(currentUser.getAdminId());
         name.setText(currentUser.getName());
     }
+
 
 
     @FXML
@@ -79,7 +79,7 @@ public class StudentMainController {
 
             timeLimit = fxmlLoader.load();
             TimeLimitController timeLimitController = fxmlLoader.getController();
-            // timeLimitController.setParentController(this);
+            timeLimitController.setParentController(this);
 
             mainPanel.getChildren().setAll(timeLimit);
 
@@ -97,7 +97,7 @@ public class StudentMainController {
 
             stdList = fxmlLoader.load();
             StudentListController studentListController = fxmlLoader.getController();
-            // studentListController.setParentController(this);
+            studentListController.setParentController(this);
 
             mainPanel.getChildren().setAll(stdList);
 
@@ -115,7 +115,7 @@ public class StudentMainController {
 
             professorList = fxmlLoader.load();
             ProfessorListController professorListController = fxmlLoader.getController();
-            // professorListController.setParentController(this);
+            professorListController.setParentController(this);
 
             mainPanel.getChildren().setAll(professorList);
 
@@ -133,7 +133,7 @@ public class StudentMainController {
 
             lectureList = fxmlLoader.load();
             LectureListController lectureListController = fxmlLoader.getController();
-            // lectureListController.setParentController(this);
+            lectureListController.setParentController(this);
 
             mainPanel.getChildren().setAll(lectureList);
 
@@ -151,7 +151,7 @@ public class StudentMainController {
 
             subjectList = fxmlLoader.load();
             SubjectListController subjectListController = fxmlLoader.getController();
-            // subjectListController.setParentController(this);
+            subjectListController.setParentController(this);
 
             mainPanel.getChildren().setAll(subjectList);
 
