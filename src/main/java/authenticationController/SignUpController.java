@@ -1,5 +1,6 @@
 package authenticationController;
 
+import Validator.Validator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -71,9 +72,20 @@ public class SignUpController implements Initializable {
         String name = this.name.getText();
         String phoneNumber = this.phoneNumber.getText();
 
-        if (id.length()==0 || pw.length()==0) {
-            parentController.showMessage("ID, PW를 다시 확인해주세요");
-            System.out.println("공백 오류");
+        if(Validator.isEmpty(id)) {
+            parentController.showMessage("id를 입력해주세요.");
+            return;
+        }
+        if(Validator.isEmpty(pw)) {
+            parentController.showMessage("비밀번호를 입력해주세요.");
+            return;
+        }
+        if(Validator.isEmpty(name)) {
+            parentController.showMessage("올바르지 않은 이름 입력");
+            return;
+        }
+        if(Validator.isValidPhoneNumber(phoneNumber) == false) {
+            parentController.showMessage("올바르지 않은 전화번호 입력");
             return;
         }
 

@@ -4,9 +4,11 @@ import Validator.Validator;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import network.Connector;
@@ -54,7 +56,7 @@ public class AddStudentBoxController implements Initializable {
     }
 
     public void setGrade(ActionEvent event) {
-        String choice = departmentBox.getValue();
+        String choice = gradeBox.getValue();
         if (choice.equals("1학년")) grade = 1;
         else if (choice.equals("2학년")) grade = 2;
         else if (choice.equals("3학년")) grade = 3;
@@ -170,13 +172,13 @@ public class AddStudentBoxController implements Initializable {
 
             System.out.println(student);
 
-            /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/studentItem.fxml"));
-            HBox item = fxmlLoader.load();
-            StudentItemController studentItemController = fxmlLoader.getController();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/studentListItem.fxml"));
+            VBox item = fxmlLoader.load();
+            StudentListItemController studentItemController = fxmlLoader.getController();
             studentItemController.setStudentListController(parentController);
-            studentItemController.id.setText(newStd.getStdNumber());
-            studentItemController.name.setText(newStd.getName());
-            parentController.vBox.getChildren().add(item);*/
+            studentItemController.setStudent(student);
+            studentItemController.setText();
+            parentController.listBox.getChildren().add(item);
 
             parentController.parentController.showMessage("학생 추가 성공");
             Stage dialog = (Stage) addBtn.getScene().getWindow();

@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import network.Connector;
 import network.Protocol;
 import persistence.Entity.AdminDTO;
-import persistence.Entity.ProfessorDTO;
+import persistence.Entity.Professor;
 import persistence.Entity.Student;
 
 import java.io.*;
@@ -198,16 +198,16 @@ public class SignInController implements Initializable {
             String name = Connector.readString();
             String password = Connector.readString();
             String phoneNumber = Connector.readString();
-            int departmentId = Connector.readInt();
+            String departmentName = Connector.readString();
             String professorId = Connector.readString();
 
-            ProfessorDTO professorDTO = new ProfessorDTO(userId, name, password, phoneNumber, departmentId, professorId);
-            System.out.println(professorDTO);
+            Professor professor = new Professor(userId, name, password, phoneNumber, departmentName, professorId);
+            System.out.println(professor);
 
             fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professor/professorMain.fxml"));
             Parent mainPage = fxmlLoader.load();
             ProfessorMainController con = fxmlLoader.getController();
-            con.setCurrentUser(professorDTO);
+            con.setCurrentUser(professor);
 
             Stage stage = (Stage) vBox.getParent().getScene().getWindow();
             stage.setScene(new Scene(mainPage));

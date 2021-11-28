@@ -1,16 +1,16 @@
 package persistence.Entity;
 
-public class ProfessorDTO extends UserDTO {
+public class Professor extends UserDTO {
 
-    private int departmentId;
+    private String departmentName;
     private String professorId;
 
-    public int getDepartmentId() {
-        return departmentId;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public String getProfessorId() {
@@ -21,25 +21,25 @@ public class ProfessorDTO extends UserDTO {
         this.professorId = professorId;
     }
 
-    public ProfessorDTO() {}
+    public Professor() {}
 
-    public ProfessorDTO(long userId, String name, String password, String phoneNumber, int departmentId, String professorId) {
+    public Professor(long userId, String name, String password, String phoneNumber, String departmentName, String professorId) {
         super(userId, name, password, phoneNumber);
-        this.departmentId = departmentId;
+        this.departmentName = departmentName;
         this.professorId = professorId;
     }
 
     // main test에서 사용
-    public ProfessorDTO(String name, String password, String phoneNumber, int departmentId, String professorId) {
+    public Professor(String name, String password, String phoneNumber, String departmentName, String professorId) {
         super(name, password, phoneNumber);
-        this.departmentId = departmentId;
+        this.departmentName = departmentName;
         this.professorId = professorId;
     }
 
     @Override
     public String toString() {
         return "ProfessorDTO{" +
-                "departmentId=" + departmentId +
+                "departmentId=" + departmentName +
                 ", professorId='" + professorId + '\'' +
                 ", userId=" + userId +
                 ", name='" + name + '\'' +
