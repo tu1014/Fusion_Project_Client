@@ -14,17 +14,17 @@
                   <Font size="27.0" />
                </font>
             </Label>
-            <Label fx:id="name" layoutX="157.0" layoutY="9.0" styleClass="custom-font" text="안태욱">
+            <Label fx:id="name" layoutX="165.0" layoutY="9.0" styleClass="custom-font" text="안태욱">
                <font>
                   <Font size="27.0" />
                </font>
             </Label>
-            <Label fx:id="department" layoutX="265.0" layoutY="9.0" styleClass="custom-font" text="컴퓨터소프트웨어공학과">
+            <Label fx:id="department" layoutX="280.0" layoutY="9.0" styleClass="custom-font" text="컴퓨터소프트웨어공학과">
                <font>
                   <Font size="27.0" />
                </font>
             </Label>
-            <Label fx:id="grade" layoutX="598.0" layoutY="9.0" styleClass="custom-font" text="2학년">
+            <Label fx:id="grade" layoutX="618.0" layoutY="9.0" styleClass="custom-font" text="2학년">
                <font>
                   <Font size="27.0" />
                </font>

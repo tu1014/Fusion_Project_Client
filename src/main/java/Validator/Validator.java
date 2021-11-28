@@ -27,6 +27,8 @@ public class Validator {
         else return true;
     }
 
+    public static boolean isZero(int i) { return i == 0; }
+
 
 
 }

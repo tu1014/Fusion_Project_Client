@@ -21,13 +21,13 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <ComboBox fx:id="departmentBox" layoutX="77.0" layoutY="303.0" prefHeight="22.0" prefWidth="217.0" promptText="컴퓨터소프트웨어공학과">
+      <ComboBox fx:id="departmentBox" layoutX="77.0" layoutY="303.0" prefHeight="22.0" prefWidth="217.0" promptText="학과">
          <styleClass>
             <String fx:value="whiteBackground" />
             <String fx:value="custom-font" />
          </styleClass>
       </ComboBox>
-      <ComboBox fx:id="gradeBox" layoutX="77.0" layoutY="343.0" prefHeight="22.0" prefWidth="217.0" promptText="1학년">
+      <ComboBox fx:id="gradeBox" layoutX="77.0" layoutY="343.0" prefHeight="22.0" prefWidth="217.0" promptText="학년">
          <styleClass>
             <String fx:value="whiteBackground" />
             <String fx:value="custom-font" />

@@ -13,12 +13,22 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import network.Connector;
+import network.Protocol;
+import persistence.Entity.Student;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class StudentListController implements Initializable {
+
+    InputStream is;
+    OutputStream os;
+    Protocol protocol;
 
     @FXML ComboBox<String> filter;
     @FXML TextField keyWord;
@@ -30,10 +40,21 @@ public class StudentListController implements Initializable {
 
     void setParentController(AdminMainController con) { parentController = con; }
     
-    String searchKeyWord = " ";
+    String searchKeyWord = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        protocol = Connector.getProtocol();
+        Socket socket = Connector.getSocket();
+
+        try {
+            is = socket.getInputStream();
+            os = socket.getOutputStream();
+        }
+
+        catch (IOException e) { e.printStackTrace(); }
+
         filter.getItems().add("grade");
         filter.getItems().add("name");
         filter.getItems().add("student number");
@@ -65,6 +86,78 @@ public class StudentListController implements Initializable {
         AddStudentBoxController addStudentBoxController = fxmlLoader.getController();
         addStudentBoxController.setParentController(this);
 
+    }
+
+    public void search(ActionEvent event) throws IOException {
+
+        listBox.getChildren().clear();
+
+        protocol.init();
+        protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.STUDENT);
+
+        // 필터 설정에 따라 숫자 넣어줘야 한다
+        protocol.addBodyIntData(0);
+
+        os.write(protocol.getPacket());
+
+        Connector.read();
+
+        byte[] header = Connector.getHeader();
+        if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
+            parentController.showMessage("학생이 존재하지 않습니다.");
+            // return;
+        }
+
+        else {
+
+            parentController.showMessage("학생 정보를 로드하였습니다");
+
+            /*if(header[Protocol.INDEX_FRAG] == Protocol.USED) {}
+
+            else {
+                readStudent();
+            }*/
+
+            readStudent();
+
+        }
+    }
+
+    public void readStudent() {
+
+        int count = Connector.readInt();
+
+        for(int i=0; i<count; i++) {
+            int userId = Connector.readInt();
+            String name = Connector.readString();
+            String password = Connector.readString();
+            String phoneNumber = Connector.readString();
+            String studentId = Connector.readString();
+            String department = Connector.readString();
+            int grade = Connector.readInt();
+
+            Student student = new Student(
+                    userId,
+                    name,
+                    password,
+                    phoneNumber,
+                    studentId,
+                    department,
+                    grade
+            );
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/studentListItem.fxml"));
+            VBox item = null;
+
+            try { item = fxmlLoader.load(); }
+            catch (IOException e) { e.printStackTrace(); }
+
+            StudentListItemController studentItemController = fxmlLoader.getController();
+            studentItemController.setStudentListController(this);
+            studentItemController.setStudent(student);
+            studentItemController.setText();
+            listBox.getChildren().add(item);
+        }
     }
 
 

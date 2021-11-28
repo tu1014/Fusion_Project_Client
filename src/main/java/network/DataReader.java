@@ -10,18 +10,17 @@ public class DataReader {
         index = 0;
     }
 
-    public int readInt() {
+    public int readInt() throws ArrayIndexOutOfBoundsException {
 
         int result = ((int) (buffer[index++] & 0xff) << 8) |
-                     ((int) buffer[index++] & 0xff);
-
+                    ((int) buffer[index++] & 0xff);
 
         return result;
     }
 
-    public String readString() {
+    public String readString() throws ArrayIndexOutOfBoundsException {
 
-        int length = readInt();
+        int length = readInt();;
         String result = new String(buffer, index, length);
         index += length;
 

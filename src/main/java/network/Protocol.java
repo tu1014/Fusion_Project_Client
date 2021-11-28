@@ -46,6 +46,7 @@ public class Protocol {
     public static final byte SYLLABUS = 8;
     public static final byte FAIL = 9;
     public static final byte SUCCESS = 10;
+    public static final byte DEPARTMENT = 11;
 
     private class Packet {
 

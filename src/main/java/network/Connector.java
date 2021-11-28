@@ -49,6 +49,7 @@ public class Connector {
 
             int bodyLength = byteToInt(header, Protocol.INDEX_BODY_LENGTH);
 
+            System.out.println("header의 BodyLength : " + bodyLength);
             body = new byte[bodyLength];
             if (bodyLength != 0) is.read(body);
 
@@ -58,6 +59,8 @@ public class Connector {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("실제 BodyLength : " + body.length);
 
     }
 
@@ -73,7 +76,14 @@ public class Connector {
     public static String readString() {
 
         String rs = "";
-        rs = reader.readString();
+
+        try { rs = reader.readString(); }
+
+        catch (ArrayIndexOutOfBoundsException e) {
+
+            read();
+            return readString();
+        }
 
         return rs;
     }
@@ -81,7 +91,13 @@ public class Connector {
     public static int readInt() {
 
         int rs = 0;
-        rs = reader.readInt();
+
+        try { rs = reader.readInt(); }
+
+        catch (ArrayIndexOutOfBoundsException e) {
+            read();
+            return readInt();
+        }
 
         return rs;
     }

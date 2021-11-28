@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import network.Connector;
 import network.Protocol;
+import persistence.Entity.Department;
 import persistence.Entity.Student;
 
 import java.io.IOException;
@@ -21,28 +22,27 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class AddStudentBoxController implements Initializable {
+
+    // 디폴트값, 셋온액션에서 맵 사용하여 값 바꿔주기
+    // 그럼 서버에서 학과 이름 검색 후 아이디 넣어주던 부분 필요 없음 여기서 아이디로 보내니까
 
     InputStream is;
     OutputStream os;
 
     private StudentListController parentController;
-    Protocol protocol = Connector.getProtocol();
+    Protocol protocol;
+    Map<String, Integer> departmentMap;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        departmentBox.getItems().add("컴퓨터소프트웨어공학과");
-        departmentBox.getItems().add("기계공학과");
-        departmentBox.getItems().add("전자공학과");
-        departmentBox.setOnAction(this::setDepartment);
 
-        gradeBox.getItems().add("1학년");
-        gradeBox.getItems().add("2학년");
-        gradeBox.getItems().add("3학년");
-        gradeBox.getItems().add("4학년");
-        gradeBox.setOnAction(this::setGrade);
+        departmentMap = new HashMap<>();
+        protocol = Connector.getProtocol();
 
         Socket socket = Connector.getSocket();
 
@@ -51,7 +51,55 @@ public class AddStudentBoxController implements Initializable {
             is = socket.getInputStream();
             os = socket.getOutputStream();
 
+            protocol.init();
+            protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.DEPARTMENT);
+            os.write(protocol.getPacket());
+
+            Connector.read();
+
+            byte[] header = Connector.getHeader();
+            if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
+
+                showMessage("학과가 존재하지 않습니다.");
+                // return;
+
+            }
+
+            else {
+
+                if(header[Protocol.INDEX_FRAG] == Protocol.USED) {}
+
+                else {
+
+                    int count = Connector.readInt();
+
+                    for(int i=0; i<count; i++) {
+
+                        int id = Connector.readInt();
+                        String name = Connector.readString();
+                        departmentMap.put(name, id);
+                        departmentBox.getItems().add(name);
+
+                    }
+
+                }
+            }
+
         } catch (IOException e) { e.printStackTrace(); }
+
+
+
+        /*departmentBox.getItems().add("컴퓨터소프트웨어공학과");
+        departmentBox.getItems().add("기계공학과");
+        departmentBox.getItems().add("전자공학과");*/
+        // default 값 어케하지?
+        departmentBox.setOnAction(this::setDepartment);
+
+        gradeBox.getItems().add("1학년");
+        gradeBox.getItems().add("2학년");
+        gradeBox.getItems().add("3학년");
+        gradeBox.getItems().add("4학년");
+        gradeBox.setOnAction(this::setGrade);
 
     }
 
@@ -80,8 +128,8 @@ public class AddStudentBoxController implements Initializable {
     @FXML HBox messageBox;
     @FXML Label message;
 
-    String department = "컴퓨터소프트웨어공학과";
-    int grade = 1;
+    String department = "";
+    int grade = 0;
 
     void showMessage(String message) {
 
@@ -118,6 +166,16 @@ public class AddStudentBoxController implements Initializable {
         }
         if(Validator.isValidPhoneNumber(phoneNumber) == false) {
             showMessage("올바르지 않은 전화번호 입력");
+            return;
+        }
+
+        if(Validator.isEmpty(department)) {
+            showMessage("학과를 선택해주세요");
+            return;
+        }
+
+        if(Validator.isZero(grade)) {
+            showMessage("학년을 선택해주세요");
             return;
         }
 
