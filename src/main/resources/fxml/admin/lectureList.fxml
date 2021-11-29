@@ -18,7 +18,7 @@
          </content>
       </ScrollPane>
       <TextField fx:id="keyWord" layoutX="49.0" layoutY="18.0" prefHeight="30.0" prefWidth="270.0" styleClass="custom-font" />
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="18.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="message-background" textFill="WHITE">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="18.0" mnemonicParsing="false" onAction="#search" prefHeight="30.0" prefWidth="30.0" styleClass="message-background" textFill="WHITE">
          <graphic>
             <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
          </graphic>

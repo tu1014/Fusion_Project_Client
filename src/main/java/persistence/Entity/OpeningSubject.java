@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @Getter
 @Setter
-public class OpeningSubjectDTO {
+public class OpeningSubject {
 
     private long openingSubjectId;
     private int subjectId;

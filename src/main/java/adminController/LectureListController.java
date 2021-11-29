@@ -6,7 +6,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import network.Connector;
+import network.Protocol;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,13 +25,27 @@ public class LectureListController implements Initializable {
 
     AdminMainController parentController;
 
+    InputStream is;
+    OutputStream os;
+    Protocol protocol;
+
     void setParentController(AdminMainController con) { parentController = con; }
 
     int searchGrade = 0;
-    String searchKeyWord = " ";
+    String searchKeyWord = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        protocol = Connector.getProtocol();
+        Socket socket = Connector.getSocket();
+
+        try {
+            is = socket.getInputStream();
+            os = socket.getOutputStream();
+        }
+
+        catch (IOException e) { e.printStackTrace(); }
 
 
         filter.getItems().add("No Filter");
@@ -58,18 +78,13 @@ public class LectureListController implements Initializable {
 
     public void setSearchFilter(ActionEvent event) {
 
+        keyWord.setText("");
         String choice = filter.getValue();
 
-        if (choice.equals("No Filter")) searchKeyWord = " ";
-        else if (choice.equals("교과목 코드")) searchKeyWord = "subjectCode";
-        else if (choice.equals("교과목 이름")) searchKeyWord = "subjectName";
-        else if (choice.equals("교수 이름")) searchKeyWord = "professorName";
+        searchKeyWord = choice;
 
         if (choice.equals("교수 이름")) gradeBox.setVisible(true);
-        else {
-            gradeBox.setVisible(false);
-            // searchGrade = 0;
-        }
+        else { gradeBox.setVisible(false); }
 
         parentController.showMessage("검색 필터 : " + choice);
 

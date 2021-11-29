@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="845.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminController.LectureListItemController">
+   <children>
+      <AnchorPane prefHeight="105.0" prefWidth="845.0">
+         <children>
+            <Label fx:id="code" layoutX="23.0" layoutY="11.0" styleClass="custom-font" text="CS00001-06">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="name" layoutX="192.0" layoutY="11.0" styleClass="custom-font" text="자바프로그래밍">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="grade" layoutX="406.0" layoutY="11.0" styleClass="custom-font" text="2학년">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Button layoutX="736.0" layoutY="11.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="20" />
+               </graphic>
+            </Button>
+            <Button layoutX="785.0" layoutY="11.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TRASH" size="20" />
+               </graphic>
+            </Button>
+            <Label fx:id="credit" layoutX="491.0" layoutY="11.0" styleClass="custom-font" text="3학점">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="time" layoutX="23.0" layoutY="58.0" styleClass="custom-font" text="수12 D327 / 금1 D41">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="professor" layoutX="576.0" layoutY="11.0" styleClass="custom-font" text="김선명">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="registered" layoutX="276.0" layoutY="58.0" prefHeight="33.0" prefWidth="189.0" styleClass="custom-font" text="Registered : 10">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="capacity" layoutX="464.0" layoutY="58.0" prefHeight="33.0" prefWidth="189.0" styleClass="custom-font" text="Capacity : 30">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <HBox prefHeight="5.0" prefWidth="845.0" styleClass="message-background" />
+   </children>
+</VBox>
