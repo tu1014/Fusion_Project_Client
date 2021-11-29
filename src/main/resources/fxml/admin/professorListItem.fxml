@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="845.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminController.StudentListItemController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="845.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminController.ProfessorListItemController">
    <children>
       <AnchorPane prefHeight="50.0" prefWidth="845.0">
          <children>
-            <Label fx:id="studentId" layoutX="25.0" layoutY="9.0" styleClass="custom-font" text="PF000001">
+            <Label fx:id="professorId" layoutX="25.0" layoutY="9.0" styleClass="custom-font" text="PF000001">
                <font>
                   <Font size="27.0" />
                </font>

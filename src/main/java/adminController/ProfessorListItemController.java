@@ -8,7 +8,7 @@ import persistence.Entity.Student;
 
 public class ProfessorListItemController {
 
-    @FXML Label studentId;
+    @FXML Label professorId;
     @FXML Label name;
     @FXML Label department;
 
@@ -19,9 +19,9 @@ public class ProfessorListItemController {
         this.parent = con;
     }
 
-    public void setStudent(Professor professor) { this.professor = professor; }
+    public void setProfessor(Professor professor) { this.professor = professor; }
     public void setText() {
-        studentId.setText(professor.getProfessorId());
+        professorId.setText(professor.getProfessorId());
         name.setText(professor.getName());
         department.setText(professor.getDepartmentName());
     }

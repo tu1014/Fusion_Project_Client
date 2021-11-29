@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class SubjectDTO {
+public class Subject {
 
     private int id;
     private String subjectCode;
@@ -14,7 +14,7 @@ public class SubjectDTO {
     private int semester;
     private int credit;
 
-    public SubjectDTO(String subjectCode, String subjectName, int targetGrade, int semester, int credit){
+    public Subject(String subjectCode, String subjectName, int targetGrade, int semester, int credit){
         this.subjectCode = subjectCode;
         this.subjectName = subjectName;
         this.targetGrade = targetGrade;

@@ -46,7 +46,7 @@ public class Connector {
 
             is.read(header);
             System.out.println("데이터 수신!");
-
+            Protocol.printPacket(header);
             int bodyLength = byteToInt(header, Protocol.INDEX_BODY_LENGTH);
 
             System.out.println("header의 BodyLength : " + bodyLength);

@@ -205,6 +205,8 @@ public class AddProfessorBoxController implements Initializable {
 
             // parentController.search();
 
+            parentController.search();
+
             parentController.parentController.showMessage("교수 추가 성공");
             Stage dialog = (Stage) addBtn.getScene().getWindow();
             dialog.close();

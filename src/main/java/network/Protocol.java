@@ -7,6 +7,45 @@ import java.util.ArrayList;
 
 public class Protocol {
 
+    public static void printPacket(byte[] header) {
+        System.out.println("<Packet Header>");
+        if (header[INDEX_MESSAGE_TYPE] == REQUEST) System.out.print("REQUEST ");
+        if (header[INDEX_MESSAGE_TYPE] == RESPONSE) System.out.print("RESPONSE ");
+        switch (header[INDEX_ACTION]) {
+            case Protocol.LOGIN: System.out.print("LOGIN "); break;
+            case Protocol.LOGOUT: System.out.print("LOGOUT "); break;
+            case Protocol.CREATE: System.out.print("CRATE "); break;
+            case Protocol.READ: System.out.print("READ "); break;
+            case Protocol.UPDATE: System.out.print("UPDATE "); break;
+            case Protocol.DELETE: System.out.print("DELETE "); break;
+        }
+        switch (header[INDEX_CODE]) {
+            case Protocol.ADMIN: System.out.print("ADMIN "); break;
+            case Protocol.STUDENT: System.out.print("STUDENT "); break;
+            case Protocol.PROFESSOR: System.out.print("PROFESSOR "); break;
+            case Protocol.SUBJECT: System.out.print("SUBJECT "); break;
+            case Protocol.LECTURE_TIME_TABLE: System.out.print("LECTURE_TIME_TABLE "); break;
+            case Protocol.OPENING_SUBJECT: System.out.print("OPENING_SUBJECT "); break;
+            case Protocol.REGISTRATION: System.out.print("REGISTRATION "); break;
+            case Protocol.STUDENT_TIME_TABLE: System.out.print("STUDENT_TIME_TABLE "); break;
+            case Protocol.SYLLABUS: System.out.print("SYLLABUS "); break;
+            case Protocol.SUCCESS: System.out.print("SUCCESS "); break;
+            case Protocol.FAIL: System.out.print("FAIL "); break;
+            case Protocol.DEPARTMENT: System.out.print("DEPARTMENT "); break;
+        }
+        System.out.println();
+        int bodyLength = ((int) (header[INDEX_BODY_LENGTH] & 0xff) << 8) |
+                ((int) header[INDEX_BODY_LENGTH+1] & 0xff);
+
+        System.out.print(bodyLength + " ");
+        System.out.print(header[INDEX_FRAG] + " ");
+        System.out.print(header[INDEX_LAST] + " ");
+        int seqNum = ((int) (header[INDEX_SEQ_NUMBER] & 0xff) << 8) |
+                ((int) header[INDEX_SEQ_NUMBER+1] & 0xff);
+        System.out.print(seqNum + " ");
+        System.out.println();
+    }
+
     public static final byte LEN_HEADER_SIZE = 9;
     public static final byte LEN_INT_DATA = 2;
     public static final int LEN_MAX_LENGTH = 1000;
@@ -82,6 +121,9 @@ public class Protocol {
                 case Protocol.REGISTRATION: System.out.print("REGISTRATION "); break;
                 case Protocol.STUDENT_TIME_TABLE: System.out.print("STUDENT_TIME_TABLE "); break;
                 case Protocol.SYLLABUS: System.out.print("SYLLABUS "); break;
+                case Protocol.SUCCESS: System.out.print("SUCCESS "); break;
+                case Protocol.FAIL: System.out.print("FAIL "); break;
+                case Protocol.DEPARTMENT: System.out.print("DEPARTMENT "); break;
             }
             System.out.println();
             int bodyLength = ((int) (header[INDEX_BODY_LENGTH] & 0xff) << 8) |

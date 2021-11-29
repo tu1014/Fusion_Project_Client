@@ -14,6 +14,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import network.Connector;
 import network.Protocol;
+import persistence.Entity.Professor;
+import persistence.Entity.Student;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +40,16 @@ public class ProfessorListController implements Initializable {
     void setParentController(AdminMainController con) { parentController = con; }
     
     String searchKeyWord = "";
+
+    String pfId;
+    String pfName;
+    String department;
+
+    private void initKey() {
+        pfId = "";
+        pfName = "";
+        department = "";
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -64,12 +76,14 @@ public class ProfessorListController implements Initializable {
         keyWord.setText("");
 
         String choice = filter.getValue();
-        if(choice.equals("No Filter")) searchKeyWord = "";
+        /*if(choice.equals("No Filter")) searchKeyWord = "";
 
         else {
             searchKeyWord = choice;
             parentController.showMessage("검색 필터 : " + choice);
-        }
+        }*/
+        searchKeyWord = choice;
+        parentController.showMessage("검색 필터 : " + choice);
 
     }
 
@@ -103,29 +117,27 @@ public class ProfessorListController implements Initializable {
         listBox.getChildren().clear();
 
         protocol.init();
-        protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.CREATE);
+        protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.PROFESSOR);
 
-        // 필터 설정에 따라 숫자 넣어줘야 한다
-        if(searchKeyWord.length() == 0) protocol.addBodyIntData(0);
-        else {
+        String input = keyWord.getText();
 
-            protocol.addBodyIntData(1); // 검색 필터 개수
-            protocol.addBodyStringData(searchKeyWord.getBytes());
+        initKey();
 
-            String input = keyWord.getText();
-
-            if (searchKeyWord.equals("grade")) {
-                // 숫자 맞는지 확인 필요
-                if (Validator.isValidGrade(input)) protocol.addBodyIntData(Integer.parseInt(input));
-                else {
-                    parentController.showMessage("올바른 학년을 입력하세요");
-                    return;
-                }
-            }
-
-            else protocol.addBodyStringData(input.getBytes());
-
+        if (searchKeyWord.equals("department")) {
+            department = input;
         }
+
+        if (searchKeyWord.equals("professorId")) {
+            pfId = input;
+        }
+
+        if (searchKeyWord.equals("name")) {
+            pfName = input;
+        }
+
+        protocol.addBodyStringData(pfId.getBytes());
+        protocol.addBodyStringData(pfName.getBytes());
+        protocol.addBodyStringData(department.getBytes());
 
         os.write(protocol.getPacket());
 
@@ -133,22 +145,53 @@ public class ProfessorListController implements Initializable {
 
         byte[] header = Connector.getHeader();
         if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
-            parentController.showMessage("학생이 존재하지 않습니다.");
+            parentController.showMessage("교수가 존재하지 않습니다.");
             // return;
         }
 
         else {
 
-            parentController.showMessage("학생 정보를 로드하였습니다");
+            parentController.showMessage("교수 정보를 로드하였습니다");
 
-            /*if(header[Protocol.INDEX_FRAG] == Protocol.USED) {}
+            readProfessor();
 
-            else {
-                readStudent();
-            }*/
+        }
+    }
 
-            // readStudent();
+    public void readProfessor() {
 
+        int count = Connector.readInt();
+        System.out.println("size : " + count);
+
+        for(int i=0; i<count; i++) {
+            int userId = Connector.readInt();
+            System.out.println("+++++++ : " + userId);
+            String name = Connector.readString();
+            String password = Connector.readString();
+            String phoneNumber = Connector.readString();
+            String department = Connector.readString();
+            String pfId = Connector.readString();
+
+            Professor pf = new Professor(
+                    userId,
+                    name,
+                    password,
+                    phoneNumber,
+                    department,
+                    pfId
+            );
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/professorListItem.fxml"));
+            VBox item = null;
+
+            try { item = fxmlLoader.load(); }
+            catch (IOException e) { e.printStackTrace(); }
+
+            ProfessorListItemController con = fxmlLoader.getController();
+            con.setProfessorListController(this);
+            con.setProfessor(pf);
+            con.setText();
+            listBox.getChildren().add(item);
         }
     }
 
