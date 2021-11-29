@@ -67,31 +67,20 @@ public class AddStudentBoxController implements Initializable {
 
             else {
 
-                if(header[Protocol.INDEX_FRAG] == Protocol.USED) {}
+                int count = Connector.readInt();
 
-                else {
+                for(int i=0; i<count; i++) {
 
-                    int count = Connector.readInt();
-
-                    for(int i=0; i<count; i++) {
-
-                        int id = Connector.readInt();
-                        String name = Connector.readString();
-                        departmentMap.put(name, id);
-                        departmentBox.getItems().add(name);
-
-                    }
+                    int id = Connector.readInt();
+                    String name = Connector.readString();
+                    departmentMap.put(name, id);
+                    departmentBox.getItems().add(name);
 
                 }
             }
 
         } catch (IOException e) { e.printStackTrace(); }
 
-
-
-        /*departmentBox.getItems().add("컴퓨터소프트웨어공학과");
-        departmentBox.getItems().add("기계공학과");
-        departmentBox.getItems().add("전자공학과");*/
         // default 값 어케하지?
         departmentBox.setOnAction(this::setDepartment);
 
