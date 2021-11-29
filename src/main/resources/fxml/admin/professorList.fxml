@@ -19,7 +19,7 @@
             <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
          </graphic>
       </Button>
-      <Button alignment="CENTER" graphicTextGap="15.0" layoutX="726.0" layoutY="18.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="153.0" styleClass="message-background" text="Add Professor" textFill="WHITE">
+      <Button alignment="CENTER" graphicTextGap="15.0" layoutX="726.0" layoutY="18.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="153.0" styleClass="message-background" text="Add Professor" onAction="#addProfessor" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
