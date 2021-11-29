@@ -20,7 +20,7 @@ public class DataReader {
 
     public String readString() throws ArrayIndexOutOfBoundsException {
 
-        int length = readInt();;
+        int length = readInt();
         String result = new String(buffer, index, length);
         index += length;
 

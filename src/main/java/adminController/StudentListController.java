@@ -55,18 +55,26 @@ public class StudentListController implements Initializable {
 
         catch (IOException e) { e.printStackTrace(); }
 
-        filter.getItems().add("grade");
+        filter.getItems().add("No Filter");
         filter.getItems().add("name");
         filter.getItems().add("student number");
+        filter.getItems().add("grade");
+        filter.getItems().add("department");
 
-        filter.setOnAction(this::setSearchGrade);
+        filter.setOnAction(this::setFilter);
     }
 
-    public void setSearchGrade(ActionEvent event) {
+    public void setFilter(ActionEvent event) {
+
+        keyWord.setText("");
 
         String choice = filter.getValue();
-        searchKeyWord = choice;
-        parentController.showMessage("검색 필터 : " + choice);
+        if(choice.equals("No Filter")) searchKeyWord = "";
+
+        else {
+            searchKeyWord = choice;
+            parentController.showMessage("검색 필터 : " + choice);
+        }
 
     }
 
@@ -96,7 +104,26 @@ public class StudentListController implements Initializable {
         protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.STUDENT);
 
         // 필터 설정에 따라 숫자 넣어줘야 한다
-        protocol.addBodyIntData(0);
+        if(searchKeyWord.length() == 0) protocol.addBodyIntData(0);
+        else {
+
+            protocol.addBodyIntData(1); // 검색 필터 개수
+            protocol.addBodyStringData(searchKeyWord.getBytes());
+
+            String input = keyWord.getText();
+
+            if (searchKeyWord.equals("grade")) {
+                // 숫자 맞는지 확인 필요
+                if (input.matches("^[1-4]")) protocol.addBodyIntData(Integer.parseInt(input));
+                else {
+                    parentController.showMessage("올바른 학년을 입력하세요");
+                    return;
+                }
+            }
+
+            else protocol.addBodyStringData(input.getBytes());
+
+        }
 
         os.write(protocol.getPacket());
 
