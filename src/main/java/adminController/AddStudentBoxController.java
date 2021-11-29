@@ -210,6 +210,7 @@ public class AddStudentBoxController implements Initializable {
 
         else {
 
+            // 학생 추가에서 데이터 받을 필요 없다?
             int userID = Connector.readInt();
             name = Connector.readString();
             pw = Connector.readString();
@@ -230,13 +231,15 @@ public class AddStudentBoxController implements Initializable {
 
             System.out.println(student);
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/studentListItem.fxml"));
+            /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/studentListItem.fxml"));
             VBox item = fxmlLoader.load();
             StudentListItemController studentItemController = fxmlLoader.getController();
             studentItemController.setStudentListController(parentController);
             studentItemController.setStudent(student);
             studentItemController.setText();
-            parentController.listBox.getChildren().add(item);
+            parentController.listBox.getChildren().add(item);*/
+
+            // parentController.search();
 
             parentController.parentController.showMessage("학생 추가 성공");
             Stage dialog = (Stage) addBtn.getScene().getWindow();

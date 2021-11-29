@@ -1,5 +1,6 @@
 package adminController;
 
+import Validator.Validator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,7 +79,8 @@ public class StudentListController implements Initializable {
 
     }
 
-    public void addStudent(ActionEvent event) throws IOException {
+    @FXML
+    public void addStudent() throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/addStudentBox.fxml"));
         AnchorPane dialogBox = fxmlLoader.load();
@@ -96,7 +98,9 @@ public class StudentListController implements Initializable {
 
     }
 
-    public void search(ActionEvent event) throws IOException {
+
+    @FXML
+    public void search() throws IOException {
 
         listBox.getChildren().clear();
 
@@ -114,7 +118,7 @@ public class StudentListController implements Initializable {
 
             if (searchKeyWord.equals("grade")) {
                 // 숫자 맞는지 확인 필요
-                if (input.matches("^[1-4]")) protocol.addBodyIntData(Integer.parseInt(input));
+                if (Validator.isValidGrade(input)) protocol.addBodyIntData(Integer.parseInt(input));
                 else {
                     parentController.showMessage("올바른 학년을 입력하세요");
                     return;

@@ -159,5 +159,23 @@ public class AdminMainController {
 
     }
 
+    @FXML
+    private void departmentList() {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/departmentList.fxml"));
+        AnchorPane subjectList = null;
+
+        try {
+
+            subjectList = fxmlLoader.load();
+            DepartmentListController con = fxmlLoader.getController();
+            con.setParentController(this);
+
+            mainPanel.getChildren().setAll(subjectList);
+
+        } catch (IOException e) { e.printStackTrace(); }
+
+    }
+
 
 }
