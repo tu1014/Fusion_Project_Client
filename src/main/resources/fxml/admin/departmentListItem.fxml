@@ -19,7 +19,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="20" />
                </graphic>
             </Button>
-            <Button layoutX="796.0" layoutY="9.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0">
+            <Button layoutX="796.0" layoutY="9.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0" onAction="#delete">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="TRASH" size="20" />
                </graphic>

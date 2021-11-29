@@ -4,10 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import network.Connector;
 import network.Protocol;
 import persistence.Entity.Department;
@@ -46,6 +49,30 @@ public class DepartmentListController implements Initializable {
             readDepartment();
 
         } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    @FXML
+    private void addDepartment() {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/addDepartmentBox.fxml"));
+        AnchorPane dialogBox = null;
+        try {
+            dialogBox = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Stage dialogStage = new Stage();
+        Scene scene = new Scene(dialogBox);
+        dialogStage.setScene(scene);
+        dialogStage.initOwner(panel.getScene().getWindow());
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+
+        dialogStage.show();
+
+        AddDepartmentBoxController con = fxmlLoader.getController();
+        con.setParentController(this);
+
     }
 
 
