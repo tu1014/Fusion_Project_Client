@@ -4,15 +4,19 @@ import Validator.Validator;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import network.Connector;
 import network.Protocol;
+import persistence.Entity.LectureTimeTable;
 import persistence.Entity.Professor;
 import persistence.Entity.Subject;
+import persistence.Enum.Day;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,6 +39,8 @@ public class AddLectureBoxController implements Initializable {
     @FXML HBox messageBox;
     @FXML Label message;
 
+    @FXML VBox listBox;
+
     @FXML ComboBox<String> subject;
     @FXML ComboBox<String> professor;
     @FXML ComboBox<String> dividedClass;
@@ -48,18 +54,22 @@ public class AddLectureBoxController implements Initializable {
     private LectureListController parentController;
     Protocol protocol;
 
-    Map<String, Integer> professorMap;
     Map<String, Integer> subjectMap;
     Map<String, Integer> roomNumberMap;
 
     String professorId = "";
     int subjectId = 0;
     int roomNumberId = 0;
+    String roomNum = "";
+    int sp = 0;
+    int cp = 0;
+    String d = "";
+    String divided = "";
+    ArrayList<LectureTimeTable> list = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        professorMap = new HashMap<>();
         subjectMap = new HashMap<>();
         roomNumberMap = new HashMap<>();
 
@@ -74,6 +84,11 @@ public class AddLectureBoxController implements Initializable {
 
             protocol.init();
             protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.PROFESSOR);
+
+            protocol.addBodyStringData("".getBytes());
+            protocol.addBodyStringData("".getBytes());
+            protocol.addBodyStringData("".getBytes());
+
             os.write(protocol.getPacket());
 
             Connector.read();
@@ -108,8 +123,7 @@ public class AddLectureBoxController implements Initializable {
                             pfId
                     );
 
-                    professorMap.put(pf.getProfessorId(), pf.getUserId());
-                    professor.getItems().add(pf.getProfessorId());
+                    professor.getItems().add(pf.getProfessorId() + " " + pf.getName());
 
                 }
 
@@ -151,7 +165,7 @@ public class AddLectureBoxController implements Initializable {
                     Subject s = new Subject(id, code, name, grade, semester, credit);
 
                     subjectMap.put(s.getSubjectCode(), s.getId());
-                    subject.getItems().add(s.getSubjectCode());
+                    subject.getItems().add(s.getSubjectCode() + " " + s.getSubjectName());
 
                 }
 
@@ -162,24 +176,241 @@ public class AddLectureBoxController implements Initializable {
             e.printStackTrace();
         }
 
+        startPeriod.getItems().add("1교시");
+        startPeriod.getItems().add("2교시");
+        startPeriod.getItems().add("3교시");
+        startPeriod.getItems().add("4교시");
+        startPeriod.getItems().add("5교시");
+        startPeriod.getItems().add("6교시");
+        startPeriod.getItems().add("7교시");
+        startPeriod.getItems().add("8교시");
+        startPeriod.setOnAction(this::setStartPeriod);
+
+        closePeriod.getItems().add("1교시");
+        closePeriod.getItems().add("2교시");
+        closePeriod.getItems().add("3교시");
+        closePeriod.getItems().add("4교시");
+        closePeriod.getItems().add("5교시");
+        closePeriod.getItems().add("6교시");
+        closePeriod.getItems().add("7교시");
+        closePeriod.getItems().add("8교시");
+        closePeriod.setOnAction(this::setClosePeriod);
+
+        roomNumber.getItems().add("D324");
+        roomNumber.getItems().add("D327");
+        roomNumber.getItems().add("D329");
+        roomNumber.getItems().add("D330");
+        roomNumber.getItems().add("D331");
+        roomNumber.setOnAction(this::setRoomNumberId);
+
+        dividedClass.getItems().add("1분반");
+        dividedClass.getItems().add("2분반");
+        dividedClass.getItems().add("3분반");
+        dividedClass.getItems().add("4분반");
+        dividedClass.setOnAction(this::setDivided);
+
+        day.getItems().add("월");
+        day.getItems().add("화");
+        day.getItems().add("수");
+        day.getItems().add("목");
+        day.getItems().add("금");
+        day.setOnAction(this::setD);
+
+
 
     } // end of initializable
 
     public void setLectureListController(LectureListController p) {parentController = p;}
 
     public void setProfessorId(ActionEvent event) {
-        String choice = professor.getValue();
+        String choice = professor.getValue().split(" ")[0];
         professorId = choice;
+        System.out.println("professor Id : " + professorId);
+    }
+
+    public void setDivided(ActionEvent event) {
+        String choice = dividedClass.getValue();
+
+        if(choice.equals("1분반")) divided = "01";
+        if(choice.equals("2분반")) divided = "02";
+        if(choice.equals("3분반")) divided = "03";
+        if(choice.equals("4분반")) divided = "04";
+
+    }
+
+    public void setD(ActionEvent event) {
+        String choice = day.getValue();
+        d = choice;
     }
 
     public void setSubjectId(ActionEvent event) {
-        String choice = subject.getValue();
+        String choice = subject.getValue().split(" ")[0];
         int id = subjectMap.get(choice);
         subjectId = id;
+        System.out.println("교과목 id : " + subjectId);
+    }
+
+    public void setRoomNumberId(ActionEvent event) {
+        String choice = roomNumber.getValue();
+        int id = 0;
+        if(choice.equals("D324")) id = 9;
+        if(choice.equals("D327")) id = 7;
+        if(choice.equals("D329")) id = 12;
+        if(choice.equals("D330")) id = 3;
+        if(choice.equals("D331")) id = 8;
+
+        roomNum = choice;
+        roomNumberId = id;
+    }
+
+    public void setStartPeriod(ActionEvent event) {
+        String choice = startPeriod.getValue();
+        int rs = 0;
+        if(choice.equals("1교시")) rs = 1;
+        if(choice.equals("2교시")) rs = 2;
+        if(choice.equals("3교시")) rs = 3;
+        if(choice.equals("4교시")) rs = 4;
+        if(choice.equals("5교시")) rs = 5;
+        if(choice.equals("6교시")) rs = 6;
+        if(choice.equals("7교시")) rs = 7;
+        if(choice.equals("8교시")) rs = 8;
+        sp = rs;
+    }
+
+    public void setClosePeriod(ActionEvent event) {
+        String choice = closePeriod.getValue();
+        int rs = 0;
+        if(choice.equals("1교시")) rs = 1;
+        if(choice.equals("2교시")) rs = 2;
+        if(choice.equals("3교시")) rs = 3;
+        if(choice.equals("4교시")) rs = 4;
+        if(choice.equals("5교시")) rs = 5;
+        if(choice.equals("6교시")) rs = 6;
+        if(choice.equals("7교시")) rs = 7;
+        if(choice.equals("8교시")) rs = 8;
+        cp = rs;
     }
 
     @FXML
     private void addLecture() throws IOException {
+
+        if(Validator.isZero(subjectId)) {
+            showMessage("교과목을 선택해주세요");
+            return;
+        }
+
+        if(Validator.isEmpty(professorId)) {
+            showMessage("담당 교수를 선택해주세요");
+            return;
+        }
+
+        if(Validator.isEmpty(divided)) {
+            showMessage("분반을 선택해주세요");
+            return;
+        }
+
+        String tmp = capacity.getText();
+        if(Validator.isDigit(tmp) == false) {
+            showMessage("올바른 최대 수강인원을 입력하세요");
+            return;
+        }
+
+        int cap = Integer.parseInt(tmp);
+
+        protocol.init();
+        protocol.setHeader(Protocol.REQUEST, Protocol.CREATE, Protocol.OPENING_SUBJECT);
+
+        protocol.addBodyIntData(subjectId);
+        protocol.addBodyStringData(professorId.getBytes());
+        protocol.addBodyStringData(divided.getBytes());
+        protocol.addBodyIntData(cap);
+
+        System.out.println("**********************8");
+        System.out.println(subjectId);
+        System.out.println(professorId);
+        System.out.println(divided);
+        System.out.println(cap);
+        System.out.println("**********************8");
+
+        protocol.addBodyIntData(list.size());
+
+        for(int i=0; i<list.size(); i++) {
+
+            LectureTimeTable ltt = list.get(i);
+            protocol.addBodyIntData(ltt.getLectureRoomId());
+            protocol.addBodyStringData(ltt.getDay().label().getBytes());
+            protocol.addBodyIntData(ltt.getStartPeriod());
+            protocol.addBodyIntData(ltt.getClosePeriod());
+
+        }
+
+        ArrayList<byte[]> packetList = protocol.getAllPacket();
+
+        packetList.stream().forEach(v -> {
+            try {
+                os.write(v);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Connector.read();
+
+        byte[] header = Connector.getHeader();
+        if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
+            showMessage("생성 실패");
+            // return;
+        }
+
+        else {
+            parentController.parentController.showMessage("강좌를 개설하였습니다");
+            parentController.search();
+        }
+
+
+    }
+
+    @FXML
+    private void addTime() throws IOException {
+
+        System.out.println("add Time 실행");
+        LectureTimeTable ltt = new LectureTimeTable();
+
+        if (Validator.isZero(roomNumberId)) {
+            showMessage("강의실을 선택해주세요");
+            return;
+        }
+        ltt.setLectureRoomId(roomNumberId);
+        ltt.setLectureRoomNumber(roomNum);
+
+        if (Validator.isEmpty(d)) {
+            showMessage("요일을 선택해주세요");
+            return;
+        }
+        ltt.setDay(Day.getValue(d));
+
+        if (Validator.isZero(sp)) {
+            showMessage("시작 교시를 선택해주세요");
+            return;
+        }
+        ltt.setStartPeriod(sp);
+
+        if (Validator.isZero(cp) || cp < sp) {
+            showMessage("올바른 종료 교시를 선택해주세요");
+            return;
+        }
+        ltt.setClosePeriod(cp);
+
+        list.add(ltt);
+        System.out.println(ltt);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/lttItem.fxml"));
+        VBox item = fxmlLoader.load();
+        lttItemController con = fxmlLoader.getController();
+        con.setLtt(ltt);
+        con.setText();
+        listBox.getChildren().add(item);
+        System.out.println("add Time 종료");
 
     }
 

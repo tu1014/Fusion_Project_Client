@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="86.0" prefWidth="202.0" styleClass="custom-font" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminController.lttItemController">
+   <children>
+      <AnchorPane prefHeight="81.0" prefWidth="202.0" styleClass="whiteBackground">
+         <children>
+            <Label fx:id="period" layoutX="14.0" layoutY="39.0" prefHeight="35.0" prefWidth="155.0" styleClass="custom-font" text="1교시-9교시">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="day" layoutX="8.0" layoutY="2.0" prefHeight="35.0" prefWidth="77.0" styleClass="custom-font" text="수요일">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="room" layoutX="101.0" layoutY="2.0" prefHeight="35.0" prefWidth="77.0" styleClass="custom-font" text="D327">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <HBox prefHeight="5.0" prefWidth="201.0" styleClass="message-background" />
+   </children>
+</VBox>

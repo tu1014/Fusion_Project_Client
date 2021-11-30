@@ -47,15 +47,15 @@
       <TextField fx:id="capacity" layoutX="63.0" layoutY="232.0" prefHeight="22.0" prefWidth="217.0" promptText="capacity" styleClass="custom-font" />
       <ScrollPane layoutX="307.0" layoutY="100.0" prefHeight="240.0" prefWidth="217.0">
          <content>
-            <VBox prefHeight="241.0" prefWidth="201.0" />
+            <VBox fx:id="listBox" prefHeight="241.0" prefWidth="201.0" />
          </content>
       </ScrollPane>
-      <Button fx:id="addBtn" layoutX="467.0" layoutY="454.0" mnemonicParsing="false" onAction="#addLecture" text="Add" textFill="WHITE">
+      <Button layoutX="467.0" layoutY="454.0" mnemonicParsing="false" onAction="#addLecture" text="Add" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="addTime" layoutX="241.0" layoutY="441.0" mnemonicParsing="false" onAction="#addProfessor" prefHeight="22.0" prefWidth="39.0" textFill="WHITE">
+      <Button layoutX="241.0" layoutY="441.0" mnemonicParsing="false" onAction="#addTime" prefHeight="22.0" prefWidth="39.0" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
