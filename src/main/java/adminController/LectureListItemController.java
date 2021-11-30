@@ -54,13 +54,15 @@ public class LectureListItemController implements Initializable {
         this.parent = con;
     }
 
+    public OpeningSubject getLecture() { return lecture; }
+
     public void setLecture(OpeningSubject lecture) { this.lecture = lecture; }
     public void setText() {
         code.setText(lecture.getSubjectCode() + "-" + lecture.getDividedClass());
         name.setText(lecture.getSubjectName());
         grade.setText(Integer.toString(lecture.getGrade()) + "학년");
         credit.setText(Integer.toString(lecture.getCredit()) + "학점");
-        time.setText(lecture.getTime().toString());
+        time.setText(lecture.getAllTime());
         professor.setText(lecture.getProfessorName());
         registered.setText("Registered : " + lecture.getRegistered());
         capacity.setText("Capacity : " + lecture.getCapacity());

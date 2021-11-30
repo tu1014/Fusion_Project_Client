@@ -7,6 +7,8 @@ import lombok.Setter;
 import persistence.Enum.Day;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Getter
@@ -28,6 +30,7 @@ public class OpeningSubject {
     private String professorName;
 
     private LectureTimeTable time;
+    private List<LectureTimeTable> lttList = new ArrayList<>();
 
     private int registered;
     private int capacity;
@@ -36,5 +39,18 @@ public class OpeningSubject {
     private LocalDateTime syllabusWriteClose;
     private LocalDateTime registerStart;
     private LocalDateTime registerClose;
+
+    public String getAllTime() {
+
+        String result = "";
+
+        for(int i=0; i<lttList.size(); i++) {
+
+            if(i != 0) result += "/";
+            result += lttList.get(i).toString();
+        }
+
+        return result;
+    }
 
 }
