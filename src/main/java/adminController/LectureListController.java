@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import network.Connector;
 import network.Protocol;
 
@@ -22,6 +23,7 @@ public class LectureListController implements Initializable {
     @FXML ComboBox<String> filter;
     @FXML TextField keyWord;
     @FXML AnchorPane panel;
+    @FXML VBox listBox;
 
     AdminMainController parentController;
 
@@ -33,6 +35,20 @@ public class LectureListController implements Initializable {
 
     int searchGrade = 0;
     String searchKeyWord = "";
+
+    private void initKey() {
+        grade = 0;
+        professorName = "";
+        subjectCode = "";
+        dividedClass = "";
+        subjectName = "";
+    }
+
+    int grade = 0;
+    String professorName = "";
+    String subjectCode = "";
+    String dividedClass = "";
+    String subjectName = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,11 +63,10 @@ public class LectureListController implements Initializable {
 
         catch (IOException e) { e.printStackTrace(); }
 
-
         filter.getItems().add("No Filter");
-        filter.getItems().add("교과목 코드");
-        filter.getItems().add("교과목 이름");
-        filter.getItems().add("교수 이름");
+        filter.getItems().add("Subject Code");
+        filter.getItems().add("Subject Name");
+        filter.getItems().add("Professor Name");
         filter.setOnAction(this::setSearchFilter);
 
         gradeBox.getItems().add("All Grades");
@@ -80,13 +95,73 @@ public class LectureListController implements Initializable {
 
         keyWord.setText("");
         String choice = filter.getValue();
-
         searchKeyWord = choice;
 
-        if (choice.equals("교수 이름")) gradeBox.setVisible(true);
-        else { gradeBox.setVisible(false); }
+        /*if (choice.equals("교수 이름")) gradeBox.setVisible(true);
+        else { gradeBox.setVisible(false); }*/
 
         parentController.showMessage("검색 필터 : " + choice);
+
+    }
+
+    @FXML
+    public void search() {
+
+        listBox.getChildren().clear();
+
+        protocol.init();
+        protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.OPENING_SUBJECT);
+
+        String input = keyWord.getText();
+
+        initKey();
+
+        if (searchKeyWord.equals("Subject Code")) {
+            String[] arr = input.split("-");
+            subjectCode = arr[0];
+            if (arr.length > 1) dividedClass = arr[1];
+        }
+
+        if (searchKeyWord.equals("Subject Name")) {
+            subjectName = input;
+        }
+
+        if (searchKeyWord.equals("Professor Name")) {
+            professorName = input;
+        }
+
+        protocol.addBodyIntData(grade);
+        protocol.addBodyStringData(professorName.getBytes());
+        protocol.addBodyStringData(subjectCode.getBytes());
+        protocol.addBodyStringData(dividedClass.getBytes());
+        protocol.addBodyStringData(subjectName.getBytes());
+
+        System.out.println(grade);
+        System.out.println(professorName);
+        System.out.println(subjectCode);
+        System.out.println(dividedClass);
+        System.out.println(subjectName);
+
+        try {
+            os.write(protocol.getPacket());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Connector.read();
+
+        byte[] header = Connector.getHeader();
+        if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
+            parentController.showMessage("개설강좌가 존재하지 않습니다.");
+            // return;
+        }
+
+        else {
+
+            parentController.showMessage("개설강좌 정보를 로드하였습니다");
+            // readStudent();
+
+        }
 
     }
 

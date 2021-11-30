@@ -19,44 +19,6 @@ import java.util.ResourceBundle;
 
 public class LectureListItemController implements Initializable {
 
-    @FXML Label code;
-    @FXML Label name;
-    @FXML Label credit;
-    @FXML Label grade;
-    @FXML Label professor;
-    @FXML Label time;
-    @FXML Label Registered;
-    @FXML Label Capacity;
-
-    private OpeningSubject lecture;
-    private LectureListController parent;
-
-    InputStream is;
-    OutputStream os;
-    Protocol protocol;
-
-    public void setLectureListController(LectureListController con) {
-        this.parent = con;
-    }
-
-    public void setStudent(OpeningSubject lecture) { this.lecture = lecture; }
-    public void setText() {
-        lecture.setText(lecture.getStudentId());
-        name.setText(lecture.getName());
-        department.setText(lecture.getDepartmentName());
-        grade.setText(lecture.getGrade() + "학년");
-    }
-
-    @FXML
-    private void delete(ActionEvent event) {
-
-        // studentListController.vBox.getChildren().remove(index);
-        // System.out.println(event.getSource().);
-
-
-    }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -71,4 +33,45 @@ public class LectureListItemController implements Initializable {
         catch (IOException e) { e.printStackTrace(); }
 
     }
+
+    @FXML Label code;
+    @FXML Label name;
+    @FXML Label credit;
+    @FXML Label grade;
+    @FXML Label professor;
+    @FXML Label time;
+    @FXML Label registered;
+    @FXML Label capacity;
+
+    private OpeningSubject lecture;
+    private LectureListController parent;
+
+    InputStream is;
+    OutputStream os;
+    Protocol protocol;
+
+    public void setLectureListController(LectureListController con) {
+        this.parent = con;
+    }
+
+    public void setStudent(OpeningSubject lecture) { this.lecture = lecture; }
+    public void setText() {
+        code.setText(lecture.getSubjectCode() + "-" + lecture.getDividedClass());
+        name.setText(lecture.getSubjectName());
+        grade.setText(Integer.toString(lecture.getGrade()));
+        credit.setText(Integer.toString(lecture.getCredit()));
+        time.setText(lecture.getTime().toString());
+        registered.setText("Registered : " + lecture.getRegistered());
+        capacity.setText("Capacity : " + lecture.getCapacity());
+    }
+
+    @FXML
+    private void delete(ActionEvent event) {
+
+        // studentListController.vBox.getChildren().remove(index);
+        // System.out.println(event.getSource().);
+
+
+    }
+
 }

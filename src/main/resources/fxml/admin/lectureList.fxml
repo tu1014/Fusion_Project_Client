@@ -31,7 +31,7 @@
             <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
          </graphic>
       </Button>
-      <ComboBox fx:id="gradeBox" layoutX="476.0" layoutY="18.0" prefHeight="30.0" prefWidth="120.0" promptText="grade" visible="false">
+      <ComboBox fx:id="gradeBox" layoutX="476.0" layoutY="18.0" prefHeight="30.0" prefWidth="120.0" promptText="grade">
          <styleClass>
             <String fx:value="custom-font" />
             <String fx:value="whiteBackground" />
