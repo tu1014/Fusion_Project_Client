@@ -1,7 +1,6 @@
-package professorController;
+package studentController;
 
 import Validator.Validator;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import network.Connector;
 import network.Protocol;
-import persistence.Entity.Student;
 import persistence.Entity.Subject;
 
 import java.io.IOException;
@@ -29,9 +27,9 @@ public class SubjectListController implements Initializable {
     @FXML AnchorPane panel;
     @FXML VBox listBox;
 
-    ProfessorMainController parentController;
+    StudentMainController parentController;
 
-    void setParentController(ProfessorMainController con) { parentController = con; }
+    void setParentController(StudentMainController con) { parentController = con; }
 
     String searchKeyWord = "";
     InputStream is;
@@ -147,7 +145,7 @@ public class SubjectListController implements Initializable {
 
             Subject subject = new Subject(id, code, name, grade, semester, credit);
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professor/subjectListItem.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/student/subjectListItem.fxml"));
             VBox item = null;
 
             try { item = fxmlLoader.load(); }

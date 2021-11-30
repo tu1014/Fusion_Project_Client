@@ -1,6 +1,5 @@
 package studentController;
 
-import adminController.*;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import persistence.Entity.Student;
+
 
 import java.io.IOException;
 
@@ -70,76 +70,57 @@ public class StudentMainController {
     }
 
     @FXML
-    private void studentList() {
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/studentList.fxml"));
-        AnchorPane stdList = null;
-
-        try {
-
-            stdList = fxmlLoader.load();
-            StudentListController studentListController = fxmlLoader.getController();
-            // studentListController.setParentController(this);
-
-            mainPanel.getChildren().setAll(stdList);
-
-        } catch (IOException e) { e.printStackTrace(); }
-
-    }
-
-    @FXML
     private void professorList() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/professorList.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/student/professorList.fxml"));
         AnchorPane professorList = null;
 
         try {
 
             professorList = fxmlLoader.load();
             ProfessorListController professorListController = fxmlLoader.getController();
-            // professorListController.setParentController(this);
+            professorListController.setParentController(this);
 
             mainPanel.getChildren().setAll(professorList);
 
         } catch (IOException e) { e.printStackTrace(); }
 
     }
-
     @FXML
     private void lectureList() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/lectureList.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/student/lectureList.fxml"));
         AnchorPane lectureList = null;
 
         try {
 
             lectureList = fxmlLoader.load();
             LectureListController lectureListController = fxmlLoader.getController();
-            // lectureListController.setParentController(this);
+            lectureListController.setParentController(this);
 
             mainPanel.getChildren().setAll(lectureList);
 
         } catch (IOException e) { e.printStackTrace(); }
 
     }
-
     @FXML
     private void subjectList() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/subjectList.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/student/subjectList.fxml"));
         AnchorPane subjectList = null;
 
         try {
 
             subjectList = fxmlLoader.load();
             SubjectListController subjectListController = fxmlLoader.getController();
-            // subjectListController.setParentController(this);
+            subjectListController.setParentController(this);
 
             mainPanel.getChildren().setAll(subjectList);
 
         } catch (IOException e) { e.printStackTrace(); }
 
     }
+
 
 
 }
