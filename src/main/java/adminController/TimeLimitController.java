@@ -159,6 +159,71 @@ public class TimeLimitController implements Initializable {
     @FXML
     private void setSyllabusWriteTime() {
 
+        startDateTime = "";
+        closeDateTime = "";
+
+        LocalDate startDate = syllabusWriteStartDate.getValue();
+        LocalDate closeDate = syllabusWriteCloseDate.getValue();
+
+        if(startDate == null || closeDate == null) {
+            parentController.showMessage("날짜를 선택해주세요");
+            return;
+        }
+
+        startDateTime = startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        closeDateTime = closeDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        if(
+                Validator.isValidTime(syllabusWriteStartTime.getText()) == false ||
+                        Validator.isValidTime(syllabusWriteCloseTime.getText()) == false
+
+        ) {
+            parentController.showMessage("올바른 시간을 입력해주세요");
+            return;
+        }
+
+        if(
+                Validator.isValidMinute(syllabusWriteStartMinute.getText()) == false ||
+                        Validator.isValidMinute(syllabusWriteCloseMinute.getText()) == false
+
+        ) {
+            parentController.showMessage("올바른 시간을 입력해주세요");
+            return;
+        }
+
+        startDateTime = startDateTime + "-" + syllabusWriteStartTime.getText() + "-" + syllabusWriteStartMinute.getText();
+        closeDateTime = closeDateTime + "-" + syllabusWriteCloseTime.getText() + "-" + syllabusWriteCloseMinute.getText();
+
+        System.out.println(startDateTime);
+        System.out.println(closeDateTime);
+
+        protocol.init();
+        protocol.setHeader(Protocol.REQUEST, Protocol.UPDATE, Protocol.OPENING_SUBJECT);
+
+        protocol.addBodyStringData("syllabusWriteTime".getBytes());
+        protocol.addBodyStringData(startDateTime.getBytes());
+        protocol.addBodyStringData(closeDateTime.getBytes());
+
+        ArrayList<byte[]> packetList = protocol.getAllPacket();
+
+        packetList.stream().forEach(v -> {
+            try {
+                os.write(v);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        Connector.read();
+
+        byte[] header = Connector.getHeader();
+        if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
+            parentController.showMessage("변경에 실패하였습니다");
+        }
+        else {
+            parentController.showMessage("강의계획서 입력 기간을 설정하였습니다");
+        }
+
     }
 
 

@@ -17,7 +17,7 @@
       <PasswordField fx:id="pw" layoutX="77.0" layoutY="171.0" prefHeight="28.0" prefWidth="217.0" promptText="Password" />
       <TextField fx:id="name" layoutX="77.0" layoutY="220.0" prefHeight="28.0" prefWidth="217.0" promptText="Name" styleClass="custom-font" />
       <TextField fx:id="phoneNumber" layoutX="77.0" layoutY="270.0" prefHeight="28.0" prefWidth="217.0" promptText="Phone Number" styleClass="custom-font" />
-      <Button fx:id="addBtn" layoutX="124.0" layoutY="393.0" mnemonicParsing="false" onAction="#addProfessor" text="Add Student" textFill="WHITE">
+      <Button fx:id="addBtn" layoutX="159.0" layoutY="393.0" mnemonicParsing="false" onAction="#addProfessor" text="add" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
