@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="845.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="professorController.ProfessorListItemController">
+   <children>
+      <AnchorPane prefHeight="50.0" prefWidth="845.0">
+         <children>
+            <Label fx:id="professorId" layoutX="25.0" layoutY="9.0" styleClass="custom-font" text="PF000001">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="name" layoutX="165.0" layoutY="9.0" styleClass="custom-font" text="김선명">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="department" layoutX="280.0" layoutY="9.0" styleClass="custom-font" text="컴퓨터소프트웨어공학과">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Button layoutX="754.0" layoutY="9.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="20" />
+               </graphic>
+            </Button>
+            <Button layoutX="796.0" layoutY="9.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="TRASH" size="20" />
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <HBox prefHeight="5.0" prefWidth="845.0" styleClass="message-background" />
+   </children>
+</VBox>
