@@ -12,7 +12,7 @@ public class AdminDTO extends UserDTO {
         this.adminId = adminId;
     }
 
-    public AdminDTO(long userId, String name, String password, String phoneNumber, String adminId) {
+    public AdminDTO(int userId, String name, String password, String phoneNumber, String adminId) {
         super(userId, name, password, phoneNumber);
         this.adminId = adminId;
     }

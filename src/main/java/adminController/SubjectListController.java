@@ -1,5 +1,6 @@
 package adminController;
 
+import Validator.Validator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -96,7 +97,11 @@ public class SubjectListController implements Initializable {
         }
 
         if (searchKeyWord.equals("grade")) {
-            grade = Integer.parseInt(input);;
+            if(Validator.isDigit(input) == false) {
+                parentController.showMessage("올바른 학년을 입력하세요");
+                return;
+            }
+            grade = Integer.parseInt(input);
         }
 
         protocol.addBodyStringData(subjectCode.getBytes());

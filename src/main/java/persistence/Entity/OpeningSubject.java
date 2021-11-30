@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class OpeningSubject {
 
-    private long openingSubjectId;
+    private int openingSubjectId;
     private int subjectId;
     private String subjectCode;
     private String dividedClass;

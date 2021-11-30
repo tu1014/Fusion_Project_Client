@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="545.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminController.AddLectureBoxController">
+   <children>
+      <HBox fx:id="messageBox" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="545.0" styleClass="message-background" visible="false">
+         <children>
+            <Label fx:id="message" styleClass="custom-font" text="message" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="18.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Label layoutX="63.0" layoutY="56.0" prefHeight="44.0" prefWidth="223.0" text="Add Lecture">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="subject" layoutX="63.0" layoutY="127.0" prefHeight="22.0" prefWidth="217.0" promptText="교과목">
+         <styleClass>
+            <String fx:value="whiteBackground" />
+            <String fx:value="custom-font" />
+         </styleClass>
+      </ComboBox>
+      <ComboBox fx:id="professor" layoutX="63.0" layoutY="162.0" prefHeight="22.0" prefWidth="217.0" promptText="담당교수">
+         <styleClass>
+            <String fx:value="whiteBackground" />
+            <String fx:value="custom-font" />
+         </styleClass>
+      </ComboBox>
+      <ComboBox fx:id="dividedClass" layoutX="63.0" layoutY="198.0" prefHeight="22.0" prefWidth="217.0" promptText="분반">
+         <styleClass>
+            <String fx:value="whiteBackground" />
+            <String fx:value="custom-font" />
+         </styleClass>
+      </ComboBox>
+      <TextField fx:id="capacity" layoutX="63.0" layoutY="232.0" prefHeight="22.0" prefWidth="217.0" promptText="capacity" styleClass="custom-font" />
+      <ScrollPane layoutX="307.0" layoutY="100.0" prefHeight="240.0" prefWidth="217.0">
+         <content>
+            <VBox fx:id="listBox" prefHeight="241.0" prefWidth="201.0" />
+         </content>
+      </ScrollPane>
+      <Button layoutX="467.0" layoutY="454.0" mnemonicParsing="false" onAction="#addLecture" text="Add" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="241.0" layoutY="441.0" mnemonicParsing="false" onAction="#addTime" prefHeight="22.0" prefWidth="39.0" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
+         </graphic>
+      </Button>
+      <ComboBox fx:id="roomNumber" layoutX="56.0" layoutY="309.0" prefHeight="22.0" prefWidth="217.0" promptText="강의실">
+         <styleClass>
+            <String fx:value="whiteBackground" />
+            <String fx:value="custom-font" />
+         </styleClass>
+      </ComboBox>
+      <Label layoutX="63.0" layoutY="275.0" text="lecture time">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="day" layoutX="56.0" layoutY="340.0" prefHeight="22.0" prefWidth="217.0" promptText="요일">
+         <styleClass>
+            <String fx:value="whiteBackground" />
+            <String fx:value="custom-font" />
+         </styleClass>
+      </ComboBox>
+      <ComboBox fx:id="startPeriod" layoutX="56.0" layoutY="368.0" prefHeight="22.0" prefWidth="217.0" promptText="시작 교시">
+         <styleClass>
+            <String fx:value="whiteBackground" />
+            <String fx:value="custom-font" />
+         </styleClass>
+      </ComboBox>
+      <ComboBox fx:id="closePeriod" layoutX="56.0" layoutY="400.0" prefHeight="22.0" prefWidth="217.0" promptText="종료 교시">
+         <styleClass>
+            <String fx:value="whiteBackground" />
+            <String fx:value="custom-font" />
+         </styleClass>
+      </ComboBox>
+   </children>
+</AnchorPane>

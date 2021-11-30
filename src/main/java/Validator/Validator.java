@@ -34,6 +34,19 @@ public class Validator {
         else return false;
     }
 
+    public static boolean isDigit(String str) {
+
+        if (str.length() == 0) return false;
+
+        for(int i=0; i<str.length(); i++) {
+            char tmp = str.charAt(i);
+            if(('0' <= tmp && tmp <= '9') == false) return  false;
+        }
+
+        return true;
+
+    }
+
 
 
 }

@@ -23,7 +23,7 @@ public class Professor extends UserDTO {
 
     public Professor() {}
 
-    public Professor(long userId, String name, String password, String phoneNumber, String departmentName, String professorId) {
+    public Professor(int userId, String name, String password, String phoneNumber, String departmentName, String professorId) {
         super(userId, name, password, phoneNumber);
         this.departmentName = departmentName;
         this.professorId = professorId;

@@ -2,13 +2,21 @@ package adminController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import network.Connector;
 import network.Protocol;
+import persistence.Entity.LectureTimeTable;
+import persistence.Entity.OpeningSubject;
+import persistence.Entity.Student;
+import persistence.Enum.Day;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,22 +41,21 @@ public class LectureListController implements Initializable {
 
     void setParentController(AdminMainController con) { parentController = con; }
 
-    int searchGrade = 0;
-    String searchKeyWord = "";
-
     private void initKey() {
-        grade = 0;
+        // grade = 0;
         professorName = "";
         subjectCode = "";
         dividedClass = "";
         subjectName = "";
     }
 
-    int grade = 0;
-    String professorName = "";
-    String subjectCode = "";
-    String dividedClass = "";
-    String subjectName = "";
+    String searchKeyWord = "";
+
+    int grade;
+    String professorName;
+    String subjectCode;
+    String dividedClass;
+    String subjectName;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,18 +82,23 @@ public class LectureListController implements Initializable {
         gradeBox.getItems().add("3학년");
         gradeBox.getItems().add("4학년");
         gradeBox.setOnAction(this::setSearchGrade);
+
+        initKey();
+        grade = 0;
     }
 
     public void setSearchGrade(ActionEvent event) {
 
         String choice = gradeBox.getValue();
+        System.out.println("choice : " + choice);
 
-        if (choice.equals("1학년")) searchGrade = 1;
-        else if (choice.equals("2학년")) searchGrade = 2;
-        else if (choice.equals("3학년")) searchGrade = 3;
-        else if (choice.equals("4학년")) searchGrade = 4;
-        else searchGrade = 0;
+        if (choice.equals("1학년")) grade = 1;
+        else if (choice.equals("2학년")) grade = 2;
+        else if (choice.equals("3학년")) grade = 3;
+        else if (choice.equals("4학년")) grade = 4;
+        else grade = 0;
 
+        System.out.println("grade : " + grade);
         parentController.showMessage("검색 키워드 : " + choice);
 
     }
@@ -94,8 +106,12 @@ public class LectureListController implements Initializable {
     public void setSearchFilter(ActionEvent event) {
 
         keyWord.setText("");
+        initKey();
         String choice = filter.getValue();
+        System.out.println("choice : " + choice);
+
         searchKeyWord = choice;
+        System.out.println("searchKeyWord : " + searchKeyWord);
 
         /*if (choice.equals("교수 이름")) gradeBox.setVisible(true);
         else { gradeBox.setVisible(false); }*/
@@ -105,28 +121,66 @@ public class LectureListController implements Initializable {
     }
 
     @FXML
+    private void addLecture() {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/addLectureBox.fxml"));
+        AnchorPane dialogBox = null;
+        try {
+            dialogBox = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Stage dialogStage = new Stage();
+        Scene scene = new Scene(dialogBox);
+        dialogStage.setScene(scene);
+        dialogStage.initOwner(panel.getScene().getWindow());
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+
+        dialogStage.show();
+
+        AddLectureBoxController con = fxmlLoader.getController();
+        con.setLectureListController(this);
+
+    }
+
+    @FXML
     public void search() {
 
         listBox.getChildren().clear();
+
+        // initKey();
 
         protocol.init();
         protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.OPENING_SUBJECT);
 
         String input = keyWord.getText();
 
-        initKey();
+        System.out.println("*");
+        System.out.println("Filter : " + searchKeyWord);
+        System.out.println("Input : " + input);
+        System.out.println("Grade : " + grade);
+        System.out.println("*");
+
+        if (searchKeyWord.equals("No Filter")) {
+            // initKey();
+            // subjectName = input;
+        }
 
         if (searchKeyWord.equals("Subject Code")) {
+            // initKey();
             String[] arr = input.split("-");
             subjectCode = arr[0];
             if (arr.length > 1) dividedClass = arr[1];
         }
 
         if (searchKeyWord.equals("Subject Name")) {
+            // initKey();
             subjectName = input;
         }
 
         if (searchKeyWord.equals("Professor Name")) {
+            // initKey();
             professorName = input;
         }
 
@@ -136,11 +190,13 @@ public class LectureListController implements Initializable {
         protocol.addBodyStringData(dividedClass.getBytes());
         protocol.addBodyStringData(subjectName.getBytes());
 
+        System.out.println("===============");
         System.out.println(grade);
         System.out.println(professorName);
         System.out.println(subjectCode);
         System.out.println(dividedClass);
         System.out.println(subjectName);
+        System.out.println("===============");
 
         try {
             os.write(protocol.getPacket());
@@ -159,8 +215,54 @@ public class LectureListController implements Initializable {
         else {
 
             parentController.showMessage("개설강좌 정보를 로드하였습니다");
-            // readStudent();
+            readOpeningSubject();
 
+        }
+
+    }
+
+    private void readOpeningSubject() {
+
+        int count = Connector.readInt();
+
+        OpeningSubject os = new OpeningSubject();
+
+        for(int i=0; i<count; i++) {
+
+            os.setOpeningSubjectId(Connector.readInt());
+            os.setSubjectCode(Connector.readString());
+            os.setDividedClass(Connector.readString());
+            os.setSubjectName(Connector.readString());
+            os.setGrade(Connector.readInt());
+            os.setCredit(Connector.readInt());
+            os.setProfessorName(Connector.readString());
+
+            LectureTimeTable time = new LectureTimeTable();
+            String d = Connector.readString();
+            Day day = Day.getValue(d);
+
+            int startPeriod = Connector.readInt();
+            int closePeriod = Connector.readInt();
+            time.setDay(day);
+            time.setStartPeriod(startPeriod);
+            time.setClosePeriod(closePeriod);
+            time.setLectureRoomNumber(Connector.readString());
+            os.setTime(time);
+
+            os.setRegistered(Connector.readInt());
+            os.setCapacity(Connector.readInt());
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/lectureListItem.fxml"));
+            VBox item = null;
+
+            try { item = fxmlLoader.load(); }
+            catch (IOException e) { e.printStackTrace(); }
+
+            LectureListItemController con = fxmlLoader.getController();
+            con.setLectureListController(this);
+            con.setLecture(os);
+            con.setText();
+            listBox.getChildren().add(item);
         }
 
     }
