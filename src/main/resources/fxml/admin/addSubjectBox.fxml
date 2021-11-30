@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="370.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminController.AddSubjectBoxController">
+   <children>
+      <Label layoutX="84.0" layoutY="48.0" text="Add Subject">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <TextField fx:id="code" layoutX="77.0" layoutY="127.0" prefHeight="28.0" prefWidth="217.0" promptText="subject code" styleClass="custom-font" />
+      <TextField fx:id="name" layoutX="77.0" layoutY="176.0" prefHeight="28.0" prefWidth="217.0" promptText="subject name" styleClass="custom-font" />
+      <ComboBox fx:id="gradeBox" layoutX="77.0" layoutY="221.0" prefHeight="22.0" prefWidth="217.0" promptText="target grade">
+         <styleClass>
+            <String fx:value="whiteBackground" />
+            <String fx:value="custom-font" />
+         </styleClass>
+      </ComboBox>
+      <ComboBox fx:id="semesterBox" layoutX="77.0" layoutY="270.0" prefHeight="22.0" prefWidth="217.0" promptText="semester">
+         <styleClass>
+            <String fx:value="whiteBackground" />
+            <String fx:value="custom-font" />
+         </styleClass>
+      </ComboBox>
+      <Button fx:id="addBtn" layoutX="155.0" layoutY="394.0" mnemonicParsing="false" onAction="#addSubject" text="add" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <HBox fx:id="messageBox" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="370.0" styleClass="message-background" visible="false">
+         <children>
+            <Label fx:id="message" styleClass="custom-font" text="message" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="18.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <ComboBox fx:id="creditBox" layoutX="77.0" layoutY="318.0" prefHeight="22.0" prefWidth="217.0" promptText="credit">
+         <styleClass>
+            <String fx:value="whiteBackground" />
+            <String fx:value="custom-font" />
+         </styleClass>
+      </ComboBox>
+   </children>
+</AnchorPane>

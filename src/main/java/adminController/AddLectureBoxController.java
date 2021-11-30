@@ -358,17 +358,16 @@ public class AddLectureBoxController implements Initializable {
 
         byte[] header = Connector.getHeader();
         if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
-            showMessage("생성 실패");
+            showMessage("해당 교과목에 대한 분반이 이미 존재합니다");
             // return;
         }
 
         else {
             parentController.parentController.showMessage("강좌를 개설하였습니다");
             // parentController.search();
+            Stage dialog = (Stage) listBox.getScene().getWindow();
+            dialog.close();
         }
-
-        Stage dialog = (Stage) listBox.getScene().getWindow();
-        dialog.close();
 
     }
 

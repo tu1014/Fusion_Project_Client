@@ -86,6 +86,8 @@ public class Protocol {
     public static final byte FAIL = 9;
     public static final byte SUCCESS = 10;
     public static final byte DEPARTMENT = 11;
+    public static final byte PROFESSOR_TIME_TABLE = 12;
+    public static final byte LECTURE_ROOM = 13;
 
     private class Packet {
 
