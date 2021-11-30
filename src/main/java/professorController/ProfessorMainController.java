@@ -116,7 +116,7 @@ public class ProfessorMainController {
 
             subjectList = fxmlLoader.load();
             SubjectListController subjectListController = fxmlLoader.getController();
-            // subjectListController.setParentController(this);
+            subjectListController.setParentController(this);
 
             mainPanel.getChildren().setAll(subjectList);
 
