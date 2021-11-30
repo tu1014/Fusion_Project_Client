@@ -2,14 +2,14 @@ package persistence.Entity;
 
 public class UserDTO {
 
-    protected long userId;
+    protected int userId;
     protected String name;
     protected String password;
     protected String phoneNumber;
 
     public UserDTO() {}
 
-    public UserDTO(long userId, String name, String password, String phoneNumber) {
+    public UserDTO(int userId, String name, String password, String phoneNumber) {
         this.userId = userId;
         this.name = name;
         this.password = password;
@@ -22,11 +22,11 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

@@ -4,7 +4,7 @@ public class Student extends UserDTO {
 
     public Student() {}
 
-    public Student(long userId, String name, String password, String phoneNumber, String studentId, String departmentName, int grade) {
+    public Student(int userId, String name, String password, String phoneNumber, String studentId, String departmentName, int grade) {
         super(userId, name, password, phoneNumber);
         this.studentId = studentId;
         this.departmentName = departmentName;

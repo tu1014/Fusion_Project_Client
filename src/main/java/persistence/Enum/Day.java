@@ -17,4 +17,20 @@ public enum Day {
     public String label() {
         return label;
     }
+
+    public static Day getValue(String day) {
+
+        if (day.equals("월") || day.equals("MON")){
+            return MON;
+        } else if(day.equals("화") || day.equals("TUE")) {
+            return TUE;
+        } else if(day.equals("수") || day.equals("WED")) {
+            return WED;
+        } else if(day.equals("목") || day.equals("THU")) {
+            return THU;
+        } else if(day.equals("금") || day.equals("FRI")) {
+            return FRI;
+        } else
+            return null;
+    }
 }
