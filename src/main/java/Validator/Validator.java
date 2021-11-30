@@ -47,6 +47,28 @@ public class Validator {
 
     }
 
+    public static boolean isValidTime(String str) {
+
+        if(isDigit(str) == false) return false;
+
+        int i = Integer.parseInt(str);
+
+        if(i < 1 || i > 24) return false;
+        else return true;
+
+    }
+
+    public static boolean isValidMinute(String str) {
+
+        if(isDigit(str) == false) return false;
+
+        int i = Integer.parseInt(str);
+
+        if(i < 0 || i > 60) return false;
+        else return true;
+
+    }
+
 
 
 }
