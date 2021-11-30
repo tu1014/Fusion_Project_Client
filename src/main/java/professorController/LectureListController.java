@@ -1,5 +1,6 @@
 package professorController;
 
+import professorController.LectureListItemController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -201,9 +202,14 @@ public class LectureListController implements Initializable {
 
         int count = Connector.readInt();
 
-        OpeningSubject os = new OpeningSubject();
+        LectureListItemController tmpCon = new LectureListItemController();
+        OpeningSubject tmpOs = new OpeningSubject();
 
         for(int i=0; i<count; i++) {
+
+            OpeningSubject os = new OpeningSubject();
+
+            boolean isDuplicated = false;
 
             os.setOpeningSubjectId(Connector.readInt());
             os.setSubjectCode(Connector.readString());
@@ -212,6 +218,15 @@ public class LectureListController implements Initializable {
             os.setGrade(Connector.readInt());
             os.setCredit(Connector.readInt());
             os.setProfessorName(Connector.readString());
+
+            System.out.println("new OS id : " + os.getOpeningSubjectId());
+            System.out.println("prev OS id : " + tmpOs.getOpeningSubjectId());
+
+
+            if(os.getOpeningSubjectId() == tmpOs.getOpeningSubjectId()){
+                isDuplicated = true;
+            }
+
 
             LectureTimeTable time = new LectureTimeTable();
             String d = Connector.readString();
@@ -223,22 +238,38 @@ public class LectureListController implements Initializable {
             time.setStartPeriod(startPeriod);
             time.setClosePeriod(closePeriod);
             time.setLectureRoomNumber(Connector.readString());
-            os.setTime(time);
+
+            if(isDuplicated) {
+                tmpCon.getLecture().getLttList().add(time);
+                tmpCon.setText();
+            }
+
+            else {
+                os.getLttList().add(time);
+            }
+
 
             os.setRegistered(Connector.readInt());
             os.setCapacity(Connector.readInt());
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professor/lectureListItem.fxml"));
-            VBox item = null;
+            if(isDuplicated == false) {
 
-            try { item = fxmlLoader.load(); }
-            catch (IOException e) { e.printStackTrace(); }
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professor/lectureListItem.fxml"));
+                VBox item = null;
 
-            LectureListItemController con = fxmlLoader.getController();
-            con.setLectureListController(this);
-            con.setLecture(os);
-            con.setText();
-            listBox.getChildren().add(item);
+                try { item = fxmlLoader.load(); }
+                catch (IOException e) { e.printStackTrace(); }
+
+                LectureListItemController con = fxmlLoader.getController();
+                con.setLectureListController(this);
+                con.setLecture(os);
+                con.setText();
+                listBox.getChildren().add(item);
+
+                tmpOs = os;
+                tmpCon = con;
+
+            }
         }
 
     }

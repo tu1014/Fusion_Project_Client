@@ -49,12 +49,12 @@
                   <Font size="27.0" />
                </font>
             </Label>
-            <Label fx:id="registered" layoutX="276.0" layoutY="58.0" prefHeight="33.0" prefWidth="189.0" styleClass="custom-font" text="Registered : 10">
+            <Label fx:id="registered" layoutX="464.0" layoutY="58.0" prefHeight="33.0" prefWidth="189.0" styleClass="custom-font" text="Registered : 10">
                <font>
                   <Font size="27.0" />
                </font>
             </Label>
-            <Label fx:id="capacity" layoutX="464.0" layoutY="58.0" prefHeight="33.0" prefWidth="189.0" styleClass="custom-font" text="Capacity : 30">
+            <Label fx:id="capacity" layoutX="652.0" layoutY="58.0" prefHeight="33.0" prefWidth="189.0" styleClass="custom-font" text="Capacity : 30">
                <font>
                   <Font size="27.0" />
                </font>

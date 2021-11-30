@@ -50,6 +50,8 @@ public class LectureListItemController implements Initializable {
     OutputStream os;
     Protocol protocol;
 
+    public OpeningSubject getLecture() { return lecture; }
+
     public void setLectureListController(LectureListController con) {
         this.parent = con;
     }
@@ -60,7 +62,7 @@ public class LectureListItemController implements Initializable {
         name.setText(lecture.getSubjectName());
         grade.setText(Integer.toString(lecture.getGrade()) + "학년");
         credit.setText(Integer.toString(lecture.getCredit()) + "학점");
-        time.setText(lecture.getTime().toString());
+        time.setText(lecture.getAllTime());
         professor.setText(lecture.getProfessorName());
         registered.setText("Registered : " + lecture.getRegistered());
         capacity.setText("Capacity : " + lecture.getCapacity());
