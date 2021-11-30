@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -24,15 +23,10 @@
                   <Font size="27.0" />
                </font>
             </Label>
-            <Button layoutX="736.0" layoutY="11.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="20" />
-               </graphic>
-            </Button>
-            <Button layoutX="785.0" layoutY="11.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="TRASH" size="20" />
-               </graphic>
+            <Button graphicTextGap="12.0" layoutX="730.0" layoutY="14.0" mnemonicParsing="false" onAction="#register" prefHeight="33.0" prefWidth="93.0" text="register" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
             </Button>
             <Label fx:id="credit" layoutX="491.0" layoutY="11.0" styleClass="custom-font" text="3학점">
                <font>
@@ -49,16 +43,21 @@
                   <Font size="27.0" />
                </font>
             </Label>
-            <Label fx:id="registered" layoutX="464.0" layoutY="58.0" prefHeight="33.0" prefWidth="189.0" styleClass="custom-font" text="Registered : 10">
+            <Label fx:id="registered" layoutX="344.0" layoutY="58.0" prefHeight="33.0" prefWidth="189.0" styleClass="custom-font" text="Registered : 10">
                <font>
                   <Font size="27.0" />
                </font>
             </Label>
-            <Label fx:id="capacity" layoutX="652.0" layoutY="58.0" prefHeight="33.0" prefWidth="189.0" styleClass="custom-font" text="Capacity : 30">
+            <Label fx:id="capacity" layoutX="532.0" layoutY="58.0" prefHeight="33.0" prefWidth="189.0" styleClass="custom-font" text="Capacity : 30">
                <font>
                   <Font size="27.0" />
                </font>
             </Label>
+            <Button graphicTextGap="12.0" layoutX="730.0" layoutY="58.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="93.0" styleClass="custom-font" text="계획서" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <HBox prefHeight="5.0" prefWidth="845.0" styleClass="message-background" />

@@ -77,4 +77,45 @@ public class LectureListItemController implements Initializable {
 
     }
 
+    @FXML
+    private void register() {
+
+        String studentId = parent.parentController.currentUser.getStudentId();
+        String code = lecture.getSubjectCode() + "-" + lecture.getDividedClass();
+
+        protocol.init();
+        protocol.setHeader(Protocol.REQUEST, Protocol.CREATE, Protocol.REGISTRATION);
+
+        protocol.addBodyStringData(code.getBytes());
+        protocol.addBodyStringData(studentId.getBytes());
+
+        try {
+            os.write(protocol.getPacket());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Connector.read();
+
+        byte[] header = Connector.getHeader();
+
+        if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
+            String message = Connector.readString();
+            parent.parentController.showMessage(message);
+            // return;
+        }
+
+        else {
+
+            parent.parentController.showMessage("수강 신청에 성공하였습니다.");
+            // parent.search();
+
+        }
+
+
+
+
+    }
+
+
 }
