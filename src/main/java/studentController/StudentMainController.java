@@ -121,6 +121,24 @@ public class StudentMainController {
 
     }
 
+    @FXML
+    private void timeTable() {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/student/timeTable.fxml"));
+        AnchorPane subjectList = null;
+
+        try {
+
+            subjectList = fxmlLoader.load();
+            TimeTableController con = fxmlLoader.getController();
+            con.setParentController(this);
+
+            mainPanel.getChildren().setAll(subjectList);
+
+        } catch (IOException e) { e.printStackTrace(); }
+
+    }
+
 
 
 }

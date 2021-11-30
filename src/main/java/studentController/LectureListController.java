@@ -345,7 +345,7 @@ public class LectureListController implements Initializable {
             catch (IOException e) { e.printStackTrace(); }
 
             MyRegistrationListItemController con = fxmlLoader.getController();
-            con.setLectureListController(this);
+            // con.setLectureListController(this);
             con.setLecture(os);
             con.setText();
             myRegistrationBox.getChildren().add(item);
