@@ -27,13 +27,13 @@
             <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
          </graphic>
       </Button>
-      <ComboBox fx:id="gradeBox" layoutX="476.0" layoutY="18.0" prefHeight="30.0" prefWidth="120.0" promptText="grade">
+      <ComboBox fx:id="gradeBox" layoutX="506.0" layoutY="18.0" prefHeight="30.0" prefWidth="120.0" promptText="All Grades">
          <styleClass>
             <String fx:value="custom-font" />
             <String fx:value="whiteBackground" />
          </styleClass>
       </ComboBox>
-      <ComboBox fx:id="filter" layoutX="338.0" layoutY="18.0" prefHeight="30.0" prefWidth="120.0" promptText="No filter">
+      <ComboBox fx:id="filter" layoutX="338.0" layoutY="18.0" prefHeight="30.0" prefWidth="145.0" promptText="No filter">
          <styleClass>
             <String fx:value="custom-font" />
             <String fx:value="whiteBackground" />

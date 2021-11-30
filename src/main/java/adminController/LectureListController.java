@@ -106,6 +106,7 @@ public class LectureListController implements Initializable {
     public void setSearchFilter(ActionEvent event) {
 
         keyWord.setText("");
+        initKey();
         String choice = filter.getValue();
         System.out.println("choice : " + choice);
 
@@ -161,20 +162,25 @@ public class LectureListController implements Initializable {
         System.out.println("Grade : " + grade);
         System.out.println("*");
 
+        if (searchKeyWord.equals("No Filter")) {
+            // initKey();
+            // subjectName = input;
+        }
+
         if (searchKeyWord.equals("Subject Code")) {
-            initKey();
+            // initKey();
             String[] arr = input.split("-");
             subjectCode = arr[0];
             if (arr.length > 1) dividedClass = arr[1];
         }
 
         if (searchKeyWord.equals("Subject Name")) {
-            initKey();
+            // initKey();
             subjectName = input;
         }
 
         if (searchKeyWord.equals("Professor Name")) {
-            initKey();
+            // initKey();
             professorName = input;
         }
 

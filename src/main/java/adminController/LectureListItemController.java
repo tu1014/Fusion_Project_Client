@@ -61,6 +61,7 @@ public class LectureListItemController implements Initializable {
         grade.setText(Integer.toString(lecture.getGrade()) + "학년");
         credit.setText(Integer.toString(lecture.getCredit()) + "학점");
         time.setText(lecture.getTime().toString());
+        professor.setText(lecture.getProfessorName());
         registered.setText("Registered : " + lecture.getRegistered());
         capacity.setText("Capacity : " + lecture.getCapacity());
     }

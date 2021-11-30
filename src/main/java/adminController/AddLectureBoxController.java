@@ -364,9 +364,11 @@ public class AddLectureBoxController implements Initializable {
 
         else {
             parentController.parentController.showMessage("강좌를 개설하였습니다");
-            parentController.search();
+            // parentController.search();
         }
 
+        Stage dialog = (Stage) listBox.getScene().getWindow();
+        dialog.close();
 
     }
 
