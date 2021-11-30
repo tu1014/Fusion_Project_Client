@@ -1,6 +1,5 @@
 package professorController;
 
-import adminController.*;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,7 +80,7 @@ public class ProfessorMainController {
 
             professorList = fxmlLoader.load();
             ProfessorListController professorListController = fxmlLoader.getController();
-            // professorListController.setParentController(this);
+            professorListController.setParentController(this);
 
             mainPanel.getChildren().setAll(professorList);
 
@@ -99,7 +98,7 @@ public class ProfessorMainController {
 
             lectureList = fxmlLoader.load();
             LectureListController lectureListController = fxmlLoader.getController();
-            // lectureListController.setParentController(this);
+            lectureListController.setParentController(this);
 
             mainPanel.getChildren().setAll(lectureList);
 

@@ -155,7 +155,7 @@ public class ProfessorListController implements Initializable {
                     pfId
             );
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/professorListItem.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professor/professorListItem.fxml"));
             VBox item = null;
 
             try { item = fxmlLoader.load(); }
