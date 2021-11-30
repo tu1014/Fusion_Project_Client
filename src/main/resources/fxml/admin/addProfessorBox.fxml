@@ -13,7 +13,7 @@
             <Font size="37.0" />
          </font>
       </Label>
-      <TextField fx:id="studentId" layoutX="77.0" layoutY="124.0" prefHeight="28.0" prefWidth="217.0" promptText="Professsor Number" styleClass="custom-font" />
+      <TextField fx:id="studentId" layoutX="77.0" layoutY="124.0" prefHeight="28.0" prefWidth="217.0" promptText="Professor Number" styleClass="custom-font" />
       <PasswordField fx:id="pw" layoutX="77.0" layoutY="171.0" prefHeight="28.0" prefWidth="217.0" promptText="Password" />
       <TextField fx:id="name" layoutX="77.0" layoutY="220.0" prefHeight="28.0" prefWidth="217.0" promptText="Name" styleClass="custom-font" />
       <TextField fx:id="phoneNumber" layoutX="77.0" layoutY="270.0" prefHeight="28.0" prefWidth="217.0" promptText="Phone Number" styleClass="custom-font" />
