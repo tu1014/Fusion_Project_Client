@@ -8,21 +8,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="900.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="professorController.LectureListController">
+<AnchorPane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="900.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="professorController.TimeTableController">
    <children>
       <ScrollPane layoutX="20.0" layoutY="56.0" prefHeight="663.0" prefWidth="860.0">
          <content>
             <VBox fx:id="listBox" prefHeight="662.0" prefWidth="845.0" />
          </content>
       </ScrollPane>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="16.0" mnemonicParsing="false" onAction="#search" prefHeight="30.0" prefWidth="30.0" styleClass="message-background" textFill="WHITE">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="221.0" layoutY="15.0" mnemonicParsing="false" onAction="#search" prefHeight="30.0" prefWidth="30.0" styleClass="message-background" textFill="WHITE">
          <graphic>
             <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" />
          </graphic>
       </Button>
-      <Label layoutX="20.0" layoutY="14.0" text="My Lecture List">
+      <Label layoutX="20.0" layoutY="8.0" text="Time Table">
          <font>
-            <Font size="28.0" />
+            <Font size="36.0" />
          </font>
       </Label>
    </children>

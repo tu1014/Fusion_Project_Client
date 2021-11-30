@@ -28,9 +28,6 @@ import java.util.ResourceBundle;
 
 public class LectureListController implements Initializable {
 
-    @FXML ComboBox<String> gradeBox;
-    @FXML ComboBox<String> filter;
-    @FXML TextField keyWord;
     @FXML AnchorPane panel;
     @FXML VBox listBox;
 
@@ -41,22 +38,6 @@ public class LectureListController implements Initializable {
     Protocol protocol;
 
     void setParentController(ProfessorMainController con) { parentController = con; }
-
-    private void initKey() {
-        // grade = 0;
-        professorName = "";
-        subjectCode = "";
-        dividedClass = "";
-        subjectName = "";
-    }
-
-    String searchKeyWord = "";
-
-    int grade;
-    String professorName;
-    String subjectCode;
-    String dividedClass;
-    String subjectName;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -71,54 +52,6 @@ public class LectureListController implements Initializable {
 
         catch (IOException e) { e.printStackTrace(); }
 
-        filter.getItems().add("No Filter");
-        filter.getItems().add("Subject Code");
-        filter.getItems().add("Subject Name");
-        filter.getItems().add("Professor Name");
-        filter.setOnAction(this::setSearchFilter);
-
-        gradeBox.getItems().add("All Grades");
-        gradeBox.getItems().add("1학년");
-        gradeBox.getItems().add("2학년");
-        gradeBox.getItems().add("3학년");
-        gradeBox.getItems().add("4학년");
-        gradeBox.setOnAction(this::setSearchGrade);
-
-        initKey();
-        grade = 0;
-    }
-
-    public void setSearchGrade(ActionEvent event) {
-
-        String choice = gradeBox.getValue();
-        System.out.println("choice : " + choice);
-
-        if (choice.equals("1학년")) grade = 1;
-        else if (choice.equals("2학년")) grade = 2;
-        else if (choice.equals("3학년")) grade = 3;
-        else if (choice.equals("4학년")) grade = 4;
-        else grade = 0;
-
-        System.out.println("grade : " + grade);
-        parentController.showMessage("검색 키워드 : " + choice);
-
-    }
-
-    public void setSearchFilter(ActionEvent event) {
-
-        keyWord.setText("");
-        initKey();
-        String choice = filter.getValue();
-        System.out.println("choice : " + choice);
-
-        searchKeyWord = choice;
-        System.out.println("searchKeyWord : " + searchKeyWord);
-
-        /*if (choice.equals("교수 이름")) gradeBox.setVisible(true);
-        else { gradeBox.setVisible(false); }*/
-
-        parentController.showMessage("검색 필터 : " + choice);
-
     }
 
     @FXML
@@ -129,51 +62,9 @@ public class LectureListController implements Initializable {
         // initKey();
 
         protocol.init();
-        protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.OPENING_SUBJECT);
-
-        String input = keyWord.getText();
-
-        System.out.println("*");
-        System.out.println("Filter : " + searchKeyWord);
-        System.out.println("Input : " + input);
-        System.out.println("Grade : " + grade);
-        System.out.println("*");
-
-        if (searchKeyWord.equals("No Filter")) {
-            // initKey();
-            // subjectName = input;
-        }
-
-        if (searchKeyWord.equals("Subject Code")) {
-            // initKey();
-            String[] arr = input.split("-");
-            subjectCode = arr[0];
-            if (arr.length > 1) dividedClass = arr[1];
-        }
-
-        if (searchKeyWord.equals("Subject Name")) {
-            // initKey();
-            subjectName = input;
-        }
-
-        if (searchKeyWord.equals("Professor Name")) {
-            // initKey();
-            professorName = input;
-        }
-
-        protocol.addBodyIntData(grade);
-        protocol.addBodyStringData(professorName.getBytes());
-        protocol.addBodyStringData(subjectCode.getBytes());
-        protocol.addBodyStringData(dividedClass.getBytes());
-        protocol.addBodyStringData(subjectName.getBytes());
-
-        System.out.println("===============");
-        System.out.println(grade);
-        System.out.println(professorName);
-        System.out.println(subjectCode);
-        System.out.println(dividedClass);
-        System.out.println(subjectName);
-        System.out.println("===============");
+        protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.PROFESSOR_TIME_TABLE);
+        protocol.addBodyStringData("lectureList".getBytes());
+        protocol.addBodyStringData(parentController.currentUser.getProfessorId().getBytes());
 
         try {
             os.write(protocol.getPacket());
@@ -185,13 +76,13 @@ public class LectureListController implements Initializable {
 
         byte[] header = Connector.getHeader();
         if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
-            parentController.showMessage("개설강좌가 존재하지 않습니다.");
+            parentController.showMessage("담당 강의가 존재하지 않습니다.");
             // return;
         }
 
         else {
 
-            parentController.showMessage("개설강좌 정보를 로드하였습니다");
+            parentController.showMessage("담당 강의 정보를 로드하였습니다");
             readOpeningSubject();
 
         }

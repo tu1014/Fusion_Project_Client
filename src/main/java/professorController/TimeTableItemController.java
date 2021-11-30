@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class LectureListItemController implements Initializable {
+public class TimeTableItemController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -36,11 +36,10 @@ public class LectureListItemController implements Initializable {
 
     @FXML Label code;
     @FXML Label name;
-    @FXML Label grade;
     @FXML Label time;
 
     private OpeningSubject lecture;
-    private LectureListController parent;
+    private TimeTableController parent;
 
     InputStream is;
     OutputStream os;
@@ -48,7 +47,7 @@ public class LectureListItemController implements Initializable {
 
     public OpeningSubject getLecture() { return lecture; }
 
-    public void setLectureListController(LectureListController con) {
+    public void setTimeTableController(TimeTableController con) {
         this.parent = con;
     }
 
@@ -56,8 +55,7 @@ public class LectureListItemController implements Initializable {
     public void setText() {
         code.setText(lecture.getSubjectCode() + "-" + lecture.getDividedClass());
         name.setText(lecture.getSubjectName());
-        grade.setText(Integer.toString(lecture.getGrade()) + "학년");
-        time.setText(lecture.getAllTime());
+        time.setText(lecture.getTime().toString());
     }
 
     @FXML

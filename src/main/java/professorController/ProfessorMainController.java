@@ -16,13 +16,10 @@ import java.io.IOException;
 
 public class ProfessorMainController {
 
-    @FXML
-    Label userId;
+    @FXML Label userId;
     @FXML Label name;
-    @FXML
-    AnchorPane mainPanel;
-    @FXML
-    HBox messageBox;
+    @FXML AnchorPane mainPanel;
+    @FXML HBox messageBox;
     @FXML Label message;
 
     Professor currentUser;
@@ -71,24 +68,6 @@ public class ProfessorMainController {
 
 
     @FXML
-    private void professorList() {
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professor/professorList.fxml"));
-        AnchorPane professorList = null;
-
-        try {
-
-            professorList = fxmlLoader.load();
-            ProfessorListController professorListController = fxmlLoader.getController();
-            professorListController.setParentController(this);
-
-            mainPanel.getChildren().setAll(professorList);
-
-        } catch (IOException e) { e.printStackTrace(); }
-
-    }
-
-    @FXML
     private void lectureList() {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professor/lectureList.fxml"));
@@ -107,18 +86,18 @@ public class ProfessorMainController {
     }
 
     @FXML
-    private void subjectList() {
+    private void timeTable() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professor/subjectList.fxml"));
-        AnchorPane subjectList = null;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/professor/timeTable.fxml"));
+        AnchorPane lectureList = null;
 
         try {
 
-            subjectList = fxmlLoader.load();
-            SubjectListController subjectListController = fxmlLoader.getController();
-            subjectListController.setParentController(this);
+            lectureList = fxmlLoader.load();
+            TimeTableController con = fxmlLoader.getController();
+            con.setParentController(this);
 
-            mainPanel.getChildren().setAll(subjectList);
+            mainPanel.getChildren().setAll(lectureList);
 
         } catch (IOException e) { e.printStackTrace(); }
 
