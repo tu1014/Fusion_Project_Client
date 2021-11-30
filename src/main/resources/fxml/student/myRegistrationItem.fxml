@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="845.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentController.MyRegistrationItemController">
+   <children>
+      <AnchorPane prefHeight="53.0" prefWidth="845.0">
+         <children>
+            <Label fx:id="name" layoutX="159.0" layoutY="10.0" styleClass="custom-font" text="자바프로그래밍">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="code" layoutX="14.0" layoutY="10.0" styleClass="custom-font" text="CS0016-01">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="credit" layoutX="436.0" layoutY="10.0" styleClass="custom-font" text="3학점">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Button layoutX="764.0" layoutY="11.0" mnemonicParsing="false" onAction="#delete" text="delete" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <HBox prefHeight="5.0" prefWidth="845.0" styleClass="message-background" />
+   </children>
+</VBox>

@@ -272,12 +272,14 @@ public class LectureListController implements Initializable {
     }
 
     @FXML
-    private void readMyRegistration() {
+    public void readMyRegistration() {
+
+        myRegistrationBox.getChildren().clear();
 
         String studentId = parentController.currentUser.getStudentId();
 
         protocol.init();
-        protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.STUDENT_TIME_TABLE);
+        protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.REGISTRATION);
 
         protocol.addBodyStringData(studentId.getBytes());
 
@@ -312,40 +314,24 @@ public class LectureListController implements Initializable {
         for(int i=0; i<count; i++) {
 
             String subjectName = Connector.readString();
-            System.out.println("+++" + subjectName);
             String subjectCode = Connector.readString();
             String dividedClass = Connector.readString();
-            String roomNumber = Connector.readString();
-            String d = Connector.readString();
-            System.out.println("************");
-            System.out.println(d);
-            System.out.println("************");
-            Day day = Day.getValue(d);
-
-
-            int startPeriod = Connector.readInt();
-            int closePeriod = Connector.readInt();
-
-            LectureTimeTable ltt = new LectureTimeTable();
-            ltt.setLectureRoomNumber(roomNumber);
-            ltt.setStartPeriod(startPeriod);
-            ltt.setClosePeriod(closePeriod);
-            ltt.setDay(day);
+            int credit = Connector.readInt();
 
             OpeningSubject os = new OpeningSubject();
             os.setSubjectName(subjectName);
             os.setSubjectCode(subjectCode);
             os.setDividedClass(dividedClass);
-            os.setTime(ltt);
+            os.setCredit(credit);
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/student/registrationBoxItem.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/student/myRegistrationItem.fxml"));
             VBox item = null;
 
             try { item = fxmlLoader.load(); }
             catch (IOException e) { e.printStackTrace(); }
 
-            MyRegistrationListItemController con = fxmlLoader.getController();
-            // con.setLectureListController(this);
+            MyRegistrationItemController con = fxmlLoader.getController();
+            con.setLectureListController(this);
             con.setLecture(os);
             con.setText();
             myRegistrationBox.getChildren().add(item);
