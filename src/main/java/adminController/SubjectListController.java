@@ -5,10 +5,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import network.Connector;
 import network.Protocol;
 import persistence.Entity.Student;
@@ -158,6 +161,31 @@ public class SubjectListController implements Initializable {
             con.setText();
             listBox.getChildren().add(item);
         }
+    }
+
+    @FXML
+    private void addSubject() {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/addSubjectBox.fxml"));
+        AnchorPane dialogBox = null;
+        try {
+            dialogBox = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Stage dialogStage = new Stage();
+        Scene scene = new Scene(dialogBox);
+        dialogStage.setScene(scene);
+        dialogStage.initOwner(panel.getScene().getWindow());
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+
+        dialogStage.show();
+
+        AddSubjectBoxController con = fxmlLoader.getController();
+        con.setParentController(this);
+
+
     }
 
 
