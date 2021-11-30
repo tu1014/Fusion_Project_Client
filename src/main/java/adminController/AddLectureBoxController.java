@@ -172,6 +172,40 @@ public class AddLectureBoxController implements Initializable {
                 subject.setOnAction(this::setSubjectId);
             }
 
+
+            protocol.init();
+            protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.LECTURE_ROOM);
+            os.write(protocol.getPacket());
+
+            Connector.read();
+
+            header = Connector.getHeader();
+            if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
+                showMessage("강의실이 존재하지 않습니다.");
+                // return;
+            }
+
+            else {
+
+                showMessage("강의실 정보를 로드하였습니다");
+
+                int count = Connector.readInt();
+
+                for (int i = 0; i < count; i++) {
+
+                    int id = Connector.readInt();
+                    String roomNumber = Connector.readString();
+
+                    roomNumberMap.put(roomNumber, id);
+                    this.roomNumber.getItems().add(roomNumber);
+
+                }
+
+                roomNumber.setOnAction(this::setRoomNumberId);
+            }
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -196,12 +230,12 @@ public class AddLectureBoxController implements Initializable {
         closePeriod.getItems().add("8교시");
         closePeriod.setOnAction(this::setClosePeriod);
 
-        roomNumber.getItems().add("D324");
+        /*roomNumber.getItems().add("D324");
         roomNumber.getItems().add("D327");
         roomNumber.getItems().add("D329");
         roomNumber.getItems().add("D330");
         roomNumber.getItems().add("D331");
-        roomNumber.setOnAction(this::setRoomNumberId);
+        roomNumber.setOnAction(this::setRoomNumberId);*/
 
         dividedClass.getItems().add("1분반");
         dividedClass.getItems().add("2분반");
@@ -252,15 +286,9 @@ public class AddLectureBoxController implements Initializable {
 
     public void setRoomNumberId(ActionEvent event) {
         String choice = roomNumber.getValue();
-        int id = 0;
-        if(choice.equals("D324")) id = 9;
-        if(choice.equals("D327")) id = 7;
-        if(choice.equals("D329")) id = 12;
-        if(choice.equals("D330")) id = 3;
-        if(choice.equals("D331")) id = 8;
 
         roomNum = choice;
-        roomNumberId = id;
+        roomNumberId = roomNumberMap.get(roomNum);
     }
 
     public void setStartPeriod(ActionEvent event) {
