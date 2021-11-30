@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="845.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentController.MyRegistrationListItemController">
+   <children>
+      <AnchorPane prefHeight="53.0" prefWidth="845.0">
+         <children>
+            <Label fx:id="code" layoutX="23.0" layoutY="11.0" styleClass="custom-font" text="CS00001-06">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="name" layoutX="192.0" layoutY="11.0" styleClass="custom-font" text="자바프로그래밍">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+            <Button graphicTextGap="12.0" layoutX="758.0" layoutY="11.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" text="delete" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Label fx:id="time" layoutX="423.0" layoutY="11.0" styleClass="custom-font" text="수12 D327 / 금1 D41">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <HBox prefHeight="5.0" prefWidth="845.0" styleClass="message-background" />
+   </children>
+</VBox>

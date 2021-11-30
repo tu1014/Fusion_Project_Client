@@ -29,6 +29,7 @@ public class LectureListController implements Initializable {
     @FXML TextField keyWord;
     @FXML AnchorPane panel;
     @FXML VBox listBox;
+    @FXML VBox myRegistrationBox;
 
     StudentMainController parentController;
 
@@ -267,6 +268,90 @@ public class LectureListController implements Initializable {
 
             }
         }
+
+    }
+
+    @FXML
+    private void readMyRegistration() {
+
+        String studentId = parentController.currentUser.getStudentId();
+
+        protocol.init();
+        protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.STUDENT_TIME_TABLE);
+
+        protocol.addBodyStringData(studentId.getBytes());
+
+        try {
+            os.write(protocol.getPacket());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Connector.read();
+
+        byte[] header = Connector.getHeader();
+        if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
+            parentController.showMessage("수강 신청 내역이 존재하지 않습니다.");
+            // return;
+        }
+
+        else {
+
+            parentController.showMessage("수강 신청 내역 정보를 로드하였습니다");
+            readRegistration();
+
+        }
+
+
+    }
+
+    public void readRegistration() {
+
+        int count = Connector.readInt();
+
+        for(int i=0; i<count; i++) {
+
+            String subjectName = Connector.readString();
+            System.out.println("+++" + subjectName);
+            String subjectCode = Connector.readString();
+            String dividedClass = Connector.readString();
+            String roomNumber = Connector.readString();
+            String d = Connector.readString();
+            System.out.println("************");
+            System.out.println(d);
+            System.out.println("************");
+            Day day = Day.getValue(d);
+
+
+            int startPeriod = Connector.readInt();
+            int closePeriod = Connector.readInt();
+
+            LectureTimeTable ltt = new LectureTimeTable();
+            ltt.setLectureRoomNumber(roomNumber);
+            ltt.setStartPeriod(startPeriod);
+            ltt.setClosePeriod(closePeriod);
+            ltt.setDay(day);
+
+            OpeningSubject os = new OpeningSubject();
+            os.setSubjectName(subjectName);
+            os.setSubjectCode(subjectCode);
+            os.setDividedClass(dividedClass);
+            os.setTime(ltt);
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/student/registrationBoxItem.fxml"));
+            VBox item = null;
+
+            try { item = fxmlLoader.load(); }
+            catch (IOException e) { e.printStackTrace(); }
+
+            MyRegistrationListItemController con = fxmlLoader.getController();
+            con.setLectureListController(this);
+            con.setLecture(os);
+            con.setText();
+            myRegistrationBox.getChildren().add(item);
+
+        }
+
 
     }
 
