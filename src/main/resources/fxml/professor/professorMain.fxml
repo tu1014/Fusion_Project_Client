@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="root" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="professorController.ProfessorMainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" styleClass="root" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="professorController.ProfessorMainController">
    <left>
       <VBox prefHeight="800.0" prefWidth="300.0" styleClass="sidePanel" stylesheets="@../../style/style.css" BorderPane.alignment="CENTER">
          <children>
@@ -43,20 +38,6 @@
                   <Insets bottom="20.0" top="60.0" />
                </VBox.margin>
             </AnchorPane>
-            <Button fx:id="studentList" alignment="BASELINE_LEFT" graphicTextGap="14.0" mnemonicParsing="false" onAction="#studentList" prefHeight="70.0" prefWidth="300.0" styleClass="navButton" text="Student list" textFill="WHITE">
-               <graphic>
-                  <FontAwesomeIconView fill="#fcfcfc" glyphName="HISTORY" size="20" />
-               </graphic>
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Button>
             <Button fx:id="professorList" alignment="BASELINE_LEFT" graphicTextGap="14.0" mnemonicParsing="false" onAction="#professorList" prefHeight="70.0" prefWidth="300.0" styleClass="navButton" text="Professor list" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="#fcfcfc" glyphName="UNIVERSITY" size="20" />
@@ -71,7 +52,7 @@
                   <Insets />
                </VBox.margin>
             </Button>
-            <Button fx:id="subject" alignment="BASELINE_LEFT" graphicTextGap="14.0" mnemonicParsing="false" onAction="#subjectList" prefHeight="70.0" prefWidth="300.0" styleClass="navButton" text="subject list" textFill="WHITE">
+            <Button fx:id="subject" alignment="BASELINE_LEFT" graphicTextGap="14.0" mnemonicParsing="false" onAction="#subjectList" prefHeight="70.0" prefWidth="300.0" styleClass="navButton" text="Subject list" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="#fcfcfc" glyphName="PENCIL" size="20" />
                </graphic>
@@ -85,20 +66,6 @@
             <Button fx:id="lectureList" alignment="BASELINE_LEFT" graphicTextGap="14.0" mnemonicParsing="false" onAction="#lectureList" prefHeight="70.0" prefWidth="300.0" styleClass="navButton" text="Lecture list" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="#fcfcfc" glyphName="BOOK" size="20" />
-               </graphic>
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="timeLimit" alignment="BASELINE_LEFT" graphicTextGap="14.0" mnemonicParsing="false" onAction="#setTimeLimit" prefHeight="70.0" prefWidth="300.0" styleClass="navButton" text="Set time limit" textFill="WHITE">
-               <graphic>
-                  <FontAwesomeIconView fill="#fcfcfc" glyphName="CALENDAR" size="20" />
                </graphic>
                <padding>
                   <Insets left="30.0" />
