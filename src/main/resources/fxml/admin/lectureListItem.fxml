@@ -24,7 +24,7 @@
                   <Font size="27.0" />
                </font>
             </Label>
-            <Button layoutX="736.0" layoutY="11.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="35.0">
+            <Button layoutX="736.0" layoutY="11.0" mnemonicParsing="false" onAction="#edit" prefHeight="33.0" prefWidth="35.0">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="20" />
                </graphic>

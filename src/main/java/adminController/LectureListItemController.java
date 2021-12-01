@@ -2,8 +2,13 @@ package adminController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import network.Connector;
 import network.Protocol;
 import persistence.Entity.OpeningSubject;
@@ -44,7 +49,7 @@ public class LectureListItemController implements Initializable {
     @FXML Label capacity;
 
     private OpeningSubject lecture;
-    private LectureListController parent;
+    public LectureListController parent;
 
     InputStream is;
     OutputStream os;
@@ -66,6 +71,31 @@ public class LectureListItemController implements Initializable {
         professor.setText(lecture.getProfessorName());
         registered.setText("Registered : " + lecture.getRegistered());
         capacity.setText("Capacity : " + lecture.getCapacity());
+    }
+
+    @FXML
+    private void edit() {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/editCapacityBox.fxml"));
+        AnchorPane dialogBox = null;
+        try {
+            dialogBox = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Stage dialogStage = new Stage();
+        Scene scene = new Scene(dialogBox);
+        dialogStage.setScene(scene);
+        dialogStage.initOwner(name.getScene().getWindow());
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.setResizable(false);
+
+        dialogStage.show();
+
+        editCapacityBox con = fxmlLoader.getController();
+        con.setParentController(this);
+
     }
 
     @FXML

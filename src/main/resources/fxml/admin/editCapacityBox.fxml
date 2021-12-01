@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="370.0" styleClass="whiteBackground" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="adminController.editCapacityBox">
+   <children>
+      <Label layoutX="78.0" layoutY="48.0" text="Edit Capacity">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <TextField fx:id="capacity" layoutX="77.0" layoutY="108.0" prefHeight="28.0" prefWidth="217.0" promptText="capacity" styleClass="custom-font" />
+      <Button fx:id="addBtn" layoutX="158.0" layoutY="166.0" mnemonicParsing="false" text="edit" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <HBox fx:id="messageBox" alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="370.0" styleClass="message-background" visible="false">
+         <children>
+            <Label fx:id="message" styleClass="custom-font" text="message" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="18.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
