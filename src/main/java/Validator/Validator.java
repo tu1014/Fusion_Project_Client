@@ -1,5 +1,6 @@
 package Validator;
 
+// 필요한 필드별로 유효성 검사를 수행하는 로직들
 public class Validator {
 
     public static boolean isValidStudentId(String stdId) {

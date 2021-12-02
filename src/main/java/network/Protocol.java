@@ -7,45 +7,6 @@ import java.util.ArrayList;
 
 public class Protocol {
 
-    public static void printPacket(byte[] header) {
-        System.out.println("<Packet Header>");
-        if (header[INDEX_MESSAGE_TYPE] == REQUEST) System.out.print("REQUEST ");
-        if (header[INDEX_MESSAGE_TYPE] == RESPONSE) System.out.print("RESPONSE ");
-        switch (header[INDEX_ACTION]) {
-            case Protocol.LOGIN: System.out.print("LOGIN "); break;
-            case Protocol.LOGOUT: System.out.print("LOGOUT "); break;
-            case Protocol.CREATE: System.out.print("CRATE "); break;
-            case Protocol.READ: System.out.print("READ "); break;
-            case Protocol.UPDATE: System.out.print("UPDATE "); break;
-            case Protocol.DELETE: System.out.print("DELETE "); break;
-        }
-        switch (header[INDEX_CODE]) {
-            case Protocol.ADMIN: System.out.print("ADMIN "); break;
-            case Protocol.STUDENT: System.out.print("STUDENT "); break;
-            case Protocol.PROFESSOR: System.out.print("PROFESSOR "); break;
-            case Protocol.SUBJECT: System.out.print("SUBJECT "); break;
-            case Protocol.LECTURE_TIME_TABLE: System.out.print("LECTURE_TIME_TABLE "); break;
-            case Protocol.OPENING_SUBJECT: System.out.print("OPENING_SUBJECT "); break;
-            case Protocol.REGISTRATION: System.out.print("REGISTRATION "); break;
-            case Protocol.STUDENT_TIME_TABLE: System.out.print("STUDENT_TIME_TABLE "); break;
-            case Protocol.SYLLABUS: System.out.print("SYLLABUS "); break;
-            case Protocol.SUCCESS: System.out.print("SUCCESS "); break;
-            case Protocol.FAIL: System.out.print("FAIL "); break;
-            case Protocol.DEPARTMENT: System.out.print("DEPARTMENT "); break;
-        }
-        System.out.println();
-        int bodyLength = ((int) (header[INDEX_BODY_LENGTH] & 0xff) << 8) |
-                ((int) header[INDEX_BODY_LENGTH+1] & 0xff);
-
-        System.out.print(bodyLength + " ");
-        System.out.print(header[INDEX_FRAG] + " ");
-        System.out.print(header[INDEX_LAST] + " ");
-        int seqNum = ((int) (header[INDEX_SEQ_NUMBER] & 0xff) << 8) |
-                ((int) header[INDEX_SEQ_NUMBER+1] & 0xff);
-        System.out.print(seqNum + " ");
-        System.out.println();
-    }
-
     public static final byte LEN_HEADER_SIZE = 9;
     public static final byte LEN_INT_DATA = 2;
     public static final int LEN_MAX_LENGTH = 1000;
@@ -89,6 +50,8 @@ public class Protocol {
     public static final byte PROFESSOR_TIME_TABLE = 12;
     public static final byte LECTURE_ROOM = 13;
 
+    // 헤더의 길이는 고정이지만 바디의 길이는 달라질 수 있기 때문에 두 바이트 배열을 사용하는
+    // 내부 클래스를 정의
     private class Packet {
 
         private byte[] header;
@@ -100,56 +63,27 @@ public class Protocol {
         void setBody() {}
 
         private Packet() { header = new byte[LEN_HEADER_SIZE]; }
-
-        public void printPacket() {
-            System.out.println("<Packet Header>");
-            if (header[INDEX_MESSAGE_TYPE] == REQUEST) System.out.print("REQUEST ");
-            if (header[INDEX_MESSAGE_TYPE] == RESPONSE) System.out.print("RESPONSE ");
-            switch (header[INDEX_ACTION]) {
-                case Protocol.LOGIN: System.out.print("LOGIN "); break;
-                case Protocol.LOGOUT: System.out.print("LOGOUT "); break;
-                case Protocol.CREATE: System.out.print("CRATE "); break;
-                case Protocol.READ: System.out.print("READ "); break;
-                case Protocol.UPDATE: System.out.print("UPDATE "); break;
-                case Protocol.DELETE: System.out.print("DELETE "); break;
-            }
-            switch (header[INDEX_CODE]) {
-                case Protocol.ADMIN: System.out.print("ADMIN "); break;
-                case Protocol.STUDENT: System.out.print("STUDENT "); break;
-                case Protocol.PROFESSOR: System.out.print("PROFESSOR "); break;
-                case Protocol.SUBJECT: System.out.print("SUBJECT "); break;
-                case Protocol.LECTURE_TIME_TABLE: System.out.print("LECTURE_TIME_TABLE "); break;
-                case Protocol.OPENING_SUBJECT: System.out.print("OPENING_SUBJECT "); break;
-                case Protocol.REGISTRATION: System.out.print("REGISTRATION "); break;
-                case Protocol.STUDENT_TIME_TABLE: System.out.print("STUDENT_TIME_TABLE "); break;
-                case Protocol.SYLLABUS: System.out.print("SYLLABUS "); break;
-                case Protocol.SUCCESS: System.out.print("SUCCESS "); break;
-                case Protocol.FAIL: System.out.print("FAIL "); break;
-                case Protocol.DEPARTMENT: System.out.print("DEPARTMENT "); break;
-            }
-            System.out.println();
-            int bodyLength = ((int) (header[INDEX_BODY_LENGTH] & 0xff) << 8) |
-                    ((int) header[INDEX_BODY_LENGTH+1] & 0xff);
-
-            System.out.print(bodyLength + " ");
-            System.out.print(header[INDEX_FRAG] + " ");
-            System.out.print(header[INDEX_LAST] + " ");
-            int seqNum = ((int) (header[INDEX_SEQ_NUMBER] & 0xff) << 8) |
-                    ((int) header[INDEX_SEQ_NUMBER+1] & 0xff);
-            System.out.print(seqNum + " ");
-            System.out.println();
-
-        } // printPacket
     }
 
     private Packet packet;
+
     ByteArrayOutputStream baos;
+    // 데이터를 담을 때 처음부터 큰 배열을 생성하고 담는 방법과 짧은 배열을 점차 늘려가며 담는 방법 중
+    // 후자를 선택. ByteArrayOutputStream에서 내부적으로 resize 로직을 수행한다.
+    // toByteArray 메서드를 호출하면 담은 데이터 만큼의 바이트 배열을 리턴
+
     ArrayList<byte[]> packetList;
+    // 한 번에 전송 가능한 최대 바디의 수를 1000 바이트로 정의.
+    // 이를 초과하면 여기에 저장하였다가 전송을 위해 getAllPacket을 호출하면
+    // 이를 리턴한다
+
     boolean isFragmented;
     int packetSeqNum;
 
     public Protocol() {init();}
 
+    // 여러 컨트롤러에서 이 프로토콜을 공유하기 때문에 전송 이후 쓰레기 데이터가 남아있음
+    // 원활한 통신을 위해 프로토콜의 패킷에 데이터를 담기 전에 초기화를 필요로 한다
     public void init() {
         packet = new Packet();
         baos = new ByteArrayOutputStream();
@@ -158,6 +92,9 @@ public class Protocol {
         packetSeqNum = 0;
     }
 
+    // 패킷의 헤더에 세팅
+    // 메세지 타입 / 동작(CRUD와 유사) / CODE(target 또는 요청에 대한 성공/실패 여부) / 바디길이를 설정한다.
+    // 분할여부 / 마지막 분할 / 시퀀스 넘버는 내부적으로 처리하여 사용자는 신경쓰지 않도록 한다
     public void setHeader(
             int messageType,
             int action,
@@ -170,9 +107,9 @@ public class Protocol {
 
     }
 
+    // 데이터를 모두 담고 getPacket을 호출하면 이 메서드가 자동으로 호출되어 바디 길이를
+    // 헤더에 기록 한 후 리턴한다
     public void setBodyLength() {
-
-        baos.size();
 
         packet.body = baos.toByteArray();
         int bodyLength = packet.body.length;
@@ -182,12 +119,13 @@ public class Protocol {
 
     }
 
-
-    // data의 0번째 index부터 count 만큼
+    // 패킷 바디에 문자열 데이터를 담는다 사용자 측은 String.getBytes()의 결과를 인자로 넘겨준다
     public void addBodyStringData(byte[] data) {
 
         try {
 
+            // 만약 데이터를 담았을 때 바디의 길이가 1000바이트를 초과하게 된다면 리스트에 패킷을 저장하고
+            // 새 패킷에 데이터를 담는다
             if(baos.size() + LEN_INT_DATA + data.length >= LEN_MAX_LENGTH) {
 
                 isFragmented = true;
@@ -210,6 +148,20 @@ public class Protocol {
 
     public void addBodyIntData(int data) {
 
+        // 만약 데이터를 담았을 때 바디의 길이가 1000바이트를 초과하게 된다면 리스트에 패킷을 저장하고
+        // 새 패킷에 데이터를 담는다
+        if(baos.size() + LEN_INT_DATA >= LEN_MAX_LENGTH) {
+
+            isFragmented = true;
+            packet.header[INDEX_FRAG] = USED;
+            packet.header[INDEX_SEQ_NUMBER] = (byte)(packetSeqNum >> 8);
+            packet.header[INDEX_SEQ_NUMBER+1] = (byte)(packetSeqNum);
+            packetSeqNum++;
+            packetList.add(getPacket());
+            baos.reset();
+
+        }
+
         baos.write((byte)(data >> 8));
         baos.write((byte)(data));
 
@@ -217,11 +169,11 @@ public class Protocol {
 
     public byte[] getPacket() {
 
+        // 담은 데이터 만큼의 패킷을 리턴
         setBodyLength();
         byte[] rs = new byte[LEN_HEADER_SIZE + packet.body.length];
         System.arraycopy(packet.header, 0, rs, 0, LEN_HEADER_SIZE);
         System.arraycopy(packet.body, 0, rs, LEN_HEADER_SIZE, packet.body.length);
-        packet.printPacket();
         return rs;
 
     }

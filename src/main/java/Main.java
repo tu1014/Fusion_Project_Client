@@ -23,19 +23,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
+
+        // 폰트 적용
         Font.loadFont(getClass().getResource("font/bmjua_ttf.ttf").toString(), 20).getFamily();
 
+        // 스플래시 화면 로딩
         Parent root = FXMLLoader.load(getClass().getResource("fxml/util/splash.fxml"));
         primaryStage.setScene(new Scene(root));
 
-        // primaryStage.initStyle(StageStyle.UNDECORATED);
-        // primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
 
         primaryStage.setTitle("Fusion Project");
         primaryStage.setResizable(false);
 
-
+        // 종료 이벤트 발생시 해당 이벤트를 날리고 종료 다이아로그 박스 로드
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent evt) {
