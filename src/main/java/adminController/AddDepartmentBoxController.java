@@ -28,9 +28,6 @@ import java.util.ResourceBundle;
 
 public class AddDepartmentBoxController implements Initializable {
 
-    // 디폴트값, 셋온액션에서 맵 사용하여 값 바꿔주기
-    // 그럼 서버에서 학과 이름 검색 후 아이디 넣어주던 부분 필요 없음 여기서 아이디로 보내니까
-
     InputStream is;
     OutputStream os;
 
@@ -109,7 +106,6 @@ public class AddDepartmentBoxController implements Initializable {
 
         else {
 
-            // 학생 추가에서 데이터 받을 필요 없다?
             int id = Connector.readInt();
             departmentName = Connector.readString();
 
@@ -124,9 +120,6 @@ public class AddDepartmentBoxController implements Initializable {
             con.setDepartment(department);
             con.setText();
             parentController.listBox.getChildren().add(item);
-
-            // parentController.search();
-
             parentController.parentController.showMessage("학과 추가 성공");
             Stage dialog = (Stage) addBtn.getScene().getWindow();
             dialog.close();

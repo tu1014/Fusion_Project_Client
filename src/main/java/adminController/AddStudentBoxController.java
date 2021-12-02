@@ -28,9 +28,6 @@ import java.util.ResourceBundle;
 
 public class AddStudentBoxController implements Initializable {
 
-    // 디폴트값, 셋온액션에서 맵 사용하여 값 바꿔주기
-    // 그럼 서버에서 학과 이름 검색 후 아이디 넣어주던 부분 필요 없음 여기서 아이디로 보내니까
-
     InputStream is;
     OutputStream os;
 
@@ -61,7 +58,6 @@ public class AddStudentBoxController implements Initializable {
             if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
 
                 showMessage("학과가 존재하지 않습니다.");
-                // return;
 
             }
 
@@ -199,7 +195,6 @@ public class AddStudentBoxController implements Initializable {
 
         else {
 
-            // 학생 추가에서 데이터 받을 필요 없다?
             int userID = Connector.readInt();
             name = Connector.readString();
             pw = Connector.readString();
@@ -219,16 +214,6 @@ public class AddStudentBoxController implements Initializable {
             );
 
             System.out.println(student);
-
-            /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/studentListItem.fxml"));
-            VBox item = fxmlLoader.load();
-            StudentListItemController studentItemController = fxmlLoader.getController();
-            studentItemController.setStudentListController(parentController);
-            studentItemController.setStudent(student);
-            studentItemController.setText();
-            parentController.listBox.getChildren().add(item);*/
-
-            // parentController.search();
 
             parentController.parentController.showMessage("학생 추가 성공");
             Stage dialog = (Stage) addBtn.getScene().getWindow();

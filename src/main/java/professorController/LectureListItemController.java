@@ -63,9 +63,6 @@ public class LectureListItemController implements Initializable {
     @FXML
     private void delete(ActionEvent event) {
 
-        // studentListController.vBox.getChildren().remove(index);
-        // System.out.println(event.getSource().);
-
 
     }
 

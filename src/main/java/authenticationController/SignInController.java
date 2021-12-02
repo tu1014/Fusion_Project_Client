@@ -63,8 +63,6 @@ public class SignInController implements Initializable {
             }
         });
 
-        // os.write(packet);
-
         Connector.read();
 
         byte[] header = Connector.getHeader();
@@ -78,7 +76,6 @@ public class SignInController implements Initializable {
 
         else {
 
-            // 로직 메서드로 뺄까?
             int userId = Connector.readInt();
             String name = Connector.readString();
             String password = Connector.readString();
@@ -119,8 +116,6 @@ public class SignInController implements Initializable {
                 e.printStackTrace();
             }
         });
-
-        // os.write(packet);
 
         Connector.read();
 
@@ -178,8 +173,6 @@ public class SignInController implements Initializable {
                 e.printStackTrace();
             }
         });
-
-        // os.write(packet);
 
         Connector.read();
 

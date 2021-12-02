@@ -120,7 +120,6 @@ public class StudentListController implements Initializable {
 
         initKey();
 
-        // 필터 설정에 따라 숫자 넣어줘야 한다
         if (searchKeyWord.equals("department")) {
             department = input;
         }
@@ -155,12 +154,6 @@ public class StudentListController implements Initializable {
         else {
 
             parentController.showMessage("학생 정보를 로드하였습니다");
-
-            /*if(header[Protocol.INDEX_FRAG] == Protocol.USED) {}
-
-            else {
-                readStudent();
-            }*/
 
             readStudent();
 

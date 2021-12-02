@@ -71,8 +71,6 @@ public class LectureListItemController implements Initializable {
     @FXML
     private void delete(ActionEvent event) {
 
-        // studentListController.vBox.getChildren().remove(index);
-        // System.out.println(event.getSource().);
 
 
     }
@@ -102,13 +100,11 @@ public class LectureListItemController implements Initializable {
         if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
             String message = Connector.readString();
             parent.parentController.showMessage(message);
-            // return;
         }
 
         else {
 
             parent.parentController.showMessage("수강 신청에 성공하였습니다.");
-            // parent.search();
 
         }
 

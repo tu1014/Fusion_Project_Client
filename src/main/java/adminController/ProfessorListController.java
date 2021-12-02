@@ -76,12 +76,6 @@ public class ProfessorListController implements Initializable {
         keyWord.setText("");
 
         String choice = filter.getValue();
-        /*if(choice.equals("No Filter")) searchKeyWord = "";
-
-        else {
-            searchKeyWord = choice;
-            parentController.showMessage("검색 필터 : " + choice);
-        }*/
         searchKeyWord = choice;
         parentController.showMessage("검색 필터 : " + choice);
 

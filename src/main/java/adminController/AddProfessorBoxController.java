@@ -26,9 +26,6 @@ import java.util.ResourceBundle;
 
 public class AddProfessorBoxController implements Initializable {
 
-    // 디폴트값, 셋온액션에서 맵 사용하여 값 바꿔주기
-    // 그럼 서버에서 학과 이름 검색 후 아이디 넣어주던 부분 필요 없음 여기서 아이디로 보내니까
-
     InputStream is;
     OutputStream os;
 
@@ -59,7 +56,6 @@ public class AddProfessorBoxController implements Initializable {
             if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
 
                 showMessage("학과가 존재하지 않습니다.");
-                // return;
 
             }
 
@@ -79,7 +75,6 @@ public class AddProfessorBoxController implements Initializable {
 
         } catch (IOException e) { e.printStackTrace(); }
 
-        // default 값 어케하지?
         departmentBox.setOnAction(this::setDepartment);
 
     }
@@ -194,16 +189,6 @@ public class AddProfessorBoxController implements Initializable {
             );
 
             System.out.println(pf);
-
-            /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/studentListItem.fxml"));
-            VBox item = fxmlLoader.load();
-            StudentListItemController studentItemController = fxmlLoader.getController();
-            studentItemController.setStudentListController(parentController);
-            studentItemController.setStudent(student);
-            studentItemController.setText();
-            parentController.listBox.getChildren().add(item);*/
-
-            // parentController.search();
 
             parentController.search();
 

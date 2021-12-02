@@ -33,9 +33,6 @@ public class DepartmentListItemController {
     @FXML
     private void delete() {
 
-        // studentListController.vBox.getChildren().remove(index);
-        // System.out.println(event.getSource().);
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/admin/departmentDeleteBox.fxml"));
         AnchorPane dialogBox = null;
         try {

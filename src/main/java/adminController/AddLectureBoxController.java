@@ -30,9 +30,6 @@ import java.util.ResourceBundle;
 
 public class AddLectureBoxController implements Initializable {
 
-    // 디폴트값, 셋온액션에서 맵 사용하여 값 바꿔주기
-    // 그럼 서버에서 학과 이름 검색 후 아이디 넣어주던 부분 필요 없음 여기서 아이디로 보내니까
-
     InputStream is;
     OutputStream os;
 
@@ -97,7 +94,6 @@ public class AddLectureBoxController implements Initializable {
             if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
 
                 showMessage("교수가 존재하지 않습니다.");
-                // return;
 
             }
 
@@ -145,7 +141,6 @@ public class AddLectureBoxController implements Initializable {
             header = Connector.getHeader();
             if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
                 showMessage("교과목이 존재하지 않습니다.");
-                // return;
             }
 
             else {
@@ -229,13 +224,6 @@ public class AddLectureBoxController implements Initializable {
         closePeriod.getItems().add("7교시");
         closePeriod.getItems().add("8교시");
         closePeriod.setOnAction(this::setClosePeriod);
-
-        /*roomNumber.getItems().add("D324");
-        roomNumber.getItems().add("D327");
-        roomNumber.getItems().add("D329");
-        roomNumber.getItems().add("D330");
-        roomNumber.getItems().add("D331");
-        roomNumber.setOnAction(this::setRoomNumberId);*/
 
         dividedClass.getItems().add("1분반");
         dividedClass.getItems().add("2분반");
@@ -387,7 +375,6 @@ public class AddLectureBoxController implements Initializable {
         byte[] header = Connector.getHeader();
         if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
             showMessage("해당 교과목에 대한 분반이 이미 존재합니다");
-            // return;
         }
 
         else {

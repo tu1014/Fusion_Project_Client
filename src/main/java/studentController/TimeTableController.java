@@ -46,8 +46,6 @@ public class TimeTableController implements Initializable {
 
         catch (IOException e) { e.printStackTrace(); }
 
-        // readMyRegistration();
-
     }
 
 
@@ -74,7 +72,6 @@ public class TimeTableController implements Initializable {
         byte[] header = Connector.getHeader();
         if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
             parentController.showMessage("수강 신청 내역이 존재하지 않습니다.");
-            // return;
         }
 
         else {

@@ -71,12 +71,6 @@ public class ProfessorListController implements Initializable {
         keyWord.setText("");
 
         String choice = filter.getValue();
-        /*if(choice.equals("No Filter")) searchKeyWord = "";
-
-        else {
-            searchKeyWord = choice;
-            parentController.showMessage("검색 필터 : " + choice);
-        }*/
         searchKeyWord = choice;
         parentController.showMessage("검색 필터 : " + choice);
 
@@ -117,7 +111,6 @@ public class ProfessorListController implements Initializable {
         byte[] header = Connector.getHeader();
         if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
             parentController.showMessage("교수가 존재하지 않습니다.");
-            // return;
         }
 
         else {

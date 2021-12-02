@@ -118,7 +118,6 @@ public class SubjectListController implements Initializable {
         byte[] header = Connector.getHeader();
         if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
             parentController.showMessage("교과목이 존재하지 않습니다.");
-            // return;
         }
 
         else {

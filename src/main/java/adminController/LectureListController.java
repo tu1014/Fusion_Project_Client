@@ -114,9 +114,6 @@ public class LectureListController implements Initializable {
         searchKeyWord = choice;
         System.out.println("searchKeyWord : " + searchKeyWord);
 
-        /*if (choice.equals("교수 이름")) gradeBox.setVisible(true);
-        else { gradeBox.setVisible(false); }*/
-
         parentController.showMessage("검색 필터 : " + choice);
 
     }
@@ -150,8 +147,6 @@ public class LectureListController implements Initializable {
 
         listBox.getChildren().clear();
 
-        // initKey();
-
         protocol.init();
         protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.OPENING_SUBJECT);
 
@@ -163,25 +158,17 @@ public class LectureListController implements Initializable {
         System.out.println("Grade : " + grade);
         System.out.println("*");
 
-        if (searchKeyWord.equals("No Filter")) {
-            // initKey();
-            // subjectName = input;
-        }
-
         if (searchKeyWord.equals("Subject Code")) {
-            // initKey();
             String[] arr = input.split("-");
             subjectCode = arr[0];
             if (arr.length > 1) dividedClass = arr[1];
         }
 
         if (searchKeyWord.equals("Subject Name")) {
-            // initKey();
             subjectName = input;
         }
 
         if (searchKeyWord.equals("Professor Name")) {
-            // initKey();
             professorName = input;
         }
 
@@ -210,7 +197,6 @@ public class LectureListController implements Initializable {
         byte[] header = Connector.getHeader();
         if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
             parentController.showMessage("개설강좌가 존재하지 않습니다.");
-            // return;
         }
 
         else {

@@ -59,8 +59,6 @@ public class LectureListController implements Initializable {
 
         listBox.getChildren().clear();
 
-        // initKey();
-
         protocol.init();
         protocol.setHeader(Protocol.REQUEST, Protocol.READ, Protocol.PROFESSOR_TIME_TABLE);
         protocol.addBodyStringData("lectureList".getBytes());
@@ -77,7 +75,6 @@ public class LectureListController implements Initializable {
         byte[] header = Connector.getHeader();
         if(header[Protocol.INDEX_CODE] == Protocol.FAIL) {
             parentController.showMessage("담당 강의가 존재하지 않습니다.");
-            // return;
         }
 
         else {

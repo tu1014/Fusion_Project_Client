@@ -25,9 +25,6 @@ import java.util.ResourceBundle;
 
 public class AddSubjectBoxController implements Initializable {
 
-    // 디폴트값, 셋온액션에서 맵 사용하여 값 바꿔주기
-    // 그럼 서버에서 학과 이름 검색 후 아이디 넣어주던 부분 필요 없음 여기서 아이디로 보내니까
-
     InputStream is;
     OutputStream os;
 
@@ -47,8 +44,6 @@ public class AddSubjectBoxController implements Initializable {
             os = socket.getOutputStream();
 
         } catch (IOException e) { e.printStackTrace(); }
-
-        // default 값 어케하지?
 
         gradeBox.getItems().add("1학년");
         gradeBox.getItems().add("2학년");

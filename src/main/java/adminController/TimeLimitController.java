@@ -23,7 +23,6 @@ public class TimeLimitController implements Initializable {
 
     String startDateTime;
     String closeDateTime;
-    int selectedGrade;
 
     AdminMainController parentController;
 

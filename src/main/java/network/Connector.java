@@ -48,6 +48,14 @@ public class Connector {
         return socket;
     }
 
+
+
+
+    // 수신 측에서는 이 커넥트 클래스를 통해 소켓의 입출력스트림, 프로토콜에 접근한다
+    // 데이터를 서버로 전송하고자 할 때는 프로토콜의 addBody 메서드를 사용하여 데이터를 담고
+    // getPacket, getAllPacket을 호출하여 얻은 바이트 배열을 소켓을 통해 전달한다
+    // 반대로 서버로부터 데이터를 읽고자 하면 Connector의 read 메서드를 출하고
+    // readInt 또는 readString을 호출하여 데이터를 얻을 수 있다
     public static void read() {
 
         System.out.println("대기중...");
